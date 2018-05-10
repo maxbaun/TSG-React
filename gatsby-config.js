@@ -1,11 +1,10 @@
 module.exports = {
 	siteMetadata: {
 		siteUrl: `https://tagprints.com`,
-		title: `TagPrints`,
-		subtitle: `Hashtag Printers and Social Photo Booth rentals built to capture branded memories at your events. From turnkey solutions to totally custom, challenge us!`
+		title: `TSG Weddings`,
+		subtitle: `Elegant & Classy Wedding DJs. Well spoken MCs. No Corny Games. No Embarrassing Moments. DJs, Photo Booths, Up Lighting, & Videography In Boston & Massachusetts.`
 	},
 	plugins: [
-		`gatsby-plugin-sass`,
 		// https://public-api.wordpress.com/wp/v2/sites/gatsbyjsexamplewordpress.wordpress.com/pages/
 		/*
 		* Gatsby's data processing layer begins with “source”
@@ -18,7 +17,7 @@ module.exports = {
 				* The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
 				* Example : 'gatsbyjswpexample.wordpress.com' or 'www.example-site.com'
 				*/
-				baseUrl: `tagprints.info`,
+				baseUrl: `tsg.info`,
 				// The protocol. This can be http or https.
 				protocol: `http`,
 				// Indicates whether the site is hosted on wordpress.com.
@@ -34,15 +33,6 @@ module.exports = {
 		},
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
-		'gatsby-plugin-react-helmet',
-		{
-			resolve: `gatsby-plugin-google-analytics`,
-			options: {
-				trackingId: `UA-43034131-1`
-			}
-		},
-		{
-			resolve: `gatsby-plugin-sitemap`
-		}
+		'gatsby-plugin-react-helmet'
 	]
 };

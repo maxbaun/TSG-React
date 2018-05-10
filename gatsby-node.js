@@ -48,52 +48,12 @@ function getPages(graphql, createPage) {
 				reject(result.errors);
 			}
 
-			result.data.pages.edges.forEach(edge => {
-				if (edge.node.slug === 'home') {
-					return;
-				}
+			console.log(JSON.stringify(result, null, 4))
 
+			result.data.pages.edges.forEach(edge => {
 				createPage({
 					path: getSlug(edge, result.data.pages.edges),
 					component: slash(getPageTemplate(edge.node.template)),
-					context: {
-						id: edge.node.id
-					}
-				});
-			});
-
-			resolve();
-		});
-	});
-}
-
-function getProfiles(graphql, createPage) {
-	return new Promise((resolve, reject) => {
-		graphql(
-			`
-			{
-				profiles: allWordpressWpProfile {
-					edges {
-						node {
-							id
-							wpid: wordpress_id
-							slug
-							status
-						}
-					}
-				}
-			}
-			`
-		).then(result => {
-			if (result.errors) {
-				console.log(result.errors);
-				reject(result.errors);
-			}
-
-			result.data.profiles.edges.forEach(edge => {
-				createPage({
-					path: `/profile/${edge.node.slug}`,
-					component: slash(path.resolve(`./src/templates/profile.js`)),
 					context: {
 						id: edge.node.id
 					}
