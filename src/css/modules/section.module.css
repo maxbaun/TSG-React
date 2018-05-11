@@ -1,0 +1,50 @@
+@import '../utils/mixins.css';
+
+.section {
+	position: relative;
+	opacity: 0;
+	transition: opacity 0.15s ease-in-out;
+	z-index: 1;
+}
+
+.wrap {
+	overflow: hidden;
+	position: relative;
+}
+
+.innerWrap {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.content {
+	width: 50%;
+
+	&:last-child {
+		margin-left: 50%;
+	}
+}
+
+.imageWrap {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 50%;
+
+	&:first-child {
+		left: 0;
+	}
+
+	&:last-child {
+		right: 0;
+	}
+}
+
+.image {
+	height: 100%;
+
+	> div,
+	> div > div {
+		height: 100%;
+	}
+}

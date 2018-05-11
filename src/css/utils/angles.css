@@ -1,0 +1,80 @@
+:root {
+	--slantAngle: 7deg;
+}
+
+@mixin angleCommon {
+	left: 0;
+	right: 0;
+	content: '';
+	height: 50%;
+	background: inherit;
+	position: absolute;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	z-index: -1;
+}
+
+.angle {
+	position: relative;
+	z-index: 1;
+}
+
+@mixin angleTop {
+	@include angleCommon;
+	top: 0;
+	transform: skewY(var(--slantAngle));
+	transform-origin: 100% 0;
+}
+
+@mixin angleTopReverse {
+	@include angleCommon;
+	top: 0;
+	transform: skewY(calc(-1 * var(--slantAngle)));
+	transform-origin: 0 0;
+}
+
+@mixin angleBottom {
+	@include angleCommon;
+	bottom: 0;
+	transform: skewY(calc(var(--slantAngle) * -1));
+	transform-origin: 100%;
+}
+
+@mixin angleBottomReverse {
+	@include angleCommon;
+	bottom: 0;
+	transform: skewY(var(--slantAngle));
+	transform-origin: 0 100%;
+}
+
+.angleBottom {
+	composes: angle;
+
+	&::after {
+		@include angleBottom();
+	}
+}
+
+.angleBottomReverse {
+	composes: angleBottom;
+
+	&::after {
+		@include angleBottomReverse();
+	}
+}
+
+.angleTop {
+	composes: angle;
+
+	&::before {
+		@include angleTop();
+	}
+}
+
+.angleTopReverse {
+	composes: angleTop;
+
+	&::before {
+		@include angleTopReverse();
+	}
+}

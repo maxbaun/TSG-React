@@ -8,7 +8,6 @@ export default class DefaultLayout extends Component {
 	}
 
 	render() {
-		console.log('here');
 		return (
 			<div id="app">
 				<main className="main">
