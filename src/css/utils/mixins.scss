@@ -1,0 +1,15 @@
+@import './responsive.scss';
+
+@mixin absoluteFull {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+@mixin flexCenter {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}

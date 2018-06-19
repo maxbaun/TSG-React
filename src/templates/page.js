@@ -6,10 +6,34 @@ import Hero from '../components/hero';
 import Section from '../components/section';
 import {innerHtml} from '../utils/wordpressHelpers';
 
+const SectionMap = {
+	hero: Hero
+};
+
 export default class PageTemplate extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.getSectionComponent = this.getSectionComponent.bind(this);
+	}
+
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired
+	};
+
+	getSectionComponent(section) {
+		let sectionKey = null;
+
+		for (let key in SectionMap) {
+			if (section[key]) {
+				sectionKey = key;
+			}
+		}
+
+		console.log(section);
+
+		return React.createElement(SectionMap[sectionKey], section[sectionKey]);
 	}
 
 	render() {
@@ -17,20 +41,24 @@ export default class PageTemplate extends React.Component {
 
 		return (
 			<div>
-				<Hero
-					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
-					content={currentPage.acf.heroContent}
-					link={currentPage.acf.heroLink}
-				/>
+				{currentPage.children.map(child => {
+					if (child.type === 'WordPressAcf_hero') {
+						return <Hero {...child.hero[0]}/>;
+					}
+
+					return null;
+				})}
 				<Section
 					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
 					slantDirection="rightToLeft"
 					backgroundColor="coral"
 				>
-					<div style={{
-						maxWidth: 600,
-						margin: '50px auto'
-					}}>
+					<div
+						style={{
+							maxWidth: 600,
+							margin: '50px auto'
+						}}
+					>
 						<h1>this is a test</h1>
 						<h3>this is another test</h3>
 						<div>content</div>
@@ -43,7 +71,6 @@ export default class PageTemplate extends React.Component {
 						<h1>this is a test</h1>
 						<h3>this is another test</h3>
 						<div>content</div>
-
 					</div>
 				</Section>
 				<Section
@@ -51,18 +78,25 @@ export default class PageTemplate extends React.Component {
 					slantDirection="leftToRight"
 					backgroundColor="lightblue"
 				>
-					<h1>this is a test</h1>
-					<h3>this is another test</h3>
-					<div>content</div>
-					<h1>this is a test</h1>
-					<h3>this is another test</h3>
-					<div>content</div>
-					<h1>this is a test</h1>
-					<h3>this is another test</h3>
-					<div>content</div>
-					<h1>this is a test</h1>
-					<h3>this is another test</h3>
-					<div>content</div>
+					<div
+						style={{
+							maxWidth: 600,
+							margin: '50px auto'
+						}}
+					>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+					</div>
 				</Section>
 				<div className="container">
 					<div className="page-content">
@@ -78,13 +112,15 @@ export default class PageTemplate extends React.Component {
 	}
 }
 
+import {Page} from '../utils/fragments'; // eslint-disable-line no-unused-vars
+
 export const pageQuery = graphql`
-query defaultPageQuery($id: String!) {
-  currentPage: wordpressPage(id: {eq: $id}) {
-	...Page
-  }
-  site {
-	...Site
-  }
-}
+	query defaultPageQuery($id: String!) {
+		currentPage: wordpressPage(id: {eq: $id}) {
+			...Page
+		}
+		site {
+			...Site
+		}
+	}
 `;

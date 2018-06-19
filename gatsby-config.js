@@ -10,7 +10,7 @@ module.exports = {
 		* Gatsby's data processing layer begins with “source”
 		* plugins. Here the site sources its data from Wordpress.
 		*/
-		// 'gatsby-plugin-sass',
+		'gatsby-plugin-sass',
 		{
 			resolve: `gatsby-source-wordpress`,
 			options: {

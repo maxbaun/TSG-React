@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 
-import CSS from '../css/modules/section.module.css';
+import CSS from '../css/modules/section.module.scss';
 import {ref} from '../utils/componentHelpers';
 
 const DEFAULT_ANGLE_HEIGHT = 150;
@@ -31,7 +31,7 @@ function debounce(func, wait, immediate) {
 			func.apply(context, args);
 		}
 	};
-};
+}
 
 export default class Section extends Component {
 	constructor(props) {
@@ -54,7 +54,7 @@ export default class Section extends Component {
 		slantDirection: PropTypes.oneOf(['leftToRight', 'rightToLeft']),
 		angleHeight: PropTypes.number,
 		backgroundColor: PropTypes.string
-	}
+	};
 
 	static defaultProps = {
 		style: {},
@@ -63,7 +63,7 @@ export default class Section extends Component {
 		slantDirection: 'rightToLeft',
 		angleHeight: 150,
 		backgroundColor: 'white'
-	}
+	};
 
 	componentDidMount() {
 		window.addEventListener('resize', this.handleResize);
@@ -88,9 +88,9 @@ export default class Section extends Component {
 		const {clientWidth: width} = inner;
 		let angleHeight = DEFAULT_ANGLE_HEIGHT;
 
-		angleHeight = (width * 0.055) + 70;
+		angleHeight = width * 0.055 + 70;
 
-		// if (width < 600) {
+		// If (width < 600) {
 		// 	angleHeight = 100;
 		// } else if (width < 800) {
 		// 	angleHeight = 110;
@@ -151,7 +151,7 @@ export default class Section extends Component {
 			<div ref={ref.call(this, 'section')} className={CSS.section} style={this.getStyle()}>
 				<div
 					style={{
-						// maxWidth: 1440,
+						// MaxWidth: 1440,
 						margin: '0 auto'
 					}}
 					className={CSS.wrap}
@@ -162,32 +162,28 @@ export default class Section extends Component {
 						style={{
 							backgroundColor,
 							paddingTop: angleHeight,
-							paddingBottom: angleHeight,
+							paddingBottom: angleHeight
 						}}
 					>
-						{contentAlign === 'left' ?
+						{contentAlign === 'left' ? (
 							<div className={CSS.innerWrap}>
-								<div className={CSS.content}>
-									{this.props.children}
-								</div>
+								<div className={CSS.content}>{this.props.children}</div>
 								<div className={CSS.imageWrap}>
 									<div className={CSS.image}>
 										<Img sizes={this.props.image}/>
 									</div>
-								</div>
-							</div> :
-							<div className={CSS.innerWrap}>
-								<div className={CSS.imageWrap}>
-									<div className={CSS.image}>
-										<Img sizes={this.props.image}/>
-									</div>
-								</div>
-								<div className={CSS.content}>
-									{this.props.children}
 								</div>
 							</div>
-
-						}
+						) : (
+							<div className={CSS.innerWrap}>
+								<div className={CSS.imageWrap}>
+									<div className={CSS.image}>
+										<Img sizes={this.props.image}/>
+									</div>
+								</div>
+								<div className={CSS.content}>{this.props.children}</div>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

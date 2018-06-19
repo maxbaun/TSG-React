@@ -1,0 +1,142 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.hero {
+	position: relative;
+	height: 550px;
+
+	@include tabletUp {
+		height: 650px;
+	}
+
+	@include desktopUp {
+		height: 900px;
+	}
+
+	&::after {
+		background-color: rgba($white, 0.4);
+		bottom: -100px;
+		content: ' ';
+		height: 198px;
+		left: 0;
+		position: absolute;
+		right: 0;
+		transform: skewY(-2.2deg);
+		transform-origin: 0 0;
+		width: 100%;
+		z-index: 0;
+	}
+}
+
+.inner {
+	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.overlay {
+	@include absoluteFull;
+	background-color: rgba(190, 1, 147, 0.25);
+	z-index: 2;
+}
+
+.image {
+	@include absoluteFull;
+	z-index: 0;
+
+	> div,
+	> div > div {
+		height: 100%;
+	}
+}
+
+.contentWrap {
+	color: $white;
+	max-width: 720px;
+	margin: 70px auto 0;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	transform: scaleY(0.95) scaleX(0.95);
+	transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+	z-index: 3;
+
+	@include desktopUp {
+		margin: 200px auto 0;
+	}
+}
+
+.contentActive {
+	opacity: 1;
+	transform: scaleY(1) scaleX(1);
+}
+
+.content {
+	margin-bottom: 22px;
+	padding: 0 15px;
+
+	@include tabletUp {
+		margin-bottom: 44px;
+		padding: 0;
+	}
+
+	h1 {
+		font-family: $fontHeading;
+		font-weight: 400;
+		font-size: 30px;
+		line-height: 38px;
+		margin: 0 0 22px;
+		position: relative;
+
+		&::after {
+			background-color: #F7E6F0;
+			content: ' ';
+			height: 2px;
+			left: 50%;
+			margin-left: -35.5px;
+			position: absolute;
+			top: calc(100% + 11px);
+			width: 75px;
+			z-index: 3;
+
+			@include tabletUp {
+				margin-left: -77px;
+				top: calc(100% + 17.5px);
+				width: 154px;
+			}
+		}
+
+		@include tabletUp {
+			font-size: 60px;
+			line-height: 68px;
+			margin: 0 0 35px;
+		}
+	}
+
+	h3 {
+		font-family: $fontBody;
+		font-weight: 400;
+		font-size: 20px;
+		line-height: 30px;
+		margin: 0 0 5px;
+
+		@include tabletUp {
+			font-size: 27px;
+			line-height: 40px;
+		}
+	}
+}
+
+.video {
+	max-width: 70%;
+	margin: 0 auto;
+	margin-top: 53px;
+	z-index: 4;
+
+	@include tabletUp {
+		margin-top: 88px;
+		max-width: 80%;
+	}
+}

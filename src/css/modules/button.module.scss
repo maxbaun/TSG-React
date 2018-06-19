@@ -1,0 +1,41 @@
+@import '../utils/variables.scss';
+
+.btn {
+	box-sizing: border-box;
+	font-family: $fontBody;
+	font-weight: 700;
+	outline: none !important;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all 0.15s ease-in-out;
+}
+
+.sm {
+	font-size: 14px;
+	line-height: 16px;
+	padding: 9px 24px 10px 25px;
+}
+
+.md {
+	font-size: 16px;
+	line-height: 19px;
+	padding: 16px 54px 15px 55px;
+}
+
+.lg {
+	font-size: 16px;
+	line-height: 19px;
+	padding: 17px 78px 16px 79px;
+}
+
+.primary {
+	background-color: $green;
+	color: white;
+	box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+	transform: scale(1);
+
+	&:hover {
+		background-color: darken($green, 10%);
+		transform: scale(1.02);
+	}
+}

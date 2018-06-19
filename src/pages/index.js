@@ -1,9 +1,30 @@
 import React, {Component} from 'react';
 
+import Hero from '../components/hero';
+
+const sizes = {
+	"base64": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAPABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAACA//EABUBAQEAAAAAAAAAAAAAAAAAAAEC/9oADAMBAAIQAxAAAAE3TKlNHmf/xAAYEAEBAQEBAAAAAAAAAAAAAAACAQMSMv/aAAgBAQABBQKZ3lTkjKUh3PR+Vsgv/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEh/9oACAEDAQE/Aa1//8QAFREBAQAAAAAAAAAAAAAAAAAAACH/2gAIAQIBAT8BR//EABsQAAIDAQEBAAAAAAAAAAAAAAACAREhMRIy/9oACAEBAAY/AvHSog24FZvkWt3ZJVeH/8QAHBAAAgICAwAAAAAAAAAAAAAAAREAIUFxMVFh/9oACAEBAAE/IS6TaluUmK8gTY1KC0x1BLE5IIwQ5E//2gAMAwEAAgADAAAAEBQP/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQARQf/aAAgBAwEBPxA5l1f/xAAYEQADAQEAAAAAAAAAAAAAAAAAARExUf/aAAgBAgEBPxBVYTg//8QAGxABAQADAQEBAAAAAAAAAAAAAREAITFxgUH/2gAIAQEAAT8QsZEC2oUvy4opmhN/LjrF0kNysejdqjs9wS1Fwabw+mK4UvRX9z//2Q==",
+"aspectRatio": 1.3029315960912051,
+"src": "/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-381d6.jpg",
+"srcSet": "/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-62f05.jpg 200w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-dc2b4.jpg 400w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-381d6.jpg 800w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-e5d70.jpg 1200w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-d14e0.jpg 1600w",
+"srcWebp": "/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-fefde.webp",
+"srcSetWebp": "/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-5eed2.webp 200w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-68e3c.webp 400w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-fefde.webp 800w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-300fe.webp 1200w,\n/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-ed5bd.webp 1600w",
+"sizes": "(max-width: 800px) 100vw, 800px",
+"originalImg": "/static/7d2018119a9dc61e7509e57175ec150b-6780bd223a570a190f5ba5b8516e18c1-d14e0.jpg",
+"originalName": "7d2018119a9dc61e7509e57175ec150b.jpg"
+};
+
 export default class Index extends Component {
 	render() {
 		return (
-			<div>home</div>
-		)
+			<Hero
+				content={`<h1>Voted #1 <strong>Wedding DJs</strong> by<br/>The Boston "A" List</h1><h3>No Games. No Gimmicks. No Embarrassing Moments.</h3><h3><strong>DJs, Lighting, Photo Booths, & Videography</strong></h3>`}
+				link={{
+					title: 'Get A Price Quote',
+					url: '/free-quote'
+				}}
+				image={sizes}
+			/>
+		);
 	}
 }

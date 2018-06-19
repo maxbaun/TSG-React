@@ -1,4 +1,4 @@
-@import '../utils/mixins.css';
+@import '../utils/mixins.scss';
 
 .section {
 	position: relative;
@@ -20,8 +20,13 @@
 .content {
 	width: 50%;
 
+	&:first-child {
+		width: calc(50% - 60px);
+	}
+
 	&:last-child {
 		margin-left: 50%;
+		padding-left: 60px;
 	}
 }
 
