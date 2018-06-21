@@ -1,0 +1,78 @@
+@import '../utils/mixins';
+
+.section {
+	display: block;
+	opacity: 0;
+	padding: 30px 0;
+	transform: scale(0.95);
+	transition: all 0.3s ease-in-out, padding 0s, margin 0s;
+
+	@include tabletUp {
+		padding: 40px 0;
+	}
+
+	@include desktopUp {
+		padding: 60px 0;
+	}
+}
+
+.sectionActive {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.sectionInner {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+
+	@include tabletUp {
+		flex-direction: row;
+	}
+}
+
+.left,
+.right {
+	width: 100%;
+
+	@include tabletUp {
+		width: 50%;
+	}
+}
+
+.left {
+	margin-bottom: 15px;
+
+	@include tabletUp {
+		margin-bottom: 0;
+	}
+
+	.image {
+		@include tabletUp {
+			padding-right: 30px;
+		}
+
+		@include desktopUp {
+			padding-right: 60px;
+		}
+	}
+}
+
+.right {
+	.image {
+		@include tabletUp {
+			padding-left: 30px;
+		}
+
+		@include desktopUp {
+			padding-left: 60px;
+		}
+	}
+}
+
+.content {
+	@include desktopUp {
+		max-width: 544px;
+		margin: 0 auto;
+	}
+}

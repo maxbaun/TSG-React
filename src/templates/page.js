@@ -4,7 +4,8 @@ import graphql from 'graphql';
 
 import Hero from '../components/hero';
 import PageDescription from '../components/pageDescription';
-import Section from '../components/sectionHalfImage';
+import Section from '../components/sectionSlant';
+import SectionHalfImage from '../components/sectionHalfImage';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 const SectionMap = {
@@ -15,13 +16,33 @@ export default class PageTemplate extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			windowWidth: 0
+		};
+
 		this.getSectionComponent = this.getSectionComponent.bind(this);
+		this.handleWindowResize = this.handleWindowResize.bind(this);
 	}
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired
 	};
+
+	componentDidMount() {
+		window.addEventListener('resize', this.handleWindowResize);
+		this.handleWindowResize();
+	}
+
+	componentWillMount() {
+		window.removeEventListener('resize', this.handleWindowResize);
+	}
+
+	handleWindowResize() {
+		this.setState({
+			windowWidth: window.innerWidth
+		});
+	}
 
 	getSectionComponent(section) {
 		let sectionKey = null;
@@ -38,24 +59,44 @@ export default class PageTemplate extends React.Component {
 	}
 
 	render() {
+		const {windowWidth} = this.state;
 		const {currentPage, site} = this.props.data;
 
 		return (
 			<div>
 				{currentPage.children.map((child, index) => {
-					if (child.type === 'WordPressAcf_hero') {
+					if (child.type === 'WordPressAcf_hero' || child.type === 'WordPressAcf_homeHero') {
 						// eslint-disable-next-line react/no-array-index-key
-						return <Hero key={index} {...child.hero[0]}/>;
+						return <Hero key={index} {...child}/>;
 					}
 
 					if (child.type === 'WordPressAcf_pageDescriptionContent') {
 						// eslint-disable-next-line react/no-array-index-key
-						return <PageDescription key={index} {...child.content[0]}/>;
+						return <PageDescription key={index} zIndex={0} view="content" {...child}/>;
+					}
+
+					if (child.type === 'WordPressAcf_pageDescriptionImages') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <PageDescription key={index} zIndex={0} view="images" {...child}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionHalfImage') {
+						const prevChild = currentPage.children[index - 1];
+						let sectionHalfStyle = {};
+
+						if (prevChild && prevChild.type === 'WordPressAcf_pageDescriptionImages') {
+							sectionHalfStyle = {
+								marginTop: windowWidth > 768 ? -100 : 0,
+								paddingTop: 0
+							};
+						}
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionHalfImage key={index} zIndex={index} style={sectionHalfStyle} {...child}/>;
 					}
 
 					return null;
 				})}
-				<Section
+				{/* <Section
 					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
 					slantDirection="leftToRight"
 					backgroundColor="coral"
@@ -104,7 +145,7 @@ export default class PageTemplate extends React.Component {
 						<h3>this is another test</h3>
 						<div>content</div>
 					</div>
-				</Section>
+				</Section> */}
 				{/* <Section
 					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
 					slantDirection="rightToLeft"

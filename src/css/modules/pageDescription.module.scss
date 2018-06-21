@@ -10,9 +10,9 @@
 	transform: translateY(5px);
 	transition: opacity 0.3s ease-in-out, transform 0.4s ease-in-out;
 
-	@include tabletUp {
-		min-height: 400px;
-	}
+	// @include tabletUp {
+	// 	min-height: 400px;
+	// }
 }
 
 .sectionActive {
@@ -21,10 +21,32 @@
 }
 
 .sectionInner {
-	padding: 22px 0 60px;
+	padding: 22px 0;
 	width: 100%;
 
 	@include tabletUp {
-		padding: 44px 0 80px;
+		padding: 44px 0;
+	}
+}
+
+.galleryInner {
+	@include tabletUp {
+		align-items: center;
+		display: flex;
+	}
+}
+
+.galleryImage {
+	padding: 15px;
+	max-width: 200px;
+	margin: 0 auto;
+
+	@include tabletUp {
+		max-width: 300px;
+	}
+
+	a {
+		display: block;
+		width: 100%;
 	}
 }

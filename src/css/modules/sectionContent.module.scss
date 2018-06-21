@@ -85,18 +85,34 @@
 	line-height: 28px;
 }
 
-.awardGalleryInner {
-	@include mobileUp {
-		align-items: center;
-		display: flex;
+.buttons {
+	display: flex;
+	margin-top: 21px;
+
+	@include tabletUp {
+		margin-top: 41px;
 	}
 }
 
-.awardGalleryImage {
-	padding: 15px;
+.sectionHalf {
+	.header {
+		h2 {
+			font-size: 22px;
+			line-height: 26px;
 
-	a {
-		display: block;
-		width: 100%;
+			@include tabletUp {
+				font-size: 30px;
+				line-height: 34px;
+			}
+
+			@include desktopUp {
+				font-size: 38px;
+				line-height: 42px;
+			}
+		}
+	}
+
+	.buttons {
+		justify-content: center;
 	}
 }

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import CSS from '../css/modules/sectionContent.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 import Image from './image';
+import Button from './button';
 
 export default class SectionContent extends Component {
 	constructor(props) {
@@ -12,69 +13,59 @@ export default class SectionContent extends Component {
 		this.renderIcon = this.renderIcon.bind(this);
 		this.renderHeader = this.renderHeader.bind(this);
 		this.renderContent = this.renderContent.bind(this);
-		this.renderAwardGallery = this.renderAwardGallery.bind(this);
+		this.renderButtons = this.renderButtons.bind(this);
 	}
 
 	static propTypes = {
-		content: PropTypes.array.isRequired,
-		contentContainerWidth: PropTypes.number
+		content: PropTypes.object.isRequired,
+		contentContainerWidth: PropTypes.number,
+		classname: PropTypes.string
 	};
 
 	static defaultProps = {
-		contentContainerWidth: 0
+		contentContainerWidth: 1440,
+		classname: null
 	};
 
 	render() {
-		const {content} = this.props;
+		const {content, classname} = this.props;
+
+		const sectionCss = [CSS.sectionContent];
+
+		if (CSS[classname]) {
+			sectionCss.push(CSS[classname]);
+		}
 
 		return (
-			<div className={CSS.sectionContent}>
-				{content.map((component, index) => {
-					const {layout} = component;
-
-					if (layout === 'icon') {
-						return this.renderIcon(component.icon, index);
-					}
-
-					if (layout === 'header') {
-						return this.renderHeader(component.header, index);
-					}
-
-					if (layout === 'content') {
-						return this.renderContent(component.content, index);
-					}
-
-					if (layout === 'awardGallery') {
-						return this.renderAwardGallery(component.awardGalleryImages, index);
-					}
-
-					return null;
-				})}
+			<div className={sectionCss.join(' ')}>
+				{content.icon ? this.renderIcon(content.icon) : null}
+				{content.header ? this.renderHeader(content.header) : null}
+				{content.content ? this.renderContent(content.content) : null}
+				{content.buttons ? this.renderButtons(content.buttons) : null}
 			</div>
 		);
 	}
 
-	renderIcon(icon, key) {
+	renderIcon(icon) {
 		return (
-			<div key={key} className={[CSS.icon]}>
+			<div className={[CSS.icon]}>
 				<span className={`icon icon-${icon}`}/>
 			</div>
 		);
 	}
 
-	renderHeader(headerHtml, key) {
+	renderHeader(headerHtml) {
 		return (
 			// eslint-disable-next-line react/no-danger
-			<div key={key} dangerouslySetInnerHTML={innerHtml(headerHtml)} className={CSS.header}/>
+			<div dangerouslySetInnerHTML={innerHtml(headerHtml)} className={CSS.header}/>
 		);
 	}
 
-	renderContent(contentHtml, key) {
+	renderContent(contentHtml) {
 		return (
 			<div
 				// eslint-disable-next-line react/no-danger
 				dangerouslySetInnerHTML={innerHtml(contentHtml)}
-				key={key}
 				className={CSS.content}
 				style={{
 					maxWidth: this.props.contentContainerWidth,
@@ -84,28 +75,23 @@ export default class SectionContent extends Component {
 		);
 	}
 
-	renderAwardGallery(items, key) {
-		const colWidth = 100 / items.length;
-
+	renderButtons(buttons) {
 		return (
-			<div key={key} className={CSS.awardGallery}>
-				<div className={CSS.awardGalleryInner}>
-					{items.map(item => {
-						const {image, link} = item;
-
-						const imageStyle = {
-							width: typeof window !== 'undefined' && window.innerWidth > 576 ? `${colWidth}%` : '100%'
-						};
-
-						return (
-							<div key={image.id} className={CSS.awardGalleryImage} style={imageStyle}>
-								<a href={link} target="_blank">
-									<Image image={image}/>
-								</a>
-							</div>
-						);
-					})}
-				</div>
+			<div
+				className={CSS.buttons}
+				style={{
+					maxWidth: this.props.contentContainerWidth,
+					marginLeft: 'auto',
+					marginRight: 'auto'
+				}}
+			>
+				{buttons.map(button => {
+					return (
+						<Button key={button.text} to={button.url} classname={button.classname}>
+							{button.text}
+						</Button>
+					);
+				})}
 			</div>
 		);
 	}

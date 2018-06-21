@@ -22,7 +22,7 @@ export default class Video extends Component {
 	}
 
 	static propTypes = {
-		thumbnail: PropTypes.object,
+		videoThumbnail: PropTypes.object,
 		videoUrl: PropTypes.string,
 		showPreview: PropTypes.bool,
 		modal: PropTypes.bool,
@@ -30,7 +30,7 @@ export default class Video extends Component {
 	};
 
 	static defaultProps = {
-		thumbnail: {},
+		videoThumbnail: {},
 		videoUrl: null,
 		showPreview: true,
 		modal: true,
@@ -51,7 +51,7 @@ export default class Video extends Component {
 	}
 
 	render() {
-		const {thumbnail, previewWidth, videoUrl} = this.props;
+		const {videoThumbnail, previewWidth, videoUrl} = this.props;
 		const {modalOpen} = this.state;
 
 		const previewStyle = {
@@ -70,7 +70,7 @@ export default class Video extends Component {
 								<span className={CSS.icon}/>
 							</div>
 						</div>
-						<Image image={thumbnail}/>
+						<Image image={videoThumbnail}/>
 					</div>
 				</div>
 				<RenderInBody>

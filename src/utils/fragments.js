@@ -58,46 +58,65 @@ export const LargeImage = graphql`
 	}
 `;
 
+export const HomeHeroComponent = graphql`
+	fragment HomeHeroComponent on WordPressAcf_homeHero {
+		images {
+			...LargeImage
+		}
+		title
+		subtitle
+		linkText
+		linkUrl
+		videoUrl
+		videoImage {
+			...LargeImage
+		}
+	}
+`;
+
 export const HeroComponent = graphql`
 	fragment HeroComponent on WordPressAcf_hero {
-		hero {
-			images {
+		images {
+			...LargeImage
+		}
+	}
+`;
+
+export const PageDescriptionContent = graphql`
+	fragment PageDescriptionContent on WordPressAcf_pageDescriptionContent {
+		content {
+			icon
+			header
+			content
+		}
+	}
+`;
+
+export const PageDescriptionImages = graphql`
+	fragment PageDescriptionImages on WordPressAcf_pageDescriptionImages {
+		images {
+			link
+			image {
 				...LargeImage
-			}
-			title
-			subtitle
-			linkText
-			linkUrl
-			video {
-				thumbnail {
-					...LargeImage
-				}
-				videoUrl
 			}
 		}
 	}
 `;
 
-export const PageDescription = graphql`
-	fragment PageDescription on WordPressAcf_pageDescriptionContent {
+export const SectionHalfImage = graphql`
+	fragment SectionHalfImage on WordPressAcf_sectionHalfImage {
+		image {
+			...LargeImage
+		}
+		imageAlign
 		content {
-			content: sectionFlexibleContent {
-				layout: acf_fc_layout
-				icon
-				header
-				content
-				buttons {
-					link {
-						url
-						title
-					}
-				}
-				awardGalleryImages {
-					image {
-						...LargeImage
-					}
-					link
-				}
+			icon
+			header
+			content
+			buttons {
+				url
+				text
+				classname
 			}
 		}
 	}
@@ -134,31 +153,20 @@ export const PageFragment = graphql`
 		}
 		children {
 			type: __typename
+			... on WordPressAcf_homeHero {
+				...HomeHeroComponent
+			}
 			... on WordPressAcf_hero {
 				...HeroComponent
 			}
 			... on WordPressAcf_pageDescriptionContent {
-				...PageDescription
+				...PageDescriptionContent
 			}
-		}
-		image: featured_media {
-			localFile {
-				childImageSharp {
-					hero: sizes(maxHeight: 650, maxWidth: 1440) {
-						base64
-						aspectRatio
-						src
-						srcSet
-						sizes
-						originalImg
-					}
-					full: resolutions {
-						src
-						height
-						width
-						srcSet
-					}
-				}
+			... on WordPressAcf_pageDescriptionImages {
+				...PageDescriptionImages
+			}
+			... on WordPressAcf_sectionHalfImage {
+				...SectionHalfImage
 			}
 		}
 	}

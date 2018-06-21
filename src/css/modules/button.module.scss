@@ -1,6 +1,7 @@
 @import '../utils/variables.scss';
 
 .btn {
+	border: 1px solid transparent;
 	box-sizing: border-box;
 	font-family: $fontBody;
 	font-weight: 700;
@@ -30,12 +31,25 @@
 
 .primary {
 	background-color: $green;
+	border-color: $green;
 	color: white;
 	box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
 	transform: scale(1);
 
 	&:hover {
 		background-color: darken($green, 10%);
+		border-color: darken($green, 10%);
 		transform: scale(1.02);
+	}
+}
+
+.secondary {
+	background-color: transparent;
+	border-color: $pink;
+	color: $grey1;
+
+	&:hover {
+		background-color: $pink;
+		color: $white;
 	}
 }

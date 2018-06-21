@@ -27,7 +27,8 @@ export default class Hero extends Component {
 		subtitle: PropTypes.string,
 		linkText: PropTypes.string,
 		linkUrl: PropTypes.string,
-		video: PropTypes.array
+		videoUrl: PropTypes.string,
+		videoImage: PropTypes.object
 	};
 
 	static defaultProps = {
@@ -35,7 +36,8 @@ export default class Hero extends Component {
 		linkUrl: null,
 		title: null,
 		subtitle: null,
-		video: []
+		videoUrl: null,
+		videoImage: {}
 	};
 
 	componentDidMount() {
@@ -65,8 +67,9 @@ export default class Hero extends Component {
 	}
 
 	render() {
-		const {images, title, subtitle, linkText, linkUrl, video} = this.props;
+		const {images, title, subtitle, linkText, linkUrl, videoUrl} = this.props;
 		const {loaded, activeImage} = this.state;
+		const showContent = title && title !== '';
 
 		const contentCss = [CSS.contentWrap];
 
@@ -76,7 +79,7 @@ export default class Hero extends Component {
 
 		const heroCss = [CSS.hero];
 
-		if (title && title !== '') {
+		if (showContent) {
 			heroCss.push(CSS.hasOverlay);
 		}
 
@@ -107,28 +110,30 @@ export default class Hero extends Component {
 							})}
 							<div className={CSS.overlay}/>
 						</div>
-						<div className={contentCss.join(' ')}>
-							<div className={CSS.content}>
-								{/* eslint-disable-next-line react/no-danger */}
-								<h1 dangerouslySetInnerHTML={innerHtml(title)}/>
-								{/* eslint-disable-next-line react/no-danger */}
-								<h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/>
+						{showContent ? (
+							<div className={contentCss.join(' ')}>
+								<div className={CSS.content}>
+									{/* eslint-disable-next-line react/no-danger */}
+									<h1 dangerouslySetInnerHTML={innerHtml(title)}/>
+									{/* eslint-disable-next-line react/no-danger */}
+									<h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/>
+								</div>
+								{linkUrl ? (
+									<Button
+										to={linkUrl}
+										classname="primary"
+										style={{
+											display: 'block',
+											maxWidth: 268,
+											margin: '0 auto'
+										}}
+									>
+										{linkText}
+									</Button>
+								) : null}
+								{videoUrl ? this.renderVideo() : null}
 							</div>
-							{linkUrl ? (
-								<Button
-									to={linkUrl}
-									classname="primary"
-									style={{
-										display: 'block',
-										maxWidth: 268,
-										margin: '0 auto'
-									}}
-								>
-									{linkText}
-								</Button>
-							) : null}
-							{video[0].videoUrl ? this.renderVideo(video[0]) : null}
-						</div>
+						) : null}
 					</div>
 				</div>
 			</div>
@@ -136,10 +141,12 @@ export default class Hero extends Component {
 	}
 
 	renderVideo(video) {
+		const {videoUrl, videoImage} = this.props;
+
 		return (
 			<div id="heroVideo" className={CSS.video}>
 				<div className={CSS.videoInner}>
-					<Video {...video}/>
+					<Video videoUrl={videoUrl} videoThumbnail={videoImage}/>
 				</div>
 			</div>
 		);
