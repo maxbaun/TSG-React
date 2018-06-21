@@ -24,6 +24,10 @@ export default class RenderInBody extends Component {
 	}
 
 	componentWillUnmount() {
+		if (!this.elem) {
+			return;
+		}
+
 		ReactDOM.unmountComponentAtNode(this.elem);
 		document.body.removeChild(this.elem);
 	}

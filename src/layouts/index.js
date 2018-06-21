@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import graphql from 'graphql';
 
 import '../css/plugins/normalize.css';
+import '../css/plugins/icomoon/style.css';
+import '../css/plugins/bootstrap-grid.css';
+import '../css/utils/global.scss';
 
 export default class DefaultLayout extends Component {
 	static propTypes = {

@@ -28,6 +28,16 @@
 	}
 }
 
+.hasOverlay {
+	.overlay {
+		display: block;
+	}
+
+	&::after {
+		background-color: rgba(191, 155, 183, 0.345);
+	}
+}
+
 .inner {
 	height: 100%;
 	position: relative;
@@ -36,12 +46,25 @@
 
 .overlay {
 	@include absoluteFull;
+	display: none;
 	background-color: rgba(190, 1, 147, 0.25);
 	z-index: 2;
 }
 
+.images {
+	@include absoluteFull;
+	z-index: 0;
+
+	> div,
+	> div > div {
+		height: 100%;
+	}
+}
+
 .image {
 	@include absoluteFull;
+	opacity: 0;
+	transition: opacity 2s ease-in-out;
 	z-index: 0;
 
 	> div,

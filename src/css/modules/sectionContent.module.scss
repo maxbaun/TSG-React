@@ -1,0 +1,102 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.icon {
+	margin-bottom: 15px;
+	text-align: center;
+
+	@include tabletUp {
+		margin-bottom: 20px;
+	}
+
+	span {
+		color: $pink;
+		font-size: 50px;
+		line-height: 50px;
+
+		@include tabletUp {
+			font-size: 75px;
+			line-height: 75px;
+		}
+	}
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 17px;
+	padding-bottom: 19px;
+	position: relative;
+
+	h2 {
+		color: $purple;
+		font-size: 33px;
+		font-family: $fontHeading;
+		font-weight: 300;
+		line-height: 44px;
+		margin: 0 0 5px;
+		text-transform: uppercase;
+
+		strong {
+			font-weight: 700;
+		}
+
+		@include tabletUp {
+			font-size: 44px;
+			line-height: 55px;
+		}
+
+		@include desktopUp {
+			font-size: 55px;
+			line-height: 74px;
+		}
+	}
+
+	h4 {
+		color: $grey1;
+		font-family: $fontBody;
+		font-weight: 300;
+		font-size: 22px;
+		line-height: 27px;
+		margin: 0;
+
+		@include desktopUp {
+			font-size: 28px;
+			line-height: 33px;
+		}
+	}
+
+	&::after {
+		background-color: $pink;
+		content: ' ';
+		bottom: 0;
+		height: 1px;
+		left: 0;
+		margin: 0 auto;
+		position: absolute;
+		right: 0;
+		width: 154px;
+	}
+}
+
+.content {
+	color: $grey1;
+	font-family: $fontBody;
+	font-size: 16px;
+	line-height: 28px;
+}
+
+.awardGalleryInner {
+	@include mobileUp {
+		align-items: center;
+		display: flex;
+	}
+}
+
+.awardGalleryImage {
+	padding: 15px;
+
+	a {
+		display: block;
+		width: 100%;
+	}
+}

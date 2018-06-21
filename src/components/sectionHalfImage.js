@@ -33,7 +33,7 @@ function debounce(func, wait, immediate) {
 	};
 }
 
-export default class Section extends Component {
+export default class SectionImageHalf extends Component {
 	constructor(props) {
 		super(props);
 
@@ -54,9 +54,7 @@ export default class Section extends Component {
 		slantDirection: PropTypes.oneOf(['leftToRight', 'rightToLeft']),
 		angleHeight: PropTypes.number,
 		backgroundColor: PropTypes.string,
-		children: PropTypes.node.isRequired,
-		id: PropTypes.string,
-		classname: PropTypes.string
+		full: PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -66,8 +64,7 @@ export default class Section extends Component {
 		slantDirection: 'rightToLeft',
 		angleHeight: 150,
 		backgroundColor: 'white',
-		id: '',
-		classname: null
+		full: false
 	};
 
 	componentDidMount() {
@@ -94,6 +91,24 @@ export default class Section extends Component {
 		let angleHeight = DEFAULT_ANGLE_HEIGHT;
 
 		angleHeight = width * 0.055 + 70;
+
+		// If (width < 600) {
+		// 	angleHeight = 100;
+		// } else if (width < 800) {
+		// 	angleHeight = 110;
+		// } else if (width < 1000) {
+		// 	angleHeight = 120;
+		// } else if (width < 1200) {
+		// 	angleHeight = 130;
+		// } else if (width < 1400) {
+		// 	angleHeight = 140;
+		// } else if (width < 1600) {
+		// 	angleHeight = 150;
+		// } else if (width < 1800) {
+		// 	angleHeight = 160;
+		// } else if (width < 2000) {
+		// 	angleHeight = 180;
+		// }
 
 		this.setState({
 			innerHeight: inner.getBoundingClientRect().height,
@@ -129,17 +144,13 @@ export default class Section extends Component {
 	}
 
 	render() {
-		const {backgroundColor, id, classname} = this.props;
+		const {backgroundColor, slantDirection, full} = this.props;
 		const {angleHeight} = this.state;
 
-		const sectionClass = [CSS.section];
-
-		if (CSS[classname]) {
-			sectionClass.push(CSS[classname]);
-		}
+		const contentAlign = slantDirection === 'rightToLeft' ? 'left' : 'right';
 
 		return (
-			<div ref={ref.call(this, 'section')} id={id} className={sectionClass.join(' ')} style={this.getStyle()}>
+			<div ref={ref.call(this, 'section')} className={CSS.section} style={this.getStyle()}>
 				<div
 					style={{
 						// MaxWidth: 1440,
@@ -156,7 +167,25 @@ export default class Section extends Component {
 							paddingBottom: angleHeight
 						}}
 					>
-						<div className={CSS.innerWrap}>{this.props.children}</div>
+						{contentAlign === 'left' ? (
+							<div className={CSS.innerWrap}>
+								<div className={CSS.content}>{this.props.children}</div>
+								<div className={CSS.imageWrap}>
+									<div className={CSS.image}>
+										<Img sizes={this.props.image}/>
+									</div>
+								</div>
+							</div>
+						) : (
+							<div className={CSS.innerWrap}>
+								<div className={CSS.imageWrap}>
+									<div className={CSS.image}>
+										<Img sizes={this.props.image}/>
+									</div>
+								</div>
+								<div className={CSS.content}>{this.props.children}</div>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

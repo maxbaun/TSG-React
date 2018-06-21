@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import graphql from 'graphql';
 
 import Hero from '../components/hero';
-import Section from '../components/section';
+import PageDescription from '../components/pageDescription';
+import Section from '../components/sectionHalfImage';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 const SectionMap = {
@@ -41,14 +42,70 @@ export default class PageTemplate extends React.Component {
 
 		return (
 			<div>
-				{currentPage.children.map(child => {
+				{currentPage.children.map((child, index) => {
 					if (child.type === 'WordPressAcf_hero') {
-						return <Hero {...child.hero[0]}/>;
+						// eslint-disable-next-line react/no-array-index-key
+						return <Hero key={index} {...child.hero[0]}/>;
+					}
+
+					if (child.type === 'WordPressAcf_pageDescriptionContent') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <PageDescription key={index} {...child.content[0]}/>;
 					}
 
 					return null;
 				})}
 				<Section
+					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
+					slantDirection="leftToRight"
+					backgroundColor="coral"
+				>
+					<div
+						style={{
+							maxWidth: 600,
+							margin: '50px auto'
+						}}
+					>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+					</div>
+				</Section>
+				<Section
+					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
+					slantDirection="rightToLeft"
+					backgroundColor="lightblue"
+				>
+					<div
+						style={{
+							maxWidth: 600,
+							margin: '50px auto'
+						}}
+					>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+						<h1>this is a test</h1>
+						<h3>this is another test</h3>
+						<div>content</div>
+					</div>
+				</Section>
+				{/* <Section
 					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
 					slantDirection="rightToLeft"
 					backgroundColor="coral"
@@ -106,7 +163,7 @@ export default class PageTemplate extends React.Component {
 							/>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		);
 	}

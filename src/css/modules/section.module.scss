@@ -7,49 +7,13 @@
 	z-index: 1;
 }
 
+.pageDescription {
+	.inner {
+		@include imgRetina('../../img/splash-color', 'png', 451px, 832px, center right);
+	}
+}
+
 .wrap {
 	overflow: hidden;
 	position: relative;
-}
-
-.innerWrap {
-	display: flex;
-	flex-wrap: nowrap;
-}
-
-.content {
-	width: 50%;
-
-	&:first-child {
-		width: calc(50% - 60px);
-	}
-
-	&:last-child {
-		margin-left: 50%;
-		padding-left: 60px;
-	}
-}
-
-.imageWrap {
-	height: 100%;
-	position: absolute;
-	top: 0;
-	width: 50%;
-
-	&:first-child {
-		left: 0;
-	}
-
-	&:last-child {
-		right: 0;
-	}
-}
-
-.image {
-	height: 100%;
-
-	> div,
-	> div > div {
-		height: 100%;
-	}
 }

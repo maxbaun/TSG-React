@@ -8,7 +8,7 @@ exports.modifyWebpackConfig = ({config}) => {
 	config.merge({
 		plugins: [
 			new webpack.DefinePlugin({
-				API_URL: JSON.stringify(isDev ? 'http://tagprints.info/wp-json' : 'http://tagprints.com/wp-json')
+				API_URL: JSON.stringify(isDev ? 'http://tsg.info/wp-json' : 'http://tsgweddings.com/wp-json')
 			})
 		]
 	});
@@ -18,29 +18,27 @@ exports.modifyWebpackConfig = ({config}) => {
 
 exports.createPages = ({graphql, boundActionCreators}) => {
 	const {createPage} = boundActionCreators;
-	return Promise.all([
-		getPages(graphql, createPage)
-	]);
+	return Promise.all([getPages(graphql, createPage)]);
 };
 
 function getPages(graphql, createPage) {
 	return new Promise((resolve, reject) => {
 		graphql(
 			`
-			{
-				pages: allWordpressPage {
-					edges {
-						node {
-							id
-							wpid: wordpress_id
-							slug
-							status
-							template
-							parent: wordpress_parent
+				{
+					pages: allWordpressPage {
+						edges {
+							node {
+								id
+								wpid: wordpress_id
+								slug
+								status
+								template
+								parent: wordpress_parent
+							}
 						}
 					}
 				}
-			}
 			`
 		).then(result => {
 			if (result.errors) {
@@ -48,7 +46,7 @@ function getPages(graphql, createPage) {
 				reject(result.errors);
 			}
 
-			console.log(JSON.stringify(result, null, 4))
+			console.log(JSON.stringify(result, null, 4));
 
 			result.data.pages.edges.forEach(edge => {
 				createPage({

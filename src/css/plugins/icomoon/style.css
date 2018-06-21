@@ -1,0 +1,92 @@
+@font-face {
+	font-family: 'icomoon';
+	src: url('fonts/icomoon.eot?o9mkc8');
+	src: url('fonts/icomoon.eot?o9mkc8#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?o9mkc8') format('truetype'),
+		url('fonts/icomoon.woff?o9mkc8') format('woff'), url('fonts/icomoon.svg?o9mkc8#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'icomoon' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-note:before {
+	content: '\e900';
+}
+
+.icon-bestdressed:before {
+	content: '\e901';
+}
+
+.icon-cake:before {
+	content: '\e902';
+}
+
+.icon-calendar:before {
+	content: '\e903';
+}
+
+.icon-cheers:before {
+	content: '\e904';
+}
+
+.icon-computer-notes:before {
+	content: '\e905';
+}
+
+.icon-happyface:before {
+	content: '\e906';
+}
+
+.icon-lighting:before {
+	content: '\e907';
+}
+
+.icon-mailphone:before {
+	content: '\e908';
+}
+
+.icon-microphone:before {
+	content: '\e909';
+}
+
+.icon-music-requests:before {
+	content: '\e90a';
+}
+
+.icon-musicnotes:before {
+	content: '\e90b';
+}
+
+.icon-playlist:before {
+	content: '\e90c';
+}
+
+.icon-same-sex:before {
+	content: '\e90d';
+}
+
+.icon-star-david:before {
+	content: '\e90e';
+}
+
+.icon-videography:before {
+	content: '\e90f';
+}
+
+.icon-wedding-location:before {
+	content: '\e910';
+}

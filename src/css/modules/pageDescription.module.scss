@@ -1,0 +1,30 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+
+.section {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	min-height: 0;
+	opacity: 0;
+	transform: translateY(5px);
+	transition: opacity 0.3s ease-in-out, transform 0.4s ease-in-out;
+
+	@include tabletUp {
+		min-height: 400px;
+	}
+}
+
+.sectionActive {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.sectionInner {
+	padding: 22px 0 60px;
+	width: 100%;
+
+	@include tabletUp {
+		padding: 44px 0 80px;
+	}
+}

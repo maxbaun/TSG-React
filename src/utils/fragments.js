@@ -27,6 +27,7 @@ export const MenuItems = graphql`
 export const BaseImage = graphql`
 	fragment BaseImage on wordpress__wp_media {
 		url: source_url
+		id: wordpress_id
 		mediaDetails: media_details {
 			width
 			height
@@ -60,20 +61,43 @@ export const LargeImage = graphql`
 export const HeroComponent = graphql`
 	fragment HeroComponent on WordPressAcf_hero {
 		hero {
-			image {
+			images {
 				...LargeImage
 			}
 			title
 			subtitle
-			link {
-				url
-				title
-			}
+			linkText
+			linkUrl
 			video {
 				thumbnail {
 					...LargeImage
 				}
 				videoUrl
+			}
+		}
+	}
+`;
+
+export const PageDescription = graphql`
+	fragment PageDescription on WordPressAcf_pageDescriptionContent {
+		content {
+			content: sectionFlexibleContent {
+				layout: acf_fc_layout
+				icon
+				header
+				content
+				buttons {
+					link {
+						url
+						title
+					}
+				}
+				awardGalleryImages {
+					image {
+						...LargeImage
+					}
+					link
+				}
 			}
 		}
 	}
@@ -112,6 +136,9 @@ export const PageFragment = graphql`
 			type: __typename
 			... on WordPressAcf_hero {
 				...HeroComponent
+			}
+			... on WordPressAcf_pageDescriptionContent {
+				...PageDescription
 			}
 		}
 		image: featured_media {

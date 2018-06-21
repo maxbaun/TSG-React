@@ -13,7 +13,8 @@ export default class Hero extends Component {
 		super(props);
 
 		this.state = {
-			loaded: false
+			loaded: false,
+			activeImage: 0
 		};
 
 		this.handleImageLoad = this.handleImageLoad.bind(this);
@@ -21,28 +22,51 @@ export default class Hero extends Component {
 	}
 
 	static propTypes = {
-		image: PropTypes.object.isRequired,
+		images: PropTypes.array.isRequired,
 		title: PropTypes.string,
 		subtitle: PropTypes.string,
-		link: PropTypes.object,
+		linkText: PropTypes.string,
+		linkUrl: PropTypes.string,
 		video: PropTypes.array
 	};
 
 	static defaultProps = {
-		link: null,
+		linkText: null,
+		linkUrl: null,
 		title: null,
 		subtitle: null,
 		video: []
 	};
+
+	componentDidMount() {
+		if (this.props.images.length > 1) {
+			this.startTransition();
+		}
+	}
+
+	startTransition() {
+		setInterval(() => {
+			this.setState(prevState => {
+				let nextIndex = prevState.activeImage + 1;
+
+				if (nextIndex === this.props.images.length) {
+					nextIndex = 0;
+				}
+
+				return {
+					activeImage: nextIndex
+				};
+			});
+		}, 5000);
+	}
 
 	handleImageLoad() {
 		this.setState({loaded: true});
 	}
 
 	render() {
-		const {image, title, subtitle, link, video} = this.props;
-		const {loaded} = this.state;
-		const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
+		const {images, title, subtitle, linkText, linkUrl, video} = this.props;
+		const {loaded, activeImage} = this.state;
 
 		const contentCss = [CSS.contentWrap];
 
@@ -50,14 +74,39 @@ export default class Hero extends Component {
 			contentCss.push(CSS.contentActive);
 		}
 
+		const heroCss = [CSS.hero];
+
+		if (title && title !== '') {
+			heroCss.push(CSS.hasOverlay);
+		}
+
 		return (
 			<div>
-				<div className={CSS.hero}>
+				<div className={heroCss.join(' ')}>
 					<div className={CSS.inner}>
-						<div className={CSS.image}>
-							{sizes ? <Img sizes={sizes} imgStyle={{objectPosition: 'top center'}} onLoad={this.handleImageLoad}/> : null}
+						<div className={CSS.images}>
+							{images.map((image, index) => {
+								const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
+								const imageCss = [CSS.image];
+								let imageStyle = {
+									opacity: 0
+								};
+
+								if (index === activeImage) {
+									imageStyle = {
+										...imageStyle,
+										opacity: 1
+									};
+								}
+
+								return (
+									<div key={image.id} className={imageCss.join(' ')} style={imageStyle}>
+										{sizes ? <Img sizes={sizes} imgStyle={{objectPosition: 'top center'}} onLoad={this.handleImageLoad}/> : null}
+									</div>
+								);
+							})}
+							<div className={CSS.overlay}/>
 						</div>
-						<div className={CSS.overlay}/>
 						<div className={contentCss.join(' ')}>
 							<div className={CSS.content}>
 								{/* eslint-disable-next-line react/no-danger */}
@@ -65,17 +114,19 @@ export default class Hero extends Component {
 								{/* eslint-disable-next-line react/no-danger */}
 								<h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/>
 							</div>
-							<Button
-								to={link.url}
-								classname="primary"
-								style={{
-									display: 'block',
-									maxWidth: 268,
-									margin: '0 auto'
-								}}
-							>
-								{link.title}
-							</Button>
+							{linkUrl ? (
+								<Button
+									to={linkUrl}
+									classname="primary"
+									style={{
+										display: 'block',
+										maxWidth: 268,
+										margin: '0 auto'
+									}}
+								>
+									{linkText}
+								</Button>
+							) : null}
 							{video[0].videoUrl ? this.renderVideo(video[0]) : null}
 						</div>
 					</div>
@@ -86,7 +137,7 @@ export default class Hero extends Component {
 
 	renderVideo(video) {
 		return (
-			<div className={CSS.video}>
+			<div id="heroVideo" className={CSS.video}>
 				<div className={CSS.videoInner}>
 					<Video {...video}/>
 				</div>
