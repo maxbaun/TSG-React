@@ -5,6 +5,7 @@ import CSS from '../css/modules/sectionContent.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 import Image from './image';
 import Button from './button';
+import Tabs from './tabs';
 
 export default class SectionContent extends Component {
 	constructor(props) {
@@ -14,6 +15,7 @@ export default class SectionContent extends Component {
 		this.renderHeader = this.renderHeader.bind(this);
 		this.renderContent = this.renderContent.bind(this);
 		this.renderButtons = this.renderButtons.bind(this);
+		this.renderBody = this.renderBody.bind(this);
 	}
 
 	static propTypes = {
@@ -40,7 +42,7 @@ export default class SectionContent extends Component {
 			<div className={sectionCss.join(' ')}>
 				{content.icon ? this.renderIcon(content.icon) : null}
 				{content.header ? this.renderHeader(content.header) : null}
-				{content.content ? this.renderContent(content.content) : null}
+				{this.renderBody()}
 				{content.buttons ? this.renderButtons(content.buttons) : null}
 			</div>
 		);
@@ -61,6 +63,20 @@ export default class SectionContent extends Component {
 		);
 	}
 
+	renderBody() {
+		const {tabs, content} = this.props.content;
+
+		if (content) {
+			return this.renderContent(content);
+		}
+
+		if (tabs) {
+			return this.renderTabs(tabs);
+		}
+
+		return null;
+	}
+
 	renderContent(contentHtml) {
 		return (
 			<div
@@ -75,6 +91,14 @@ export default class SectionContent extends Component {
 		);
 	}
 
+	renderTabs(tabs) {
+		return (
+			<div className={CSS.tabs}>
+				<Tabs tabs={tabs} classname="sectionContentTabs"/>
+			</div>
+		);
+	}
+
 	renderButtons(buttons) {
 		return (
 			<div
@@ -85,7 +109,9 @@ export default class SectionContent extends Component {
 					marginRight: 'auto'
 				}}
 			>
-				{buttons.map(button => {
+				{buttons.map(b => {
+					const button = b.button[0];
+
 					return (
 						<Button key={button.text} to={button.url} classname={button.classname}>
 							{button.text}

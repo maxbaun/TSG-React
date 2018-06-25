@@ -8,6 +8,16 @@ export const replaceLinks = str => {
 		.replace('https://admin.tsgweddings.com', '');
 };
 
+export const isExternalLink = str => {
+	const replaced = replaceLinks(str);
+
+	if (replaced.includes('https://') || replaced.includes('http://')) {
+		return true;
+	}
+
+	return false;
+};
+
 export const replaceContent = content => {
 	return replaceLinks(content);
 };
@@ -30,4 +40,4 @@ export const sortByMenuOrder = list => {
 
 		return a.menuOrder - b.menuOrder;
 	});
-}
+};

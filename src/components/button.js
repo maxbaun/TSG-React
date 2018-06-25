@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
-import {replaceLinks} from '../utils/wordpressHelpers';
+import {replaceLinks, isExternalLink} from '../utils/wordpressHelpers';
 import CSS from '../css/modules/button.module.scss';
 
 export default class Button extends Component {
@@ -25,13 +25,21 @@ export default class Button extends Component {
 		const {to, classname, children, size, style} = this.props;
 
 		const btnClass = [CSS.btn, CSS[size], CSS[classname]].join(' ');
+		const isExternal = isExternalLink(to);
 
 		if (to) {
-			return (
-				<Link to={replaceLinks(to)} className={btnClass} style={style}>
-					{children}
-				</Link>
-			);
+			const props = {
+				className: btnClass,
+				style
+			};
+
+			if (isExternal) {
+				props.href = to;
+			} else {
+				props.to = replaceLinks(to);
+			}
+
+			return isExternal ? <a {...props}>{children}</a> : <Link {...props}>{children}</Link>;
 		}
 
 		return (

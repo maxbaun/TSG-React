@@ -22,16 +22,16 @@ export default class Video extends Component {
 	}
 
 	static propTypes = {
-		videoThumbnail: PropTypes.object,
-		videoUrl: PropTypes.string,
+		thumbnail: PropTypes.object,
+		url: PropTypes.string,
 		showPreview: PropTypes.bool,
 		modal: PropTypes.bool,
 		previewWidth: PropTypes.number
 	};
 
 	static defaultProps = {
-		videoThumbnail: {},
-		videoUrl: null,
+		thumbnail: {},
+		url: null,
 		showPreview: true,
 		modal: true,
 		previewWidth: 710
@@ -51,7 +51,7 @@ export default class Video extends Component {
 	}
 
 	render() {
-		const {videoThumbnail, previewWidth, videoUrl} = this.props;
+		const {thumbnail, previewWidth, url} = this.props;
 		const {modalOpen} = this.state;
 
 		const previewStyle = {
@@ -70,7 +70,7 @@ export default class Video extends Component {
 								<span className={CSS.icon}/>
 							</div>
 						</div>
-						<Image image={videoThumbnail}/>
+						<Image image={thumbnail}/>
 					</div>
 				</div>
 				<RenderInBody>
@@ -78,7 +78,7 @@ export default class Video extends Component {
 						<div className={CSS.playerWrap}>
 							<ReactPlayer
 								className={CSS.player}
-								url={videoUrl}
+								url={url}
 								width="100%"
 								height="100%"
 								style={{

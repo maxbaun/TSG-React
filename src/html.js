@@ -40,7 +40,7 @@ export default class Html extends React.Component {
 					<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no"/>
 					<meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
 					<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"/>
-					<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet"/>
+					<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet"/>
 					{css}
 				</head>
 				<body data-theme="default">

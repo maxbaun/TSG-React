@@ -5,7 +5,9 @@ import graphql from 'graphql';
 import Hero from '../components/hero';
 import PageDescription from '../components/pageDescription';
 import Section from '../components/sectionSlant';
-import SectionHalfImage from '../components/sectionHalfImage';
+import SectionHalf from '../components/sectionHalf';
+import SectionReviews from '../components/sectionReviews';
+import SectionBios from '../components/sectionBios';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 const SectionMap = {
@@ -34,7 +36,7 @@ export default class PageTemplate extends React.Component {
 		this.handleWindowResize();
 	}
 
-	componentWillMount() {
+	componentWillUnmount() {
 		window.removeEventListener('resize', this.handleWindowResize);
 	}
 
@@ -53,8 +55,6 @@ export default class PageTemplate extends React.Component {
 			}
 		}
 
-		console.log(section);
-
 		return React.createElement(SectionMap[sectionKey], section[sectionKey]);
 	}
 
@@ -62,36 +62,69 @@ export default class PageTemplate extends React.Component {
 		const {windowWidth} = this.state;
 		const {currentPage, site} = this.props.data;
 
+		const children = currentPage.children.filter(c => {
+			return (
+				c.type === 'WordPressAcf_hero' ||
+				c.type === 'WordPressAcf_pageDescriptionContent' ||
+				c.type === 'WordPressAcf_pageDescriptionImages' ||
+				c.type === 'WordPressAcf_sectionHalf' ||
+				c.type === 'WordPressAcf_sectionReviews' ||
+				c.type === 'WordPressAcf_sectionBios'
+			);
+		});
+
 		return (
 			<div>
-				{currentPage.children.map((child, index) => {
-					if (child.type === 'WordPressAcf_hero' || child.type === 'WordPressAcf_homeHero') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <Hero key={index} {...child}/>;
+				{children.map((child, index) => {
+					if (child.type === 'WordPressAcf_hero') {
+						return (
+							<Hero
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								title={child.title}
+								subtitle={child.subtitle}
+								link={child.link}
+								images={child.images}
+								video={child.video ? child.video[0] : null}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_pageDescriptionContent') {
 						// eslint-disable-next-line react/no-array-index-key
-						return <PageDescription key={index} zIndex={0} view="content" {...child}/>;
+						return <PageDescription key={index} zIndex={0} view="content" content={child.sectionContent[0]}/>;
 					}
 
 					if (child.type === 'WordPressAcf_pageDescriptionImages') {
 						// eslint-disable-next-line react/no-array-index-key
-						return <PageDescription key={index} zIndex={0} view="images" {...child}/>;
+						return <PageDescription key={index} zIndex={0} view="images" images={child.images}/>;
 					}
 
-					if (child.type === 'WordPressAcf_sectionHalfImage') {
-						const prevChild = currentPage.children[index - 1];
+					if (child.type === 'WordPressAcf_sectionHalf') {
+						const prevChild = children[index - 1];
 						let sectionHalfStyle = {};
 
 						if (prevChild && prevChild.type === 'WordPressAcf_pageDescriptionImages') {
 							sectionHalfStyle = {
-								marginTop: windowWidth > 768 ? -100 : 0,
-								paddingTop: 0
+								marginTop: windowWidth > 768 ? -100 : 0
 							};
+
+							if (windowWidth > 768) {
+								sectionHalfStyle.paddingTop = 0;
+							}
 						}
 						// eslint-disable-next-line react/no-array-index-key
-						return <SectionHalfImage key={index} zIndex={index} style={sectionHalfStyle} {...child}/>;
+						return <SectionHalf key={index} zIndex={index} style={sectionHalfStyle} left={child.left[0]} right={child.right[0]}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionReviews') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionReviews key={index} header={child.header} content={child.content} reviews={child.reviews} link={child.link}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionBios') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionBios key={index} header={child.header} content={child.content} bios={child.bios}/>;
 					}
 
 					return null;

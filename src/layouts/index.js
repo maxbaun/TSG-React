@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import graphql from 'graphql';
+import 'swiper/dist/css/swiper.css';
 
 import '../css/plugins/normalize.css';
 import '../css/plugins/icomoon/style.css';
 import '../css/plugins/bootstrap-grid.css';
+import '../css/plugins/fontawesome/css/all.css';
 import '../css/utils/global.scss';
 
 export default class DefaultLayout extends Component {

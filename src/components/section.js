@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
 
 import CSS from '../css/modules/section.module.scss';
 import {ref} from '../utils/componentHelpers';
-
-const DEFAULT_ANGLE_HEIGHT = 150;
 
 function debounce(func, wait, immediate) {
 	var timeout;
@@ -39,7 +36,7 @@ export default class Section extends Component {
 
 		this.state = {
 			innerHeight: 0,
-			angleHeight: DEFAULT_ANGLE_HEIGHT
+			angleHeight: props.angleHeight
 		};
 
 		this.section = null;
@@ -56,7 +53,8 @@ export default class Section extends Component {
 		backgroundColor: PropTypes.string,
 		children: PropTypes.node.isRequired,
 		id: PropTypes.string,
-		classname: PropTypes.string
+		classname: PropTypes.string,
+		spacingTop: PropTypes.number
 	};
 
 	static defaultProps = {
@@ -64,10 +62,11 @@ export default class Section extends Component {
 		slantTop: true,
 		slantBottom: true,
 		slantDirection: 'rightToLeft',
-		angleHeight: 150,
+		angleHeight: 100,
 		backgroundColor: 'white',
 		id: '',
-		classname: null
+		classname: null,
+		spacingTop: 0
 	};
 
 	componentDidMount() {
@@ -91,9 +90,12 @@ export default class Section extends Component {
 		}
 
 		const {clientWidth: width} = inner;
-		let angleHeight = DEFAULT_ANGLE_HEIGHT;
 
-		angleHeight = width * 0.055 + 70;
+		let angleHeight = width * 0.055 + 70;
+
+		if (angleHeight > this.props.angleHeight) {
+			angleHeight = this.props.angleHeight;
+		}
 
 		this.setState({
 			innerHeight: inner.getBoundingClientRect().height,
@@ -129,7 +131,7 @@ export default class Section extends Component {
 	}
 
 	render() {
-		const {backgroundColor, id, classname} = this.props;
+		const {backgroundColor, id, classname, spacingTop} = this.props;
 		const {angleHeight} = this.state;
 
 		const sectionClass = [CSS.section];
@@ -143,7 +145,7 @@ export default class Section extends Component {
 				<div
 					style={{
 						// MaxWidth: 1440,
-						margin: '0 auto'
+						margin: `${spacingTop}px auto 0`
 					}}
 					className={CSS.wrap}
 				>

@@ -1,0 +1,86 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.tabs {
+	display: block;
+	opacity: 0;
+	transition: all 0.3s ease-in-out;
+}
+
+.tabsActive {
+	opacity: 1;
+}
+
+.header,
+.body {
+	ul {
+		@include noList();
+	}
+}
+
+.header {
+	ul {
+		display: flex;
+		justify-content: space-between;
+
+		li {
+		}
+	}
+}
+
+.headerTab {
+	cursor: pointer;
+	font-family: $fontBody;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 19px;
+	opacity: 0.5;
+	padding: 15px 50;
+	text-align: center;
+
+	@include tabletUp {
+		padding: 15px 75px;
+		white-space: nowrap;
+	}
+}
+
+.headerTabActive {
+	@extend .headerTab;
+	font-weight: 500;
+	opacity: 1;
+}
+
+.body {
+	overflow: hidden;
+
+	ul {
+		transition: all 0.15s ease-in-out;
+		white-space: nowrap;
+	}
+}
+
+.bodyTab {
+	display: inline-block;
+	font-family: $fontBody;
+	font-size: 16px;
+	line-height: 28px;
+	opacity: 0;
+	transition: all 0.15s ease-in-out;
+	white-space: normal;
+	width: 100%;
+}
+
+.bodyTabActive {
+	@extend .bodyTab;
+	opacity: 1;
+}
+
+.sectionContentTabs {
+	.headerTab {
+		color: $pinkDark;
+	}
+
+	.bodyTab {
+		color: $grey1;
+	}
+}

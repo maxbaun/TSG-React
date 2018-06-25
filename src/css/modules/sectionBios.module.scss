@@ -1,0 +1,10 @@
+@import '../utils/mixins';
+@import '../utils/section';
+
+.sectionHeader {
+	margin-bottom: 15px;
+
+	@include tabletUp {
+		margin-bottom: 30px;
+	}
+}

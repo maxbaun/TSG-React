@@ -21,7 +21,7 @@ export default class PageDescription extends Component {
 	}
 
 	static propTypes = {
-		content: PropTypes.array,
+		content: PropTypes.object,
 		images: PropTypes.array,
 		id: PropTypes.string,
 		view: PropTypes.oneOf(['content', 'images']),
@@ -29,7 +29,7 @@ export default class PageDescription extends Component {
 	};
 
 	static defaultProps = {
-		content: [],
+		content: {},
 		images: [],
 		id: 'pageDescription',
 		view: 'content',
@@ -61,17 +61,14 @@ export default class PageDescription extends Component {
 		}
 
 		const heroRect = heroVideo.getBoundingClientRect();
-		const sectionRect = section.getBoundingClientRect();
+
 		const sectionChild = section
 			.querySelector('div')
 			.querySelector('div')
 			.querySelector('div');
-		const sectionPadding = sectionChild.style.paddingTop;
 
 		// Const videoBleed = heroRect.bottom - sectionRect.top - parseInt(sectionPadding, 10);
 		const videoBleed = heroRect.bottom - sectionChild.getBoundingClientRect().top;
-
-		console.log(videoBleed);
 
 		this.setState({
 			videoBleed: videoBleed > 0 ? videoBleed : 0
@@ -119,7 +116,7 @@ export default class PageDescription extends Component {
 
 						return (
 							<div key={image.id} className={CSS.galleryImage} style={imageStyle}>
-								<a href={link} target="_blank">
+								<a href={link} target="_blank" rel="noopener noreferrer">
 									<Image image={image}/>
 								</a>
 							</div>

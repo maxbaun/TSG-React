@@ -41,7 +41,8 @@
 		"react-intercom": "^1.0.14",
 		"react-motion": "^0.5.2",
 		"react-player": "^1.6.4",
-		"react-url-query": "^1.4.0"
+		"react-url-query": "^1.4.0",
+		"swiper": "^4.3.3"
 	},
 	"devDependencies": {
 		"babel-eslint": "8.2.3",

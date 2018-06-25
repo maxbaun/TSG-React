@@ -1,0 +1,58 @@
+@import '../utils/mixins';
+@import '../utils/section';
+
+.sectionInner {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+
+	@include tabletUp {
+		flex-direction: row;
+	}
+}
+
+.left,
+.right {
+	width: 100%;
+
+	@include tabletUp {
+		width: 50%;
+	}
+}
+
+.left {
+	margin-bottom: 15px;
+
+	@include tabletUp {
+		margin-bottom: 0;
+	}
+
+	.media {
+		@include tabletUp {
+			padding-right: 30px;
+		}
+
+		@include desktopUp {
+			padding-right: 60px;
+		}
+	}
+}
+
+.right {
+	.media {
+		@include tabletUp {
+			padding-left: 30px;
+		}
+
+		@include desktopUp {
+			padding-left: 60px;
+		}
+	}
+}
+
+.content {
+	@include desktopUp {
+		max-width: 544px;
+		margin: 0 auto;
+	}
+}

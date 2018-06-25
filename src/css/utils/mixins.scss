@@ -1,5 +1,12 @@
 @import './responsive.scss';
 
+@mixin noList {
+	list-style: none;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
 @mixin absoluteFull {
 	height: 100%;
 	left: 0;

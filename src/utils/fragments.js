@@ -58,35 +58,71 @@ export const LargeImage = graphql`
 	}
 `;
 
-export const HomeHeroComponent = graphql`
-	fragment HomeHeroComponent on WordPressAcf_homeHero {
-		images {
-			...LargeImage
+export const SectionHalf = graphql`
+	fragment SectionHalf on WordPressAcf_sectionHalf {
+		left {
+			image {
+				...LargeImage
+			}
+			video {
+				url
+				thumbnail {
+					...LargeImage
+				}
+			}
+			content {
+				icon
+				header
+				content
+				tabs {
+					title
+					content
+				}
+				buttons {
+					button {
+						text
+						url
+						classname
+					}
+				}
+			}
 		}
-		title
-		subtitle
-		linkText
-		linkUrl
-		videoUrl
-		videoImage {
-			...LargeImage
-		}
-	}
-`;
-
-export const HeroComponent = graphql`
-	fragment HeroComponent on WordPressAcf_hero {
-		images {
-			...LargeImage
+		right {
+			image {
+				...LargeImage
+			}
+			video {
+				url
+				thumbnail {
+					...LargeImage
+				}
+			}
+			content {
+				icon
+				header
+				content
+				tabs {
+					title
+					content
+				}
+				buttons {
+					button {
+						text
+						url
+						classname
+					}
+				}
+			}
 		}
 	}
 `;
 
 export const PageDescriptionContent = graphql`
 	fragment PageDescriptionContent on WordPressAcf_pageDescriptionContent {
-		content {
+		sectionContent: content {
 			icon
 			header
+			contentType
 			content
 		}
 	}
@@ -95,30 +131,53 @@ export const PageDescriptionContent = graphql`
 export const PageDescriptionImages = graphql`
 	fragment PageDescriptionImages on WordPressAcf_pageDescriptionImages {
 		images {
-			link
 			image {
 				...LargeImage
 			}
+			link
 		}
 	}
 `;
 
-export const SectionHalfImage = graphql`
-	fragment SectionHalfImage on WordPressAcf_sectionHalfImage {
-		image {
+export const Hero = graphql`
+	fragment Hero on WordPressAcf_hero {
+		images {
 			...LargeImage
 		}
-		imageAlign
-		content {
-			icon
-			header
-			content
-			buttons {
-				url
-				text
-				classname
+		video {
+			url
+			thumbnail {
+				...LargeImage
 			}
 		}
+		title
+		subtitle
+		link {
+			title
+			url
+		}
+	}
+`;
+
+export const SectionReviews = graphql`
+	fragment SectionReviews on WordPressAcf_sectionReviews {
+		header: sectionReviewsHeader
+		content: sectionReviewsContent
+		reviews: sectionReviewsReviews {
+			name
+			review
+		}
+		link: sectionReviewsLink {
+			title
+			url
+		}
+	}
+`;
+
+export const SectionBios = graphql`
+	fragment SectionBios on WordPressAcf_sectionBios {
+		header: sectionBiosHeader
+		content: sectionBiosContent
 	}
 `;
 
@@ -146,27 +205,25 @@ export const PageFragment = graphql`
 			twitterDescription: twitter_description
 			twitterImage: twitter_image
 		}
-		acf {
-			section: flexibleContent_page {
-				type: __typename
-			}
-		}
 		children {
 			type: __typename
-			... on WordPressAcf_homeHero {
-				...HomeHeroComponent
-			}
-			... on WordPressAcf_hero {
-				...HeroComponent
-			}
-			... on WordPressAcf_pageDescriptionContent {
-				...PageDescriptionContent
+			... on WordPressAcf_sectionHalf {
+				...SectionHalf
 			}
 			... on WordPressAcf_pageDescriptionImages {
 				...PageDescriptionImages
 			}
-			... on WordPressAcf_sectionHalfImage {
-				...SectionHalfImage
+			... on WordPressAcf_pageDescriptionContent {
+				...PageDescriptionContent
+			}
+			... on WordPressAcf_hero {
+				...Hero
+			}
+			... on WordPressAcf_sectionReviews {
+				...SectionReviews
+			}
+			... on WordPressAcf_sectionBios {
+				...SectionBios
 			}
 		}
 	}

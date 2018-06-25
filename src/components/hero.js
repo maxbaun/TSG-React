@@ -25,19 +25,15 @@ export default class Hero extends Component {
 		images: PropTypes.array.isRequired,
 		title: PropTypes.string,
 		subtitle: PropTypes.string,
-		linkText: PropTypes.string,
-		linkUrl: PropTypes.string,
-		videoUrl: PropTypes.string,
-		videoImage: PropTypes.object
+		link: PropTypes.object,
+		video: PropTypes.object
 	};
 
 	static defaultProps = {
-		linkText: null,
-		linkUrl: null,
+		link: {},
 		title: null,
 		subtitle: null,
-		videoUrl: null,
-		videoImage: {}
+		video: {}
 	};
 
 	componentDidMount() {
@@ -67,7 +63,7 @@ export default class Hero extends Component {
 	}
 
 	render() {
-		const {images, title, subtitle, linkText, linkUrl, videoUrl} = this.props;
+		const {images, title, subtitle, link, video} = this.props;
 		const {loaded, activeImage} = this.state;
 		const showContent = title && title !== '';
 
@@ -118,9 +114,9 @@ export default class Hero extends Component {
 									{/* eslint-disable-next-line react/no-danger */}
 									<h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/>
 								</div>
-								{linkUrl ? (
+								{link && link.url ? (
 									<Button
-										to={linkUrl}
+										to={link.url}
 										classname="primary"
 										style={{
 											display: 'block',
@@ -128,10 +124,10 @@ export default class Hero extends Component {
 											margin: '0 auto'
 										}}
 									>
-										{linkText}
+										{link.title}
 									</Button>
 								) : null}
-								{videoUrl ? this.renderVideo() : null}
+								{video && video.url ? this.renderVideo(video) : null}
 							</div>
 						) : null}
 					</div>
@@ -141,12 +137,12 @@ export default class Hero extends Component {
 	}
 
 	renderVideo(video) {
-		const {videoUrl, videoImage} = this.props;
+		const {url, thumbnail} = video;
 
 		return (
 			<div id="heroVideo" className={CSS.video}>
 				<div className={CSS.videoInner}>
-					<Video videoUrl={videoUrl} videoThumbnail={videoImage}/>
+					<Video url={url} thumbnail={thumbnail}/>
 				</div>
 			</div>
 		);

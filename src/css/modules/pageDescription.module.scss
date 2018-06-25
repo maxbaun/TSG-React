@@ -25,7 +25,11 @@
 	width: 100%;
 
 	@include tabletUp {
-		padding: 44px 0;
+		padding: 66px 0;
+	}
+
+	@include desktopUp {
+		padding: 90px 0;
 	}
 }
 

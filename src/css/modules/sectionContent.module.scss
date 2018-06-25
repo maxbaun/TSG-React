@@ -94,25 +94,43 @@
 	}
 }
 
+.sectionHalfHeader {
+	h2 {
+		font-size: 30px;
+		line-height: 34px;
+
+		@include tabletUp {
+			font-size: 30px;
+			line-height: 34px;
+		}
+
+		@include desktopUp {
+			font-size: 38px;
+			line-height: 42px;
+		}
+	}
+}
+
 .sectionHalf {
 	.header {
-		h2 {
-			font-size: 22px;
-			line-height: 26px;
-
-			@include tabletUp {
-				font-size: 30px;
-				line-height: 34px;
-			}
-
-			@include desktopUp {
-				font-size: 38px;
-				line-height: 42px;
-			}
-		}
+		@extend .sectionHalfHeader;
 	}
 
 	.buttons {
 		justify-content: center;
 	}
+}
+
+.sectionReviewsContent {
+	.header {
+		@extend .sectionHalfHeader;
+	}
+
+	.content {
+		text-align: center;
+	}
+}
+
+.sectionBiosContent {
+	@extend .sectionReviewsContent;
 }
