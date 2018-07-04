@@ -9,6 +9,8 @@ import '../css/plugins/bootstrap-grid.css';
 import '../css/plugins/fontawesome/css/all.css';
 import '../css/utils/global.scss';
 
+import Header from '../components/header';
+
 export default class DefaultLayout extends Component {
 	static propTypes = {
 		children: PropTypes.func.isRequired,
@@ -19,6 +21,7 @@ export default class DefaultLayout extends Component {
 	render() {
 		return (
 			<div id="app">
+				<Header menu={this.props.data.mainMenu}/>
 				<main className="main">{this.props.children()}</main>
 			</div>
 		);

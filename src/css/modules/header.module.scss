@@ -1,0 +1,82 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.header {
+
+}
+
+.headerContainer {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	height: 75px;
+}
+
+.headerInner {
+	align-items: center;
+	display: flex;
+}
+
+.headerMenu {
+	flex: 1;
+	max-width: 60%;
+}
+
+.toggle {
+	display: block;
+
+	@include tabletUp {
+		display: none;
+	}
+}
+
+.menu {
+	ul {
+		@include noList();
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+
+		li {
+
+		}
+	}
+}
+
+.link {
+	color: $purple;
+	display: block;
+	font-family: $fontBody;
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 14px;
+	position: relative;
+	text-decoration: none !important;
+	text-transform: uppercase;
+	transition: all 0.2s ease-in-out;
+
+	&:hover {
+		font-weight: 700;
+
+		&::after {
+			opacity: 1;
+			transform: rotateY(0deg);
+			transition: all 0.3s 0.1s ease-in-out;
+		}
+	}
+
+	&::after {
+		@include tabletUp {
+			background-color: $pink;
+			bottom: -7px;
+			content: ' ';
+			left: -14%;
+			height: 2px;
+			position: absolute;
+			opacity: 0;
+			transform: rotateY(90deg);
+			transition: all 0.15s ease-in-out;
+			width: 128%;
+		}
+	}
+}

@@ -2,12 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/sectionCta.module.scss';
-import {click, ref} from '../utils/componentHelpers';
-import {bioPosition, bioName} from '../utils/wordpressHelpers';
 import WindowSize from './windowSize';
 import Section from './section';
 import SectionContent from './sectionContent';
-import Image from './image';
 import Button from './button';
 
 // eslint-disable-next-line react/no-deprecated
