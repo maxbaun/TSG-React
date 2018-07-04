@@ -178,6 +178,14 @@ export const SectionBios = graphql`
 	fragment SectionBios on WordPressAcf_sectionBios {
 		header: sectionBiosHeader
 		content: sectionBiosContent
+		bios: sectionBiosBios {
+			title: post_title
+			excerpt: post_excerpt
+			url
+			image: featured_media {
+				...LargeImage
+			}
+		}
 	}
 `;
 
@@ -187,6 +195,9 @@ export const PageFragment = graphql`
 		content
 		title
 		excerpt
+		acf {
+			hasCallToAction
+		}
 		yoast {
 			metaKeywords: focuskw
 			title: title

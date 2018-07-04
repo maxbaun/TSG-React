@@ -1,0 +1,63 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+@import '../utils/section';
+
+.section {
+	@include imgRetina('../../img/splash-color-reverse', 'png', 451px, 832px, top left);
+	padding: 34px 0;
+
+	@include tabletUp {
+		padding: 50px 0 80px;
+	}
+
+	@include desktopUp {
+		padding: 68px 0 102px;
+	}
+}
+
+.boxes {
+	@include noList();
+	@include tabletUp {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	li {
+		margin: 0 auto 30px;
+		max-width: 560px;
+		width: 100%;
+		position: relative;
+
+		@include tabletUp {
+			margin: 0;
+			width: 45%;
+		}
+
+		&::before {
+			@include tabletUp {
+				content: '';
+				display: block;
+				padding-top: 80%;
+			}
+		}
+	}
+}
+
+.box {
+	background-color: $white;
+	box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.19);
+}
+
+.boxInner {
+	padding: 22.5px 28px;
+	text-align: center;
+
+	@include tabletUp {
+		@include absoluteFull();
+		padding: 45px 56px;
+	}
+}
+
+.boxContent {
+	margin-bottom: 39px;
+}

@@ -8,6 +8,7 @@ import Section from '../components/sectionSlant';
 import SectionHalf from '../components/sectionHalf';
 import SectionReviews from '../components/sectionReviews';
 import SectionBios from '../components/sectionBios';
+import SectionCta from '../components/sectionCta';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 const SectionMap = {
@@ -129,6 +130,7 @@ export default class PageTemplate extends React.Component {
 
 					return null;
 				})}
+				{currentPage.acf.hasCallToAction ? <SectionCta/> : null}
 				{/* <Section
 					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
 					slantDirection="leftToRight"

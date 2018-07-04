@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/section.module.scss';
+import WindowSize from './windowSize';
 import {ref} from '../utils/componentHelpers';
 
 function debounce(func, wait, immediate) {
@@ -30,7 +31,8 @@ function debounce(func, wait, immediate) {
 	};
 }
 
-export default class Section extends Component {
+// eslint-disable-next-line react/no-deprecated
+class Section extends Component {
 	constructor(props) {
 		super(props);
 
@@ -40,7 +42,7 @@ export default class Section extends Component {
 		};
 
 		this.section = null;
-		this.handleResize = debounce(this.handleResize.bind(this), 150);
+		this.handleResize = debounce(this.handleResize.bind(this), 300);
 		this.getStyle = this.getStyle.bind(this);
 	}
 
@@ -54,7 +56,10 @@ export default class Section extends Component {
 		children: PropTypes.node.isRequired,
 		id: PropTypes.string,
 		classname: PropTypes.string,
-		spacingTop: PropTypes.number
+		spacingTop: PropTypes.number,
+		windowWidth: PropTypes.number,
+		angleBottom: PropTypes.bool,
+		angleTop: PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -66,16 +71,20 @@ export default class Section extends Component {
 		backgroundColor: 'white',
 		id: '',
 		classname: null,
-		spacingTop: 0
+		spacingTop: 0,
+		windowWidth: 0,
+		angleBottom: true,
+		angleTop: true
 	};
 
 	componentDidMount() {
-		window.addEventListener('resize', this.handleResize);
 		this.handleResize();
 	}
 
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleResize);
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.windowWidth !== this.props.windowWidth) {
+			this.handleResize();
+		}
 	}
 
 	isMobile() {
@@ -91,20 +100,20 @@ export default class Section extends Component {
 
 		const {clientWidth: width} = inner;
 
-		let angleHeight = width * 0.055 + 70;
+		let angleHeight = (width * 0.055) + 70;
 
 		if (angleHeight > this.props.angleHeight) {
 			angleHeight = this.props.angleHeight;
 		}
 
 		this.setState({
-			innerHeight: inner.getBoundingClientRect().height,
+			innerHeight: inner.offsetHeight,
 			angleHeight: width < 768 ? 0 : angleHeight
 		});
 	}
 
 	getStyle() {
-		const {style, slantDirection} = this.props;
+		let {style, slantDirection} = this.props;
 
 		if (!this.inner) {
 			return {
@@ -121,17 +130,25 @@ export default class Section extends Component {
 			`polygon(0 ${angleHeight}px, 100% 0, 100% 100%, 0 ${bottomCoord}px` :
 			`polygon(0 0, 100% ${angleHeight}px, 100% ${bottomCoord}px, 0 100%`;
 
-		return {
+		style = {
 			...style,
-			marginTop: angleHeight * -1,
-			clipPath,
-			WebkitClipPath: clipPath,
 			opacity: innerHeight ? 1 : 0
 		};
+
+		if (angleHeight > 0) {
+			style = {
+				...style,
+				marginTop: angleHeight * -1,
+				clipPath,
+				WebkitClipPath: clipPath
+			};
+		}
+
+		return style;
 	}
 
 	render() {
-		const {backgroundColor, id, classname, spacingTop} = this.props;
+		const {backgroundColor, id, classname, spacingTop, angleBottom} = this.props;
 		const {angleHeight} = this.state;
 
 		const sectionClass = [CSS.section];
@@ -155,7 +172,7 @@ export default class Section extends Component {
 						style={{
 							backgroundColor,
 							paddingTop: angleHeight,
-							paddingBottom: angleHeight
+							paddingBottom: angleBottom ? angleHeight : 0
 						}}
 					>
 						<div className={CSS.innerWrap}>{this.props.children}</div>
@@ -165,3 +182,5 @@ export default class Section extends Component {
 		);
 	}
 }
+
+export default WindowSize(Section);

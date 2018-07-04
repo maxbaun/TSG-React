@@ -41,3 +41,17 @@ export const sortByMenuOrder = list => {
 		return a.menuOrder - b.menuOrder;
 	});
 };
+
+export const bioName = name => {
+	return getBioPart(name, 0);
+};
+
+export const bioPosition = name => {
+	return getBioPart(name, 1);
+};
+
+function getBioPart(name, part) {
+	const parts = name.split(' - ');
+
+	return parts[part];
+}
