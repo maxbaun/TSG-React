@@ -10,6 +10,7 @@ import '../css/plugins/fontawesome/css/all.css';
 import '../css/utils/global.scss';
 
 import Header from '../components/header';
+import Footer from '../components/footer';
 
 export default class DefaultLayout extends Component {
 	static propTypes = {
@@ -24,6 +25,23 @@ export default class DefaultLayout extends Component {
 			<div id="app">
 				<Header menu={this.props.data.mainMenu}/>
 				<main className="main">{this.props.children()}</main>
+				<Footer
+					menus={[
+						{
+							title: 'Resources',
+							items: this.props.data.footerMenu1 ? this.props.data.footerMenu1.items : []
+						},
+						{
+							title: 'Services',
+							items: this.props.data.footerMenu2 ? this.props.data.footerMenu2.items : []
+						}
+					]}
+					phone={this.props.data.options.phone}
+					email={this.props.data.options.email}
+					social={this.props.data.options.social}
+					description={this.props.data.options.footerDescription}
+					copy="© TSG Weddings // The Sussman Group, LLC"
+				/>
 			</div>
 		);
 	}

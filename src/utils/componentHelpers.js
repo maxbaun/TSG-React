@@ -178,9 +178,14 @@ export function phoneLink(string) {
 		.replace('-', '')
 		.replace('(', '')
 		.replace(')', '')
-		.replace(' ', '');
+		.replace(' ', '')
+		.replace('  ', '');
 
 	return `tel:${num}`;
+}
+
+export function emailLink(email) {
+	return `mailto:${email}`;
 }
 
 export function price(price) {

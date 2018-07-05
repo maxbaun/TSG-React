@@ -17,7 +17,8 @@
 
 .boxes {
 	@include noList();
-	@include tabletUp {
+
+	@include desktopUp {
 		display: flex;
 		justify-content: space-around;
 	}
@@ -28,13 +29,13 @@
 		width: 100%;
 		position: relative;
 
-		@include tabletUp {
+		@include desktopUp {
 			margin: 0;
 			width: 45%;
 		}
 
 		&::before {
-			@include tabletUp {
+			@include desktopUp {
 				content: '';
 				display: block;
 				padding-top: 80%;
@@ -52,7 +53,7 @@
 	padding: 22.5px 28px;
 	text-align: center;
 
-	@include tabletUp {
+	@include desktopUp {
 		@include absoluteFull();
 		padding: 45px 56px;
 	}
