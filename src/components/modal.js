@@ -5,6 +5,7 @@ import {Motion, spring, presets} from 'react-motion';
 import CSS from '../css/modules/modal.module.scss';
 import Close from './close';
 
+// eslint-disable-next-line react/no-deprecated
 export default class Modal extends Component {
 	constructor(props) {
 		super(props);
@@ -43,7 +44,7 @@ export default class Modal extends Component {
 		size: null,
 		showClose: false,
 		classname: '',
-		fogOpacity: 0.5,
+		fogOpacity: 0.7,
 		height: 0,
 		width: 0,
 		backgroundColor: '#FAFAFA'
@@ -107,10 +108,22 @@ export default class Modal extends Component {
 	}
 
 	render() {
-		const {children, size, showClose, classname, fogOpacity, height, width, backgroundColor} = this.props;
+		const {
+			children,
+			size,
+			showClose,
+			classname,
+			fogOpacity,
+			height,
+			width,
+			backgroundColor
+		} = this.props;
 		const {visibility, windowHeight, display, active} = this.state;
 
-		const wrapClass = [CSS.wrap, classname && classname !== '' ? CSS[classname] : ''];
+		const wrapClass = [
+			CSS.wrap,
+			classname && classname !== '' ? CSS[classname] : ''
+		];
 		const modalClass = [CSS.modal, size ? CSS[size] : ''];
 
 		return (
@@ -121,13 +134,19 @@ export default class Modal extends Component {
 							opacity: 0
 						}}
 						style={{
-							opacity: active ? spring(fogOpacity, presets.stiff) : spring(0, presets.stiff)
+							opacity: active ?
+								spring(fogOpacity, presets.stiff) :
+								spring(0, presets.stiff)
 						}}
 					>
 						{style => {
 							return (
 								<span style={style} className={CSS.close}>
-									<Close backgroundColor="#FAFAFA" size={40} onClick={this.handleClose}/>
+									<Close
+										backgroundColor="#FAFAFA"
+										size={40}
+										onClick={this.handleClose}
+									/>
 								</span>
 							);
 						}}
@@ -141,10 +160,18 @@ export default class Modal extends Component {
 						top: 4
 					}}
 					style={{
-						opacity: active ? spring(1, presets.stiff) : spring(0, presets.stiff),
-						x: active ? spring(1, presets.stiff) : spring(0.8, presets.stiff),
-						y: active ? spring(1, presets.stiff) : spring(0.8, presets.stiff),
-						top: active ? spring(10, presets.stiff) : spring(4, presets.stiff)
+						opacity: active ?
+							spring(1, presets.stiff) :
+							spring(0, presets.stiff),
+						x: active ?
+							spring(1, presets.stiff) :
+							spring(0.8, presets.stiff),
+						y: active ?
+							spring(1, presets.stiff) :
+							spring(0.8, presets.stiff),
+						top: active ?
+							spring(10, presets.stiff) :
+							spring(4, presets.stiff)
 					}}
 					onRest={this.handleRest}
 				>
@@ -173,7 +200,10 @@ export default class Modal extends Component {
 						}
 
 						return (
-							<div className={modalClass.join(' ')} style={modalStyle}>
+							<div
+								className={modalClass.join(' ')}
+								style={modalStyle}
+							>
 								{children}
 							</div>
 						);
@@ -184,7 +214,9 @@ export default class Modal extends Component {
 						opacity: 0
 					}}
 					style={{
-						opacity: active ? spring(fogOpacity, presets.stiff) : spring(0, presets.stiff)
+						opacity: active ?
+							spring(fogOpacity, presets.stiff) :
+							spring(0, presets.stiff)
 					}}
 				>
 					{styles => {

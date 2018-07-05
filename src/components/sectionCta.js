@@ -42,7 +42,12 @@ class SectionCta extends Component {
 		}
 
 		return (
-			<Section id="sectionBios" slantDirection="leftToRight" backgroundColor="#FFF" angleHeight={0}>
+			<Section
+				id="sectionCta"
+				slantDirection="leftToRight"
+				backgroundColor="#FFF"
+				angleHeight={0}
+			>
 				<div className={sectionCss.join(' ')}>
 					<div className="container">
 						<ul className={CSS.boxes}>

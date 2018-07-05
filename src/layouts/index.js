@@ -19,6 +19,7 @@ export default class DefaultLayout extends Component {
 	};
 
 	render() {
+		console.log(this.props.data);
 		return (
 			<div id="app">
 				<Header menu={this.props.data.mainMenu}/>
@@ -34,8 +35,26 @@ export const mainLayoutQuery = graphql`
 		mainMenu: wordpressWpApiMenusMenusItems(name: {eq: "Main Nav"}) {
 			...MenuItems
 		}
+		footerMenu1: wordpressWpApiMenusMenusItems(name: {eq: "Footer 1"}) {
+			...MenuItems
+		}
+		footerMenu2: wordpressWpApiMenusMenusItems(name: {eq: "Footer 2"}) {
+			...MenuItems
+		}
 		site {
 			...Site
+		}
+		options: wordpressAcfOptions {
+			footerDescription
+			phone: contactPhoneNumber
+			email: contactEmail
+			social: contactSocial {
+				facebook
+				pinterest
+				instagram
+				vimeo
+				youtube
+			}
 		}
 	}
 `;
