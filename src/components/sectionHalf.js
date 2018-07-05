@@ -5,8 +5,9 @@ import CSS from '../css/modules/sectionHalf.module.scss';
 import Image from './image';
 import Video from './video';
 import SectionContent from './sectionContent';
+import WindowSize from './windowSize';
 
-export default class SectionHalf extends Component {
+class SectionHalf extends Component {
 	constructor(props) {
 		super(props);
 
@@ -19,7 +20,8 @@ export default class SectionHalf extends Component {
 		right: PropTypes.object,
 		left: PropTypes.object,
 		zIndex: PropTypes.number.isRequired,
-		style: PropTypes.object
+		style: PropTypes.object,
+		windowWidth: PropTypes.number.isRequired
 	};
 
 	static defaultProps = {
@@ -39,8 +41,10 @@ export default class SectionHalf extends Component {
 	}
 
 	render() {
-		const {right, left, zIndex, style} = this.props;
+		const {right, left, zIndex, style, windowWidth} = this.props;
 		const {active} = this.state;
+
+		const isMobile = windowWidth < 768;
 
 		const sectionStyle = {
 			...style,
@@ -61,15 +65,31 @@ export default class SectionHalf extends Component {
 				<div className="container">
 					<div className={CSS.sectionInner}>
 						<div className={CSS.left} style={leftStyle}>
-							{this.renderColumn(left)}
+							{isMobile ? this.renderContent(left, right) : this.renderColumn(left)}
 						</div>
 						<div className={CSS.right} style={rightStyle}>
-							{this.renderColumn(right)}
+							{isMobile ? this.renderMedia(right, left) : this.renderColumn(right)}
 						</div>
 					</div>
 				</div>
 			</section>
 		);
+	}
+
+	renderMedia(col1, col2) {
+		if (col2.image || col2.video) {
+			return this.renderColumn(col2);
+		}
+
+		return this.renderColumn(col1);
+	}
+
+	renderContent(col1, col2) {
+		if (col2.content) {
+			return this.renderColumn(col2);
+		}
+
+		return this.renderColumn(col1);
 	}
 
 	renderColumn(column) {
@@ -102,3 +122,5 @@ export default class SectionHalf extends Component {
 		return <div className={CSS.media}>{mediaJsx}</div>;
 	}
 }
+
+export default WindowSize(SectionHalf);

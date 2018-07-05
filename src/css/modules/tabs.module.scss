@@ -22,9 +22,6 @@
 	ul {
 		display: flex;
 		justify-content: space-between;
-
-		li {
-		}
 	}
 }
 
@@ -35,11 +32,10 @@
 	font-weight: 300;
 	line-height: 19px;
 	opacity: 0.5;
-	padding: 15px 50;
+	padding: 15px;
 	text-align: center;
 
 	@include tabletUp {
-		padding: 15px 75px;
 		white-space: nowrap;
 	}
 }
