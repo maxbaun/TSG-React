@@ -4,6 +4,8 @@ export const replaceLinks = str => {
 		.replace('https://tsg.info', '')
 		.replace('http://tsgweddings.com', '')
 		.replace('https://tsgweddings.com', '')
+		.replace('http://tsg.d3applications.com', '')
+		.replace('https://tsg.d3applications.com', '')
 		.replace('http://admin.tsgweddings.com', '')
 		.replace('https://admin.tsgweddings.com', '');
 };
