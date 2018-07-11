@@ -118,6 +118,28 @@
 
 	.buttons {
 		justify-content: center;
+		flex-wrap: wrap;
+
+		@include tabletUp {
+			justify-content: space-evenly;
+		}
+
+		> a {
+			align-items: center;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: center;
+			height: 54px;
+			padding: 10px;
+			margin: 0 0 17px;
+			width: 250px;
+			max-width: 100%;
+
+			@include tabletUp {
+				width: 48%;
+				max-width: 48%;
+			}
+		}
 	}
 }
 
@@ -137,4 +159,35 @@
 
 .sectionCtaContent {
 	@extend .sectionReviewsContent;
+
+	.buttons {
+		justify-content: center;
+	}
+}
+
+.sectionSlant {
+	@extend .sectionHalf;
+}
+
+.sectionFacts {
+	@extend .sectionReviewsContent;
+
+	.header {
+		h2,
+		h4 {
+			color: $white;
+		}
+
+		&::after {
+			background-color: $white;
+		}
+	}
+}
+
+.sectionFeatured {
+	@extend .sectionCtaContent;
+}
+
+.sectionServices {
+	@extend .sectionBiosContent;
 }

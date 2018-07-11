@@ -54,3 +54,14 @@
 		color: $white;
 	}
 }
+
+.secondary-white {
+	@extend .secondary;
+	border-color: $white;
+	color: $white;
+
+	&:hover {
+		background-color: $white;
+		color: $grey1;
+	}
+}

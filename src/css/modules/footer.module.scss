@@ -46,10 +46,6 @@
 	position: relative;
 	padding-bottom: 19px;
 
-	img {
-		background-color: white;
-	}
-
 	&::after {
 		bottom: 0;
 		background-color: $pink;

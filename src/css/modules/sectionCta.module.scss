@@ -3,7 +3,7 @@
 @import '../utils/section';
 
 .section {
-	@include imgRetina('../../img/splash-color-reverse', 'png', 451px, 832px, top left);
+	@include imgRetina('../../img/BG-watercolor', 'png', 527px, 844px, top left);
 	padding: 34px 0;
 
 	@include tabletUp {

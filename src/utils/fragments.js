@@ -119,6 +119,7 @@ export const SectionHalf = graphql`
 
 export const PageDescriptionContent = graphql`
 	fragment PageDescriptionContent on WordPressAcf_pageDescriptionContent {
+		disableAngleBottom: pageDescriptionContentDisableAngleBottom
 		sectionContent: content {
 			icon
 			header
@@ -130,6 +131,7 @@ export const PageDescriptionContent = graphql`
 
 export const PageDescriptionImages = graphql`
 	fragment PageDescriptionImages on WordPressAcf_pageDescriptionImages {
+		disableAngleBottom: pageDescriptionImagesDisableAngleBottom
 		images {
 			image {
 				...LargeImage
@@ -189,6 +191,94 @@ export const SectionBios = graphql`
 	}
 `;
 
+export const SectionAwards = graphql`
+	fragment SectionAwards on WordPressAcf_sectionAwards {
+		title: sectionAwardsTitle
+		images: sectionAwardsImages {
+			image {
+				...LargeImage
+			}
+			link
+		}
+	}
+`;
+
+export const SectionSlant = graphql`
+	fragment SectionSlant on WordPressAcf_sectionSlant {
+		slantDirection: sectionSlantSlantDirection
+		image: sectionSlantImage {
+			...LargeImage
+		}
+		disableSlantTop: sectionSlantDisableSlantTop
+		disableSlantBottom: sectionSlantDisableSlantBottom
+		sectionContent: sectionSlantContent {
+			icon
+			header
+			contentType
+			content
+			buttons {
+				button {
+					text
+					url
+					classname
+				}
+			}
+		}
+	}
+`;
+
+export const SectionFacts = graphql`
+	fragment SectionFacts on WordPressAcf_sectionFacts {
+		title: sectionFactsTitle
+		facts: sectionFactsFacts {
+			icon
+			text
+		}
+		link: sectionFactsLink {
+			title
+			url
+		}
+	}
+`;
+
+export const SectionFeatured = graphql`
+	fragment SectionFeatured on WordPressAcf_sectionFeatured {
+		image: sectionFeaturedImage {
+			...LargeImage
+		}
+		sectionContent: sectionFeaturedContent {
+			header
+			contentType
+			content
+			buttons {
+				button {
+					text
+					url
+					classname
+				}
+			}
+		}
+	}
+`;
+
+export const SectionServices = graphql`
+	fragment SectionServices on WordPressAcf_sectionServices {
+		services: sectionServicesServices {
+			title
+			text
+			image {
+				...LargeImage
+			}
+		}
+		sectionContent: sectionServicesContent {
+			header
+			contentType
+			sectionContent: content
+			icon
+		}
+	}
+`;
+
 export const PageFragment = graphql`
 	fragment Page on wordpress__PAGE {
 		id
@@ -235,6 +325,21 @@ export const PageFragment = graphql`
 			}
 			... on WordPressAcf_sectionBios {
 				...SectionBios
+			}
+			... on WordPressAcf_sectionAwards {
+				...SectionAwards
+			}
+			... on WordPressAcf_sectionSlant {
+				...SectionSlant
+			}
+			... on WordPressAcf_sectionFacts {
+				...SectionFacts
+			}
+			... on WordPressAcf_sectionFeatured {
+				...SectionFeatured
+			}
+			... on WordPressAcf_sectionServices {
+				...SectionServices
 			}
 		}
 	}

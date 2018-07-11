@@ -38,7 +38,8 @@ class Section extends Component {
 
 		this.state = {
 			innerHeight: 0,
-			angleHeight: props.angleHeight
+			angleHeightTop: props.angleHeightTop || props.angleHeight,
+			angleHeightBottom: props.angleHeightBottom || props.angleHeight
 		};
 
 		this.section = null;
@@ -52,6 +53,8 @@ class Section extends Component {
 		slantBottom: PropTypes.bool,
 		slantDirection: PropTypes.oneOf(['leftToRight', 'rightToLeft']),
 		angleHeight: PropTypes.number,
+		angleHeightBottom: PropTypes.number,
+		angleHeightTop: PropTypes.number,
 		backgroundColor: PropTypes.string,
 		children: PropTypes.node.isRequired,
 		id: PropTypes.string,
@@ -59,7 +62,9 @@ class Section extends Component {
 		spacingTop: PropTypes.number,
 		windowWidth: PropTypes.number,
 		angleBottom: PropTypes.bool,
-		angleTop: PropTypes.bool
+		angleTop: PropTypes.bool,
+		setPadding: PropTypes.bool,
+		breakpoint: PropTypes.number
 	};
 
 	static defaultProps = {
@@ -68,13 +73,17 @@ class Section extends Component {
 		slantBottom: true,
 		slantDirection: 'rightToLeft',
 		angleHeight: 100,
+		angleHeightBottom: 0,
+		angleHeightTop: 0,
 		backgroundColor: 'white',
 		id: '',
 		classname: null,
 		spacingTop: 0,
 		windowWidth: 0,
 		angleBottom: true,
-		angleTop: true
+		angleTop: true,
+		setPadding: true,
+		breakpoint: 768
 	};
 
 	componentDidMount() {
@@ -100,20 +109,31 @@ class Section extends Component {
 
 		const {clientWidth: width} = inner;
 
-		let angleHeight = (width * 0.055) + 70;
+		let {angleHeightTop: maxAngleHeightTop, angleHeightBottom: maxAngleHeightBottom, angleHeight: maxAngleHeight} = this.props;
 
-		if (angleHeight > this.props.angleHeight) {
-			angleHeight = this.props.angleHeight;
+		let angleHeightTop = width * 0.055 + 70;
+		let angleHeightBottom = width * 0.055 + 70;
+
+		let angleTopMax = maxAngleHeightTop ? maxAngleHeightTop : maxAngleHeight;
+		let angleBottomMax = maxAngleHeightBottom ? maxAngleHeightBottom : maxAngleHeight;
+
+		if (angleHeightTop > angleTopMax) {
+			angleHeightTop = angleTopMax;
+		}
+
+		if (angleHeightBottom > angleBottomMax) {
+			angleHeightBottom = angleBottomMax;
 		}
 
 		this.setState({
 			innerHeight: inner.offsetHeight,
-			angleHeight: width < 768 ? 0 : angleHeight
+			angleHeightTop: width < this.props.breakpoint ? 0 : angleHeightTop,
+			angleHeightBottom: width < this.props.breakpoint ? 0 : angleHeightBottom
 		});
 	}
 
 	getStyle() {
-		let {style, slantDirection} = this.props;
+		let {style, slantDirection, angleTop, angleBottom} = this.props;
 
 		if (!this.inner) {
 			return {
@@ -122,23 +142,23 @@ class Section extends Component {
 			};
 		}
 
-		const {innerHeight, angleHeight} = this.state;
+		const {innerHeight, angleHeightTop, angleHeightBottom} = this.state;
 		const reversed = slantDirection === 'rightToLeft';
 
-		const bottomCoord = innerHeight + angleHeight;
+		const bottomCoord = innerHeight + angleHeightBottom;
 		let clipPath = reversed ?
-			`polygon(0 ${angleHeight}px, 100% 0, 100% 100%, 0 ${bottomCoord}px` :
-			`polygon(0 0, 100% ${angleHeight}px, 100% ${bottomCoord}px, 0 100%`;
+			`polygon(0 ${angleTop ? angleHeightTop : 0}px, 100% 0, 100% 100%, 0 ${angleBottom ? `${bottomCoord}px` : '100%'}` :
+			`polygon(0 0, 100% ${angleTop ? angleHeightTop : 0}px, 100% ${angleBottom ? `${bottomCoord}px` : '100%'}, 0 100%`;
 
 		style = {
 			...style,
 			opacity: innerHeight ? 1 : 0
 		};
 
-		if (angleHeight > 0) {
+		if (angleHeightTop > 0 || angleHeightBottom > 0) {
 			style = {
 				...style,
-				marginTop: angleHeight * -1,
+				marginTop: angleTop ? angleHeightTop * -1 : 0,
 				clipPath,
 				WebkitClipPath: clipPath
 			};
@@ -148,8 +168,8 @@ class Section extends Component {
 	}
 
 	render() {
-		const {backgroundColor, id, classname, spacingTop, angleBottom} = this.props;
-		const {angleHeight} = this.state;
+		const {backgroundColor, id, classname, spacingTop, angleBottom, setPadding, angleTop} = this.props;
+		const {angleHeightTop, angleHeightBottom} = this.state;
 
 		const sectionClass = [CSS.section];
 
@@ -171,8 +191,8 @@ class Section extends Component {
 						className={CSS.inner}
 						style={{
 							backgroundColor,
-							paddingTop: angleHeight,
-							paddingBottom: angleBottom ? angleHeight : 0
+							paddingTop: setPadding && angleTop ? angleHeightTop : 0,
+							paddingBottom: setPadding && angleBottom ? angleHeightBottom : 0
 						}}
 					>
 						<div className={CSS.innerWrap}>{this.props.children}</div>

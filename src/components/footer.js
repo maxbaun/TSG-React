@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import Logo from '../img/tsg-logo-color.png';
+import Logo from '../img/tsg-logo-light.png';
 import CSS from '../css/modules/footer.module.scss';
 import {phoneLink, emailLink} from '../utils/componentHelpers';
 import Link from './link';
 import WindowSize from './windowSize';
-import Button from './button';
-import Close from './close';
 
 class Footer extends Component {
 	static propTypes = {
@@ -36,34 +34,46 @@ class Footer extends Component {
 						<div className={CSS.description}>
 							<div className={CSS.descriptionInner}>
 								<div className={CSS.logo}>
-									<img src={Logo} alt="TSG Weddings Logo" width={181} height={59}/>
+									<Link to="/">
+										<img src={Logo} alt="TSG Weddings Logo" width={181} height={59}/>
+									</Link>
 								</div>
 								<p>{this.props.description}</p>
 							</div>
 						</div>
-						{this.props.menus && this.props.menus.map(menu => {
-							return (
-								<div key={menu.title} className={CSS.menu}>
-									<h3>{menu.title}</h3>
-									<ul>
-										{menu.items && menu.items.map(item => {
-											return (
-												<li key={item.title}>
-													<Link to={item.url} classname={CSS.menuLink}>
-														{item.title}
-													</Link>
-												</li>
-											);
-										})}
-									</ul>
-								</div>
-							);
-						})}
+						{this.props.menus &&
+							this.props.menus.map(menu => {
+								return (
+									<div key={menu.title} className={CSS.menu}>
+										<h3>{menu.title}</h3>
+										<ul>
+											{menu.items &&
+												menu.items.map(item => {
+													return (
+														<li key={item.title}>
+															<Link to={item.url} classname={CSS.menuLink}>
+																{item.title}
+															</Link>
+														</li>
+													);
+												})}
+										</ul>
+									</div>
+								);
+							})}
 						<div className={[CSS.menu, CSS.social].join(' ')}>
 							<h3>Connect With Us</h3>
 							<ul>
-								<li><a href={phoneLink(this.props.phone)} className={CSS.menuLink}>{this.props.phone}</a></li>
-								<li><a href={emailLink(this.props.email)} className={CSS.menuLink}>{this.props.email}</a></li>
+								<li>
+									<a href={phoneLink(this.props.phone)} className={CSS.menuLink}>
+										{this.props.phone}
+									</a>
+								</li>
+								<li>
+									<a href={emailLink(this.props.email)} className={CSS.menuLink}>
+										{this.props.email}
+									</a>
+								</li>
 							</ul>
 							<div className={CSS.socialIcons}>
 								<ul>

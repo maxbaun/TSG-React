@@ -1,0 +1,107 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+@import '../utils/section';
+
+.section {
+	background-color: $purple;
+
+	@include desktopUp {
+		padding: 68px 0 94px;
+	}
+}
+
+.facts {
+	margin-top: 36px;
+
+	ul {
+		@include noList();
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+
+		li {
+			position: relative;
+			margin: 0 0 30px;
+			width: 100%;
+
+			@include tabletUp {
+				margin: 0 0.5% 30px;
+				width: 49%;
+			}
+
+			@include desktopUp {
+				margin: 0 1.5% 30px;
+				width: 22%;
+			}
+
+			&::before {
+				@include tabletUp {
+					content: '';
+					display: block;
+					padding-top: 70%;
+				}
+
+				@include desktopUp {
+					padding-top: 110%;
+				}
+
+				@include widescreen {
+					padding-top: 100%;
+				}
+			}
+		}
+	}
+}
+
+.fact {
+	background-color: #FFF;
+	box-shadow: 8px 8px 15px 0 rgba(0, 0, 0, 0.2);
+	max-width: 271px;
+	max-height: 255px;
+	margin: 0 auto;
+	padding: 28px 33px;
+	text-align: center;
+	transform: scale(1);
+	transition: transform 0.4s ease-in-out;
+
+	@include tabletUp {
+		@include absoluteFull();
+	}
+
+	@include desktopUp {
+		padding: 14px 16.5px;
+	}
+
+	@include widescreen {
+		padding: 28px 33px;
+	}
+
+	&:hover {
+		transform: scale(1.05);
+	}
+
+	span {
+		color: $pink;
+		display: block;
+		font-size: 52px;
+		line-height: 52px;
+		margin-bottom: 18px;
+	}
+
+	p {
+		color: $grey1;
+		font-size: 16px;
+		line-height: 25px;
+		margin: 0;
+	}
+}
+
+.link {
+	text-align: center;
+
+	> a {
+		display: block;
+		max-width: 320px;
+		margin: 0 auto;
+	}
+}

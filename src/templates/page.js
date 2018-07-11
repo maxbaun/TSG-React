@@ -9,6 +9,11 @@ import SectionHalf from '../components/sectionHalf';
 import SectionReviews from '../components/sectionReviews';
 import SectionBios from '../components/sectionBios';
 import SectionCta from '../components/sectionCta';
+import SectionSlant from '../components/sectionSlant';
+import SectionFacts from '../components/sectionFacts';
+import SectionFeatured from '../components/sectionFeatured';
+import SectionAwards from '../components/sectionAwards';
+import SectionServices from '../components/sectionServices';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 const SectionMap = {
@@ -70,7 +75,12 @@ export default class PageTemplate extends React.Component {
 				c.type === 'WordPressAcf_pageDescriptionImages' ||
 				c.type === 'WordPressAcf_sectionHalf' ||
 				c.type === 'WordPressAcf_sectionReviews' ||
-				c.type === 'WordPressAcf_sectionBios'
+				c.type === 'WordPressAcf_sectionBios' ||
+				c.type === 'WordPressAcf_sectionAwards' ||
+				c.type === 'WordPressAcf_sectionSlant' ||
+				c.type === 'WordPressAcf_sectionFacts' ||
+				c.type === 'WordPressAcf_sectionFeatured' ||
+				c.type === 'WordPressAcf_sectionServices'
 			);
 		});
 
@@ -92,30 +102,48 @@ export default class PageTemplate extends React.Component {
 					}
 
 					if (child.type === 'WordPressAcf_pageDescriptionContent') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <PageDescription key={index} zIndex={0} view="content" content={child.sectionContent[0]}/>;
+						return (
+							<PageDescription
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								zIndex={0}
+								view="content"
+								content={child.sectionContent[0]}
+								angleBottom={!child.disableAngleBottom}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_pageDescriptionImages') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <PageDescription key={index} zIndex={0} view="images" images={child.images}/>;
+						console.log(child);
+
+						return (
+							<PageDescription
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								zIndex={0}
+								view="images"
+								images={child.images}
+								angleBottom={!child.disableAngleBottom}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_sectionHalf') {
-						const prevChild = children[index - 1];
-						let sectionHalfStyle = {};
+						// Const prevChild = children[index - 1];
+						// let sectionHalfStyle = {};
 
-						if (prevChild && prevChild.type === 'WordPressAcf_pageDescriptionImages') {
-							sectionHalfStyle = {
-								marginTop: windowWidth > 768 ? -100 : 0
-							};
+						// if (prevChild && prevChild.type === 'WordPressAcf_pageDescriptionImages') {
+						// 	sectionHalfStyle = {
+						// 		marginTop: windowWidth > 768 ? -100 : 0
+						// 	};
 
-							if (windowWidth > 768) {
-								sectionHalfStyle.paddingTop = 0;
-							}
-						}
+						// 	if (windowWidth > 768) {
+						// 		sectionHalfStyle.paddingTop = 0;
+						// 	}
+						// }
 						// eslint-disable-next-line react/no-array-index-key
-						return <SectionHalf key={index} zIndex={index} style={sectionHalfStyle} left={child.left[0]} right={child.right[0]}/>;
+						return <SectionHalf key={index} zIndex={index} left={child.left[0]} right={child.right[0]}/>;
 					}
 
 					if (child.type === 'WordPressAcf_sectionReviews') {
@@ -126,6 +154,41 @@ export default class PageTemplate extends React.Component {
 					if (child.type === 'WordPressAcf_sectionBios') {
 						// eslint-disable-next-line react/no-array-index-key
 						return <SectionBios key={index} header={child.header} content={child.content} bios={child.bios}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionSlant') {
+						return (
+							<SectionSlant
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								id={`sectionSlant${index}`}
+								slantDirection={child.slantDirection}
+								image={child.image}
+								content={child.sectionContent[0]}
+								slantTop={!child.disableSlantTop}
+								slantBottom={!child.disableSlantBottom}
+							/>
+						);
+					}
+
+					if (child.type === 'WordPressAcf_sectionFacts') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionFacts key={index} title={child.title} facts={child.facts} link={child.link}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionFeatured') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionFeatured key={index} image={child.image} content={child.sectionContent[0]}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionAwards') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionAwards key={index} title={child.title} images={child.images}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionServices') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionServices key={index} content={child.sectionContent[0]} services={child.services}/>;
 					}
 
 					return null;

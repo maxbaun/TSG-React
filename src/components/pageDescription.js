@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CSS from '../css/modules/pageDescription.module.scss';
 import Section from './section';
 import SectionContent from './sectionContent';
-import Image from './image';
+import PageDescriptionGallery from './pageDescriptionGallery';
 
 export default class PageDescription extends Component {
 	constructor(props) {
@@ -16,8 +16,6 @@ export default class PageDescription extends Component {
 		};
 
 		this.section = null;
-
-		// This.handleWindowResize = this.handleWindowResize.bind(this);
 	}
 
 	static propTypes = {
@@ -25,7 +23,8 @@ export default class PageDescription extends Component {
 		images: PropTypes.array,
 		id: PropTypes.string,
 		view: PropTypes.oneOf(['content', 'images']),
-		zIndex: PropTypes.number
+		zIndex: PropTypes.number,
+		angleBottom: PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -33,7 +32,8 @@ export default class PageDescription extends Component {
 		images: [],
 		id: 'pageDescription',
 		view: 'content',
-		zIndex: 0
+		zIndex: 0,
+		angleBottom: true
 	};
 
 	componentDidMount() {
@@ -76,7 +76,7 @@ export default class PageDescription extends Component {
 	}
 
 	render() {
-		const {id, content, images, view, zIndex} = this.props;
+		const {id, content, images, view, zIndex, angleBottom} = this.props;
 		const {videoBleed, active} = this.state;
 
 		const sectionStyle = {
@@ -90,40 +90,26 @@ export default class PageDescription extends Component {
 		}
 
 		return (
-			<Section id={id} classname="pageDescription" slantDirection="rightToLeft" backgroundColor="white" style={{padding: 0, zIndex}}>
+			<Section
+				id={id}
+				classname="pageDescription"
+				slantDirection="rightToLeft"
+				backgroundColor="white"
+				style={{padding: 0, zIndex}}
+				angleBottom={angleBottom}
+			>
 				<div className={sectionCss.join(' ')} style={sectionStyle}>
 					<div className={CSS.sectionInner}>
 						<div className="container">
-							{view === 'content' ? <SectionContent content={content} contentContainerWidth={720}/> : this.renderImages(images)}
+							{view === 'content' ? (
+								<SectionContent content={content} contentContainerWidth={720}/>
+							) : (
+								<PageDescriptionGallery images={images}/>
+							)}
 						</div>
 					</div>
 				</div>
 			</Section>
-		);
-	}
-
-	renderImages(images) {
-		const colWidth = 100 / images.length;
-		return (
-			<div className={CSS.gallery}>
-				<div className={CSS.galleryInner}>
-					{images.map(item => {
-						const {image, link} = item;
-
-						const imageStyle = {
-							width: typeof window !== 'undefined' && window.innerWidth > 768 ? `${colWidth}%` : '100%'
-						};
-
-						return (
-							<div key={image.id} className={CSS.galleryImage} style={imageStyle}>
-								<a href={link} target="_blank" rel="noopener noreferrer">
-									<Image image={image}/>
-								</a>
-							</div>
-						);
-					})}
-				</div>
-			</div>
 		);
 	}
 }

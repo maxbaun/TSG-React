@@ -1,0 +1,29 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+@import '../utils/section';
+
+.wrap {
+	position: relative;
+}
+
+.image {
+	@include desktopUp {
+		clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+	}
+}
+
+.content {
+	background-color: #FFF;
+	padding: 40px 15px;
+
+	@include desktopUp {
+		bottom: 2%;
+		box-shadow: 10px 10px 30px 0 rgba(0, 0, 0, 0.19);
+		height: 394px;
+		padding: 50px 58px;
+		position: absolute;
+		right: 10%;
+		width: 570px;
+		z-index: 1;
+	}
+}

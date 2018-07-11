@@ -23,12 +23,12 @@ class Header extends Component {
 	static propTypes = {
 		windowWidth: PropTypes.number,
 		menu: PropTypes.object
-	}
+	};
 
 	static defaultProps = {
 		windowWidth: 0,
 		menu: {}
-	}
+	};
 
 	handleToggle(menuActive) {
 		this.setState({menuActive});
@@ -53,7 +53,9 @@ class Header extends Component {
 					<div className={CSS.headerContainer}>
 						<div className={CSS.headerInner}>
 							<div className={CSS.logo}>
-								<img src={Logo} alt="TSG Weddings Logo" width={156} height={52}/>
+								<Link to="/">
+									<img src={Logo} alt="TSG Weddings Logo" width={156} height={52}/>
+								</Link>
 							</div>
 							<div className={CSS.toggle} onClick={click(this.handleToggle, !menuActive)}>
 								<span/>
@@ -67,62 +69,61 @@ class Header extends Component {
 									<Close backgroundColor="#3C3C3C" size={22} onClick={click(this.handleToggle, false)}/>
 								</div>
 								<ul>
-									{menu.items && menu.items.map(item => {
-										const isButton = item.classes && (item.classes.includes('button') || item.classes.includes('btn'));
+									{menu.items &&
+										menu.items.map(item => {
+											const isButton = item.classes && (item.classes.includes('button') || item.classes.includes('btn'));
 
-										if (isButton) {
+											if (isButton) {
+												return (
+													<li key={item.title}>
+														<Button
+															classname="primary"
+															to={item.url}
+															style={{
+																display: 'block',
+																padding: '9px 25px',
+																fontSize: 14,
+																lineHeight: '16px',
+																width: 205
+															}}
+														>
+															{item.title}
+														</Button>
+													</li>
+												);
+											}
+
+											const isDropdown = item.children && item.children.length;
+
+											const linkCss = [CSS.link];
+
+											if (isDropdown) {
+												linkCss.push([CSS.dropdownToggle]);
+											}
+
 											return (
-												<li key={item.title}>
-													<Button
-														classname="primary"
-														to={item.url}
-														style={{
-															display: 'block',
-															padding: '9px 25px',
-															fontSize: 14,
-															lineHeight: '16px',
-															width: 205
-														}}
-													>
+												<li key={item.title} className={isDropdown ? CSS.hasDropdown : ''}>
+													<Link to={item.url} classname={linkCss.join(' ')}>
 														{item.title}
-													</Button>
+													</Link>
+													{isDropdown ? (
+														<div className={CSS.dropdown}>
+															<ul className={CSS.dropdownInner}>
+																{item.children.map(child => {
+																	return (
+																		<li key={child.title}>
+																			<Link to={child.url} classname={CSS.dropdownLink}>
+																				{child.title}
+																			</Link>
+																		</li>
+																	);
+																})}
+															</ul>
+														</div>
+													) : null}
 												</li>
 											);
-										}
-
-										const isDropdown = item.children && item.children.length;
-
-										const linkCss = [CSS.link];
-
-										if (isDropdown) {
-											linkCss.push([CSS.dropdownToggle]);
-										}
-
-										return (
-											<li key={item.title} className={isDropdown ? CSS.hasDropdown : ''}>
-												<Link
-													to={item.url}
-													classname={linkCss.join(' ')}
-												>
-													{item.title}
-												</Link>
-												{isDropdown ? (
-													<div className={CSS.dropdown}>
-														<ul className={CSS.dropdownInner}>
-															{item.children.map(child => {
-																return (
-																	<li key={child.title}>
-																		<Link to={child.url} classname={CSS.dropdownLink}>{child.title}</Link>
-																	</li>
-																);
-															})}
-														</ul>
-													</div>
-												) : null}
-											</li>
-
-										);
-									})}
+										})}
 								</ul>
 							</div>
 						</div>

@@ -14,6 +14,7 @@ export default function WindowSize(WrappedComponent) {
 
 		componentDidMount() {
 			window.addEventListener('resize', this.handleResize);
+			this.handleResize();
 		}
 
 		componentWillUnmount() {

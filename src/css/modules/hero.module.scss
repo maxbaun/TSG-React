@@ -3,20 +3,20 @@
 
 .hero {
 	position: relative;
-	height: 550px;
+	height: 50vh;
+	min-height: 600px;
 
 	@include tabletUp {
-		height: 650px;
+		height: 75vh;
 	}
 
 	@include desktopUp {
-		height: 900px;
+		height: 80vh;
 	}
 
 	&::after {
 		background-color: rgba($white, 0.4);
 		bottom: -100px;
-		content: ' ';
 		height: 198px;
 		left: 0;
 		position: absolute;
@@ -25,10 +25,20 @@
 		transform-origin: 0 0;
 		width: 100%;
 		z-index: 0;
+
+		@include tabletUp {
+			content: ' ';
+		}
 	}
 }
 
 .hasOverlay {
+	min-height: 650px;
+
+	@include tabletUp {
+		min-height: 800px;
+	}
+
 	.overlay {
 		display: block;
 	}

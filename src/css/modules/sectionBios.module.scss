@@ -2,21 +2,13 @@
 @import '../utils/variables';
 @import '../utils/section';
 
-.sectionHeader {
-	margin-bottom: 15px;
-
-	@include tabletUp {
-		margin-bottom: 30px;
-	}
-}
-
 .bioTabsHeader {
 	margin: 31px 0 45px;
 
 	ul {
 		@include noList();
 		display: flex;
-		justify-content: space-around;
+		justify-content: center;
 		flex-wrap: wrap;
 	}
 }
@@ -28,6 +20,7 @@
 	font-size: 16px;
 	font-weight: 300;
 	line-height: 19px;
+	margin: 0 10px;
 	opacity: 0.4;
 	transition: opacity 0.3s ease-in-out, font-weight 0.3s ease-in-out, color 0.3s ease-in-out;
 

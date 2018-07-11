@@ -95,6 +95,8 @@ class SectionBios extends Component {
 					<div className="container">
 						<div className={CSS.sectionHeader}>
 							<SectionContent content={{header, content}} classname="sectionBiosContent" contentContainerWidth={950}/>
+						</div>
+						<div className={CSS.sectionBody}>
 							<div className={CSS.bioTabs}>
 								<div className={CSS.bioTabsHeader}>
 									<ul>

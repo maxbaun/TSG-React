@@ -25,32 +25,10 @@
 	width: 100%;
 
 	@include tabletUp {
-		padding: 66px 0;
+		padding: 40px 0;
 	}
 
 	@include desktopUp {
-		padding: 90px 0;
-	}
-}
-
-.galleryInner {
-	@include tabletUp {
-		align-items: center;
-		display: flex;
-	}
-}
-
-.galleryImage {
-	padding: 15px;
-	max-width: 200px;
-	margin: 0 auto;
-
-	@include tabletUp {
-		max-width: 300px;
-	}
-
-	a {
-		display: block;
-		width: 100%;
+		padding: 60px 0;
 	}
 }

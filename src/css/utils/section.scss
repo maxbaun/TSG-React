@@ -21,6 +21,14 @@
 	transform: scale(1);
 }
 
+.sectionHeader {
+	margin-bottom: 15px;
+
+	@include tabletUp {
+		margin-bottom: 30px;
+	}
+}
+
 .sectionInner {
 	align-items: flex-start;
 	display: flex;
