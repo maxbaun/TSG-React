@@ -4,7 +4,6 @@ import graphql from 'graphql';
 
 import Hero from '../components/hero';
 import PageDescription from '../components/pageDescription';
-import Section from '../components/sectionSlant';
 import SectionHalf from '../components/sectionHalf';
 import SectionReviews from '../components/sectionReviews';
 import SectionBios from '../components/sectionBios';
@@ -14,7 +13,6 @@ import SectionFacts from '../components/sectionFacts';
 import SectionFeatured from '../components/sectionFeatured';
 import SectionAwards from '../components/sectionAwards';
 import SectionServices from '../components/sectionServices';
-import {innerHtml} from '../utils/wordpressHelpers';
 
 const SectionMap = {
 	hero: Hero
@@ -110,13 +108,12 @@ export default class PageTemplate extends React.Component {
 								view="content"
 								content={child.sectionContent[0]}
 								angleBottom={!child.disableAngleBottom}
+								video={child.video ? child.video[0] : null}
 							/>
 						);
 					}
 
 					if (child.type === 'WordPressAcf_pageDescriptionImages') {
-						console.log(child);
-
 						return (
 							<PageDescription
 								// eslint-disable-next-line react/no-array-index-key
@@ -125,25 +122,22 @@ export default class PageTemplate extends React.Component {
 								view="images"
 								images={child.images}
 								angleBottom={!child.disableAngleBottom}
+								video={child.video ? child.video[0] : null}
 							/>
 						);
 					}
 
 					if (child.type === 'WordPressAcf_sectionHalf') {
-						// Const prevChild = children[index - 1];
-						// let sectionHalfStyle = {};
-
-						// if (prevChild && prevChild.type === 'WordPressAcf_pageDescriptionImages') {
-						// 	sectionHalfStyle = {
-						// 		marginTop: windowWidth > 768 ? -100 : 0
-						// 	};
-
-						// 	if (windowWidth > 768) {
-						// 		sectionHalfStyle.paddingTop = 0;
-						// 	}
-						// }
-						// eslint-disable-next-line react/no-array-index-key
-						return <SectionHalf key={index} zIndex={index} left={child.left[0]} right={child.right[0]}/>;
+						return (
+							<SectionHalf
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								zIndex={index}
+								verticalCenter={child.verticalCenter}
+								left={child.left[0]}
+								right={child.right[0]}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_sectionReviews') {
@@ -194,115 +188,6 @@ export default class PageTemplate extends React.Component {
 					return null;
 				})}
 				{currentPage.acf.hasCallToAction ? <SectionCta/> : null}
-				{/* <Section
-					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
-					slantDirection="leftToRight"
-					backgroundColor="coral"
-				>
-					<div
-						style={{
-							maxWidth: 600,
-							margin: '50px auto'
-						}}
-					>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-					</div>
-				</Section>
-				<Section
-					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
-					slantDirection="rightToLeft"
-					backgroundColor="lightblue"
-				>
-					<div
-						style={{
-							maxWidth: 600,
-							margin: '50px auto'
-						}}
-					>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-					</div>
-				</Section> */}
-				{/* <Section
-					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
-					slantDirection="rightToLeft"
-					backgroundColor="coral"
-				>
-					<div
-						style={{
-							maxWidth: 600,
-							margin: '50px auto'
-						}}
-					>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-					</div>
-				</Section>
-				<Section
-					image={currentPage.image ? currentPage.image.localFile.childImageSharp.hero : {}}
-					slantDirection="leftToRight"
-					backgroundColor="lightblue"
-				>
-					<div
-						style={{
-							maxWidth: 600,
-							margin: '50px auto'
-						}}
-					>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-						<h1>this is a test</h1>
-						<h3>this is another test</h3>
-						<div>content</div>
-					</div>
-				</Section>
-				<div className="container">
-					<div className="page-content">
-						<div className="bg-black">
-							<div
-								dangerouslySetInnerHTML={innerHtml(currentPage.content)} // eslint-disable-line react/no-danger
-							/>
-						</div>
-					</div>
-				</div> */}
 			</div>
 		);
 	}

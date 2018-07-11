@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import GatsbyLink from 'gatsby-link';
 
 import {replaceLinks, isExternalLink} from '../utils/wordpressHelpers';
+import {noop} from '../utils/componentHelpers';
 
 export default class Link extends Component {
 	static propTypes = {
@@ -10,23 +11,26 @@ export default class Link extends Component {
 		children: PropTypes.node.isRequired,
 		classname: PropTypes.string,
 		size: PropTypes.string,
-		style: PropTypes.object
+		style: PropTypes.object,
+		onClick: PropTypes.func
 	};
 
 	static defaultProps = {
 		to: null,
 		classname: 'primary',
 		size: 'md',
-		style: {}
+		style: {},
+		onClick: noop
 	};
 
 	render() {
-		const {to, classname, children, style} = this.props;
+		const {to, classname, children, style, onClick} = this.props;
 		const isExternal = isExternalLink(to);
 
 		const props = {
 			className: classname,
-			style
+			style,
+			onClick
 		};
 
 		if (isExternal) {

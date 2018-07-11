@@ -1,6 +1,16 @@
 @import '../utils/mixins';
 @import '../utils/section';
 
+.section {
+	display: block;
+}
+
+.sectionVerticalCenter {
+	.sectionInner {
+		align-items: center;
+	}
+}
+
 .sectionInner {
 	align-items: flex-start;
 	display: flex;

@@ -31,6 +31,7 @@ function getPages(graphql, createPage) {
 							node {
 								id
 								wpid: wordpress_id
+								title
 								slug
 								status
 								template
@@ -46,9 +47,11 @@ function getPages(graphql, createPage) {
 				reject(result.errors);
 			}
 
-			console.log(JSON.stringify(result, null, 4));
-
 			result.data.pages.edges.forEach(edge => {
+				if (edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home') {
+					return;
+				}
+
 				createPage({
 					path: getSlug(edge, result.data.pages.edges),
 					component: slash(getPageTemplate(edge.node.template)),

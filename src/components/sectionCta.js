@@ -42,12 +42,7 @@ class SectionCta extends Component {
 		}
 
 		return (
-			<Section
-				id="sectionCta"
-				slantDirection="leftToRight"
-				backgroundColor="#FFF"
-				angleHeight={0}
-			>
+			<Section id="sectionCta" slantDirection="leftToRight" backgroundColor="#FFF" angleHeight={0}>
 				<div className={sectionCss.join(' ')}>
 					<div className="container">
 						<ul className={CSS.boxes}>
@@ -63,17 +58,19 @@ class SectionCta extends Component {
 											classname="sectionCtaContent"
 										/>
 									</div>
-									<Button
-										classname="secondary"
-										to="#"
-										style={{
-											display: 'block',
-											maxWidth: 304,
-											margin: '0 auto'
-										}}
-									>
-										Schedule A Meeting
-									</Button>
+									<div className={CSS.boxButton}>
+										<Button
+											classname="secondary"
+											to="#"
+											style={{
+												display: 'block',
+												maxWidth: 304,
+												margin: '0 auto'
+											}}
+										>
+											Schedule A Meeting
+										</Button>
+									</div>
 								</div>
 							</li>
 							<li className={CSS.box}>
@@ -88,17 +85,19 @@ class SectionCta extends Component {
 											classname="sectionCtaContent"
 										/>
 									</div>
-									<Button
-										classname="secondary"
-										to="#"
-										style={{
-											display: 'block',
-											maxWidth: 304,
-											margin: '0 auto'
-										}}
-									>
-										Check Availability
-									</Button>
+									<div className={CSS.boxButton}>
+										<Button
+											classname="secondary"
+											to="#"
+											style={{
+												display: 'block',
+												maxWidth: 304,
+												margin: '0 auto'
+											}}
+										>
+											Check Availability
+										</Button>
+									</div>
 								</div>
 							</li>
 						</ul>

@@ -5,6 +5,7 @@ import CSS from '../css/modules/pageDescription.module.scss';
 import Section from './section';
 import SectionContent from './sectionContent';
 import PageDescriptionGallery from './pageDescriptionGallery';
+import Video from './video';
 
 export default class PageDescription extends Component {
 	constructor(props) {
@@ -19,6 +20,7 @@ export default class PageDescription extends Component {
 	}
 
 	static propTypes = {
+		video: PropTypes.object,
 		content: PropTypes.object,
 		images: PropTypes.array,
 		id: PropTypes.string,
@@ -28,6 +30,7 @@ export default class PageDescription extends Component {
 	};
 
 	static defaultProps = {
+		video: null,
 		content: {},
 		images: [],
 		id: 'pageDescription',
@@ -76,7 +79,7 @@ export default class PageDescription extends Component {
 	}
 
 	render() {
-		const {id, content, images, view, zIndex, angleBottom} = this.props;
+		const {id, content, images, view, zIndex, angleBottom, video} = this.props;
 		const {videoBleed, active} = this.state;
 
 		const sectionStyle = {
@@ -97,6 +100,7 @@ export default class PageDescription extends Component {
 				backgroundColor="white"
 				style={{padding: 0, zIndex}}
 				angleBottom={angleBottom}
+				breakpoint={992}
 			>
 				<div className={sectionCss.join(' ')} style={sectionStyle}>
 					<div className={CSS.sectionInner}>
@@ -106,6 +110,7 @@ export default class PageDescription extends Component {
 							) : (
 								<PageDescriptionGallery images={images}/>
 							)}
+							{video && video.url ? <Video {...video}/> : null}
 						</div>
 					</div>
 				</div>

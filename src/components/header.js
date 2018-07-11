@@ -103,7 +103,7 @@ class Header extends Component {
 
 											return (
 												<li key={item.title} className={isDropdown ? CSS.hasDropdown : ''}>
-													<Link to={item.url} classname={linkCss.join(' ')}>
+													<Link to={item.url} classname={linkCss.join(' ')} onClick={click(this.handleToggle, false)}>
 														{item.title}
 													</Link>
 													{isDropdown ? (
@@ -112,7 +112,11 @@ class Header extends Component {
 																{item.children.map(child => {
 																	return (
 																		<li key={child.title}>
-																			<Link to={child.url} classname={CSS.dropdownLink}>
+																			<Link
+																				to={child.url}
+																				classname={CSS.dropdownLink}
+																				onClick={click(this.handleToggle, false)}
+																			>
 																				{child.title}
 																			</Link>
 																		</li>

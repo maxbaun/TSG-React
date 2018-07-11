@@ -60,6 +60,7 @@ export const LargeImage = graphql`
 
 export const SectionHalf = graphql`
 	fragment SectionHalf on WordPressAcf_sectionHalf {
+		verticalCenter: sectionHalfVerticalCenter
 		left {
 			image {
 				...LargeImage
@@ -125,6 +126,12 @@ export const PageDescriptionContent = graphql`
 			header
 			contentType
 			content
+		}
+		video: pageDescriptionContentVideo {
+			url
+			thumbnail {
+				...LargeImage
+			}
 		}
 	}
 `;

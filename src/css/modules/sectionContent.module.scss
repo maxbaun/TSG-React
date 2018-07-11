@@ -160,6 +160,28 @@
 .sectionCtaContent {
 	@extend .sectionReviewsContent;
 
+	.header {
+		h2 {
+			font-size: 26px;
+			line-height: 30px;
+
+			@include tabletUp {
+				font-size: 26px;
+				line-height: 30px;
+			}
+
+			@include desktopUp {
+				font-size: 26px;
+				line-height: 30px;
+			}
+
+			@include widescreen {
+				font-size: 38px;
+				line-height: 42px;
+			}
+		}
+	}
+
 	.buttons {
 		justify-content: center;
 	}

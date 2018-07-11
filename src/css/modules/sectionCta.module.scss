@@ -31,6 +31,10 @@
 
 		@include desktopUp {
 			margin: 0;
+			width: 48%;
+		}
+
+		@include widescreen {
 			width: 45%;
 		}
 
@@ -51,14 +55,36 @@
 
 .boxInner {
 	padding: 22.5px 28px;
+	position: relative;
 	text-align: center;
 
 	@include desktopUp {
 		@include absoluteFull();
+		padding: 30px 41px;
+	}
+
+	@include widescreen {
 		padding: 45px 56px;
 	}
 }
 
 .boxContent {
 	margin-bottom: 39px;
+}
+
+.boxButton {
+	@include desktopUp {
+		position: absolute;
+		left: 0;
+		margin: 0 auto;
+		right: 0;
+	}
+
+	@include desktopUp {
+		bottom: 30px;
+	}
+
+	@include widescreen {
+		bottom: 45px;
+	}
 }

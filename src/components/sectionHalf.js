@@ -21,13 +21,15 @@ class SectionHalf extends Component {
 		left: PropTypes.object,
 		zIndex: PropTypes.number.isRequired,
 		style: PropTypes.object,
-		windowWidth: PropTypes.number.isRequired
+		windowWidth: PropTypes.number.isRequired,
+		verticalCenter: PropTypes.bool
 	};
 
 	static defaultProps = {
 		right: {},
 		left: {},
-		style: {}
+		style: {},
+		verticalCenter: false
 	};
 
 	componentDidMount() {
@@ -41,7 +43,7 @@ class SectionHalf extends Component {
 	}
 
 	render() {
-		const {right, left, zIndex, style, windowWidth} = this.props;
+		const {right, left, zIndex, style, windowWidth, verticalCenter} = this.props;
 		const {active} = this.state;
 
 		const isMobile = windowWidth < 768;
@@ -58,6 +60,10 @@ class SectionHalf extends Component {
 
 		if (active) {
 			sectionCss.push(CSS.sectionActive);
+		}
+
+		if (verticalCenter) {
+			sectionCss.push(CSS.sectionVerticalCenter);
 		}
 
 		return (

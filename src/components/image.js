@@ -14,6 +14,10 @@ export default class Image extends Component {
 	render() {
 		const {image} = this.props;
 
+		if (!image) {
+			return null;
+		}
+
 		const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
 		const resolutions = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.resolutions : null;
 

@@ -3,15 +3,15 @@
 
 .hero {
 	position: relative;
-	height: 50vh;
-	min-height: 600px;
+	height: 40vh;
+	min-height: 300px;
 
 	@include tabletUp {
-		height: 75vh;
+		height: 50vh;
 	}
 
 	@include desktopUp {
-		height: 80vh;
+		height: 60vh;
 	}
 
 	&::after {
@@ -26,7 +26,7 @@
 		width: 100%;
 		z-index: 0;
 
-		@include tabletUp {
+		@include desktopUp {
 			content: ' ';
 		}
 	}
@@ -36,7 +36,12 @@
 	min-height: 650px;
 
 	@include tabletUp {
+		height: 70vh;
 		min-height: 800px;
+	}
+
+	@include desktopUp {
+		height: 80vh;
 	}
 
 	.overlay {
