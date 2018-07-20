@@ -286,6 +286,28 @@ export const SectionServices = graphql`
 	}
 `;
 
+export const FullWidthImage = graphql`
+	fragment FullWidthImage on WordPressAcf_fullWidthImage {
+		image: fullWidthImageImage {
+			...LargeImage
+		}
+		disableSlantTop: fullWidthImageDisableSlantTop
+		disableSlantBottom: fullWidthImageDisableSlantBottom
+		slantDirection: fullWidthImageSlantDirection
+	}
+`;
+
+export const SectionComponents = graphql`
+	fragment SectionComponents on WordPressAcf_sectionComponents {
+		header: sectionComponentsHeader
+		components: sectionComponentsComponents {
+			title
+			titleAlign
+			text
+		}
+	}
+`;
+
 export const PageFragment = graphql`
 	fragment Page on wordpress__PAGE {
 		id
@@ -347,6 +369,12 @@ export const PageFragment = graphql`
 			}
 			... on WordPressAcf_sectionServices {
 				...SectionServices
+			}
+			... on WordPressAcf_fullWidthImage {
+				...FullWidthImage
+			}
+			... on WordPressAcf_sectionComponents {
+				...SectionComponents
 			}
 		}
 	}

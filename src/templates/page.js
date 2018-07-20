@@ -13,6 +13,8 @@ import SectionFacts from '../components/sectionFacts';
 import SectionFeatured from '../components/sectionFeatured';
 import SectionAwards from '../components/sectionAwards';
 import SectionServices from '../components/sectionServices';
+import FullWidthImage from '../components/fullWidthImage';
+import SectionComponents from '../components/sectionComponents';
 
 const SectionMap = {
 	hero: Hero
@@ -78,7 +80,9 @@ export default class PageTemplate extends React.Component {
 				c.type === 'WordPressAcf_sectionSlant' ||
 				c.type === 'WordPressAcf_sectionFacts' ||
 				c.type === 'WordPressAcf_sectionFeatured' ||
-				c.type === 'WordPressAcf_sectionServices'
+				c.type === 'WordPressAcf_sectionServices' ||
+				c.type === 'WordPressAcf_fullWidthImage' ||
+				c.type === 'WordPressAcf_sectionComponents'
 			);
 		});
 
@@ -183,6 +187,16 @@ export default class PageTemplate extends React.Component {
 					if (child.type === 'WordPressAcf_sectionServices') {
 						// eslint-disable-next-line react/no-array-index-key
 						return <SectionServices key={index} content={child.sectionContent[0]} services={child.services}/>;
+					}
+
+					if (child.type === 'WordPressAcf_fullWidthImage') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <FullWidthImage key={index} {...child}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionComponents') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionComponents key={index} header={child.header} components={child.components}/>;
 					}
 
 					return null;

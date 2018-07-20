@@ -1,0 +1,102 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+@import '../utils/section';
+
+.section {
+	@extend .sectionActive;
+	display: block;
+}
+
+.sectionHeader {
+	margin: 0 auto 30px;
+
+	@include tabletUp {
+		margin: 0 auto 60px;
+	}
+}
+
+.components {
+	@include noList();
+	margin: 0 -15px;
+
+	@include tabletUp {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	li {
+		max-width: 470px;
+		padding: 0 15px;
+
+		&:not(:last-child) {
+			margin-bottom: 30px;
+
+			@include tabletUp {
+				margin-bottom: 60px;
+			}
+		}
+
+		&:last-child {
+			@include tabletUp {
+				flex: 100%;
+				justify-self: center;
+				max-width: none;
+
+				> div {
+					max-width: 470px;
+					margin: 0 auto;
+				}
+			}
+		}
+
+		@include tabletUp {
+			flex: 50%;
+			width: 50%;
+		}
+	}
+}
+
+.component {
+	h3 {
+		color: $purple;
+		font-family: $fontHeading;
+		font-size: 28px;
+		font-weight: 300;
+		line-height: 42px;
+		margin: 0 0 15px;
+		padding: 0 0 10px;
+		position: relative;
+		text-transform: uppercase;
+
+		&[data-align='center'] {
+			@include tabletUp {
+				text-align: center;
+
+				&::after {
+					margin: 0 auto;
+					right: 0;
+				}
+			}
+		}
+
+		&::after {
+			background-color: $purple;
+			bottom: 0;
+			content: ' ';
+			height: 1px;
+			left: 0;
+			position: absolute;
+			width: 105px;
+		}
+	}
+
+	p {
+		color: $grey1;
+		font-family: $fontBody;
+		font-size: 16px;
+		line-height: 28px;
+		margin: 0;
+		text-align: justify;
+	}
+}

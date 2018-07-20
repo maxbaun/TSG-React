@@ -45,6 +45,8 @@ class Section extends Component {
 		this.section = null;
 		this.handleResize = debounce(this.handleResize.bind(this), 300);
 		this.getStyle = this.getStyle.bind(this);
+		this.isMobile = this.isMobile.bind(this);
+		this.isDesktop = this.isDesktop.bind(this);
 	}
 
 	static propTypes = {
@@ -97,7 +99,11 @@ class Section extends Component {
 	}
 
 	isMobile() {
-		return false;
+		return this.props.windowWidth < this.props.breakpoint;
+	}
+
+	isDesktop() {
+		return !this.isMobile();
 	}
 
 	handleResize() {
@@ -178,11 +184,11 @@ class Section extends Component {
 		}
 
 		return (
-			<div ref={ref.call(this, 'section')} id={id} className={sectionClass.join(' ')} style={this.getStyle()}>
+			<section ref={ref.call(this, 'section')} id={id} className={sectionClass.join(' ')} style={this.getStyle()}>
 				<div
 					style={{
 						// MaxWidth: 1440,
-						margin: `${spacingTop}px auto 0`
+						margin: `${this.isDesktop() ? spacingTop : 0}px auto 0`
 					}}
 					className={CSS.wrap}
 				>
@@ -198,7 +204,7 @@ class Section extends Component {
 						<div className={CSS.innerWrap}>{this.props.children}</div>
 					</div>
 				</div>
-			</div>
+			</section>
 		);
 	}
 }

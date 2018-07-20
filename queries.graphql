@@ -1,0 +1,151 @@
+fragment BaseImage on wordpress__wp_media {
+	url: source_url
+	id: wordpress_id
+	mediaDetails: media_details {
+		width
+		height
+	}
+}
+
+fragment ImageSizes on ImageSharpSizes {
+	base64
+	aspectRatio
+	src
+	srcSet
+	sizes
+}
+
+fragment LargeImage on wordpress__wp_media {
+	...BaseImage
+	localFile {
+		childImageSharp {
+			sizes(maxWidth: 1600) {
+				...ImageSizes
+			}
+		}
+	}
+}
+
+fragment SectionAwards on WordPressAcf_sectionAwards {
+	title: sectionAwardsTitle
+	images: sectionAwardsImages {
+		image {
+			...LargeImage
+		}
+		link
+	}
+}
+
+fragment SectionSlant on WordPressAcf_sectionSlant {
+	slantDirection: sectionSlantSlantDirection
+	image: sectionSlantImage {
+		...LargeImage
+	}
+	sectionSlantContent: sectionSlantContent {
+		icon
+		header
+		contentType
+		content
+		buttons {
+			button {
+				text
+				url
+				classname
+			}
+		}
+	}
+}
+
+fragment SectionFacts on WordPressAcf_sectionFacts {
+	title: sectionFactsTitle
+	facts: sectionFactsFacts {
+		icon
+		text
+	}
+}
+
+fragment SectionFeatured on WordPressAcf_sectionFeatured {
+	image: sectionFeaturedImage {
+		...LargeImage
+	}
+	content: sectionFeaturedContent {
+		header
+		contentType
+		content
+		buttons {
+			button {
+				text
+				url
+				classname
+			}
+		}
+	}
+}
+
+fragment SectionServices on WordPressAcf_sectionServices {
+	services: sectionServicesServices {
+		title
+		text
+		image {
+			...LargeImage
+		}
+	}
+	content: sectionServicesContent {
+		header
+		contentType
+		sectionContent: content
+		icon
+	}
+}
+
+fragment FullWidthImage on WordPressAcf_fullWidthImage {
+	image: fullWidthImageImage {
+		...LargeImage
+	}
+	disableSlantTop: fullWidthImageDisableSlantTop
+	disableSlantBottom: fullWidthImageDisableSlantBottom
+	slantDirection: fullWidthImageSlantDirection
+}
+
+fragment SectionComponents on WordPressAcf_sectionComponents {
+	header: sectionComponentsHeader
+	components: sectionComponentsComponents {
+		title
+		titleAlign
+		text
+	}
+}
+
+{
+	allWordpressPage {
+		edges {
+			node {
+				title
+				children {
+					__typename
+					... on WordPressAcf_sectionAwards {
+						...SectionAwards
+					}
+					... on WordPressAcf_sectionSlant {
+						...SectionSlant
+					}
+					... on WordPressAcf_sectionFacts {
+						...SectionFacts
+					}
+					... on WordPressAcf_sectionFeatured {
+						...SectionFeatured
+					}
+					... on WordPressAcf_sectionServices {
+						...SectionServices
+					}
+					... on WordPressAcf_fullWidthImage {
+						...FullWidthImage
+					}
+					... on WordPressAcf_sectionComponents {
+						...SectionComponents
+					}
+				}
+			}
+		}
+	}
+}
