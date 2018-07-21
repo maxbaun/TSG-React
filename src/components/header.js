@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Logo from '../img/tsg-logo-color.png';
 import CSS from '../css/modules/header.module.scss';
-import {click} from '../utils/componentHelpers';
+import {click, innerHtml} from '../utils/componentHelpers';
 import Link from './link';
 import WindowSize from './windowSize';
 import Button from './button';
@@ -104,7 +104,8 @@ class Header extends Component {
 											return (
 												<li key={item.title} className={isDropdown ? CSS.hasDropdown : ''}>
 													<Link to={item.url} classname={linkCss.join(' ')} onClick={click(this.handleToggle, false)}>
-														{item.title}
+														{/* eslint-disable-next-line react/no-danger */}
+														<span dangerouslySetInnerHTML={innerHtml(item.title)}/>
 													</Link>
 													{isDropdown ? (
 														<div className={CSS.dropdown}>
@@ -117,7 +118,8 @@ class Header extends Component {
 																				classname={CSS.dropdownLink}
 																				onClick={click(this.handleToggle, false)}
 																			>
-																				{child.title}
+																				{/* eslint-disable-next-line react/no-danger */}
+																				<span dangerouslySetInnerHTML={innerHtml(child.title)}/>
 																			</Link>
 																		</li>
 																	);

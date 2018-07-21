@@ -99,34 +99,11 @@
 .bioImage {
 	height: 271px;
 	margin: 0 auto 17px;
-	padding: 10px 21px 11px 23px;
 	position: relative;
 	width: 294px;
 
 	@include tabletUp {
 		margin: 0 0 17px;
-	}
-
-	&::before,
-	&::after {
-		border-radius: 50%;
-		content: ' ';
-		height: 250px;
-		position: absolute;
-		width: 250px;
-		z-index: -1;
-	}
-
-	&::before {
-		background-color: rgba(122, 36, 111, 0.4);
-		left: 0;
-		top: 0;
-	}
-
-	&::after {
-		background-color: rgba(247, 230, 240, 0.8);
-		right: 0;
-		bottom: 0;
 	}
 }
 

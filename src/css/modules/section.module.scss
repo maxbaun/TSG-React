@@ -9,7 +9,7 @@
 
 .pageDescription {
 	.inner {
-		@include imgRetina('../../img/splash-color', 'png', 451px, 832px, center right);
+		@include imgRetina('../../img/splash-color', 'png', 451px, 832px, top right);
 	}
 }
 

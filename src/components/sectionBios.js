@@ -7,8 +7,8 @@ import {bioPosition, bioName} from '../utils/wordpressHelpers';
 import WindowSize from './windowSize';
 import Section from './section';
 import SectionContent from './sectionContent';
-import Image from './image';
 import Button from './button';
+import DJThumbnail from './djThumbnail';
 
 // eslint-disable-next-line react/no-deprecated
 class SectionBios extends Component {
@@ -129,7 +129,7 @@ class SectionBios extends Component {
 													<div className={CSS.bio}>
 														<div className={CSS.bioLeft}>
 															<div className={CSS.bioImage}>
-																<Image image={bio.image}/>
+																<DJThumbnail image={bio.image}/>
 															</div>
 															<h4 className={CSS.bioTitle}>{bioName(bio.title)}</h4>
 															<p className={CSS.bioPosition}>{bioPosition(bio.title)}</p>

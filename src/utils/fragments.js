@@ -308,7 +308,7 @@ export const SectionComponents = graphql`
 	}
 `;
 
-export const PageFragment = graphql`
+export const Page = graphql`
 	fragment Page on wordpress__PAGE {
 		id
 		content
@@ -376,6 +376,37 @@ export const PageFragment = graphql`
 			... on WordPressAcf_sectionComponents {
 				...SectionComponents
 			}
+		}
+	}
+`;
+
+export const DJ = graphql`
+	fragment DJ on wordpress__wp_dj {
+		id
+		content
+		title
+		excerpt
+		slug
+		image: featured_media {
+			...LargeImage
+		}
+		yoast {
+			metaKeywords: focuskw
+			title: title
+			metaDescription: metadesc
+			linkdex
+			metakeywords
+			noIndex: meta_robots_noindex
+			noFollow: meta_robots_nofollow
+			meta_robots_adv
+			canonical
+			redirect
+			ogTitle: opengraph_title
+			ogDescription: opengraph_description
+			ogImage: opengraph_image
+			twitterTitle: twitter_title
+			twitterDescription: twitter_description
+			twitterImage: twitter_image
 		}
 	}
 `;

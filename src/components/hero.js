@@ -66,6 +66,8 @@ export default class Hero extends Component {
 		const {images, title, subtitle, link, video} = this.props;
 		const {loaded, activeImage} = this.state;
 		const showContent = title && title !== '';
+		const hasSubtitle = subtitle && subtitle !== '';
+		const hasVideo = video && video.url && video.url !== '';
 
 		const contentCss = [CSS.contentWrap];
 
@@ -75,8 +77,16 @@ export default class Hero extends Component {
 
 		const heroCss = [CSS.hero];
 
+		if (hasVideo) {
+			heroCss.push(CSS.hasVideo);
+		}
+
 		if (showContent) {
 			heroCss.push(CSS.hasOverlay);
+		}
+
+		if (hasSubtitle) {
+			contentCss.push(CSS.hasSubtitle);
 		}
 
 		return (
@@ -112,7 +122,7 @@ export default class Hero extends Component {
 									{/* eslint-disable-next-line react/no-danger */}
 									<h1 dangerouslySetInnerHTML={innerHtml(title)}/>
 									{/* eslint-disable-next-line react/no-danger */}
-									<h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/>
+									{hasSubtitle ? <h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/> : null}
 								</div>
 								{link && link.url ? (
 									<Button

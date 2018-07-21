@@ -27,6 +27,7 @@
 	padding-bottom: 19px;
 	position: relative;
 
+	h1,
 	h2 {
 		color: $purple;
 		font-size: 33px;
@@ -51,6 +52,7 @@
 		}
 	}
 
+	h3,
 	h4 {
 		color: $grey1;
 		font-family: $fontBody;
@@ -95,6 +97,7 @@
 }
 
 .sectionHalfHeader {
+	h1,
 	h2 {
 		font-size: 30px;
 		line-height: 34px;
@@ -161,6 +164,7 @@
 	@extend .sectionReviewsContent;
 
 	.header {
+		h1,
 		h2 {
 			font-size: 26px;
 			line-height: 30px;
@@ -195,7 +199,9 @@
 	@extend .sectionReviewsContent;
 
 	.header {
+		h1,
 		h2,
+		h3,
 		h4 {
 			color: $white;
 		}

@@ -46,7 +46,7 @@ class SectionHalf extends Component {
 		const {right, left, zIndex, style, windowWidth, verticalCenter} = this.props;
 		const {active} = this.state;
 
-		const isMobile = windowWidth < 768;
+		const isMobile = windowWidth < 992;
 
 		const sectionStyle = {
 			...style,
@@ -70,10 +70,10 @@ class SectionHalf extends Component {
 			<section className={sectionCss.join(' ')} style={sectionStyle}>
 				<div className="container">
 					<div className={CSS.sectionInner}>
-						<div className={CSS.left} style={leftStyle}>
+						<div className={[CSS.left, left.content ? CSS.colContent : CSS.colImage].join(' ')} style={leftStyle}>
 							{isMobile ? this.renderContent(left, right) : this.renderColumn(left)}
 						</div>
-						<div className={CSS.right} style={rightStyle}>
+						<div className={[CSS.right, right.content ? CSS.colContent : CSS.colImage].join(' ')} style={rightStyle}>
 							{isMobile ? this.renderMedia(right, left) : this.renderColumn(right)}
 						</div>
 					</div>

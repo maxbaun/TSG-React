@@ -15,6 +15,11 @@
 	}
 }
 
+.sectionContent {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
 .components {
 	@include noList();
 	margin: 0 -15px;

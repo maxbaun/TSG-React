@@ -16,7 +16,7 @@
 	display: flex;
 	flex-direction: column;
 
-	@include tabletUp {
+	@include desktopUp {
 		flex-direction: row;
 	}
 }
@@ -25,7 +25,7 @@
 .right {
 	width: 100%;
 
-	@include tabletUp {
+	@include desktopUp {
 		width: 50%;
 	}
 }
@@ -33,14 +33,14 @@
 .left {
 	margin-bottom: 15px;
 
-	@include tabletUp {
+	@include desktopUp {
 		margin-bottom: 0;
 	}
 
 	.media {
-		@include tabletUp {
-			padding-right: 30px;
-		}
+		// @include tabletUp {
+		// 	padding-right: 30px;
+		// }
 
 		@include desktopUp {
 			padding-right: 60px;
@@ -50,13 +50,29 @@
 
 .right {
 	.media {
-		@include tabletUp {
-			padding-left: 30px;
-		}
+		// @include tabletUp {
+		// 	padding-left: 30px;
+		// }
 
 		@include desktopUp {
 			padding-left: 60px;
 		}
+	}
+}
+
+.colImage {
+	width: 100%;
+
+	@include desktopUp {
+		width: 52%;
+	}
+}
+
+.colContent {
+	width: 100%;
+
+	@include desktopUp {
+		width: 48%;
 	}
 }
 

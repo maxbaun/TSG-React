@@ -64,6 +64,10 @@ class SectionSlant extends Component {
 			sectionCss.push(CSS.noSlantBottom);
 		}
 
+		const innerStyle = {
+			minHeight: windowWidth > 992 ? 700 : 'none'
+		};
+
 		return (
 			<Section
 				id={id}
@@ -76,12 +80,12 @@ class SectionSlant extends Component {
 			>
 				<div className={sectionCss.join(' ')}>
 					{contentAlign === 'left' && windowWidth > 992 ? (
-						<div className={CSS.inner}>
+						<div className={CSS.inner} style={innerStyle}>
 							{this.renderContent()}
 							{this.renderImage()}
 						</div>
 					) : (
-						<div className={CSS.inner}>
+						<div className={CSS.inner} style={innerStyle}>
 							{this.renderImage()}
 							{this.renderContent()}
 						</div>

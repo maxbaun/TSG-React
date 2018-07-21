@@ -1,4 +1,8 @@
 export const replaceLinks = str => {
+	if (!str) {
+		return '';
+	}
+
 	return str
 		.replace('http://tsg.info', '')
 		.replace('https://tsg.info', '')
@@ -53,7 +57,8 @@ export const bioPosition = name => {
 };
 
 function getBioPart(name, part) {
-	const parts = name.split(' - ');
+	const separator = name.includes(`8211`) ? ` &#8211; ` : ' - ';
+	const parts = name.split(separator);
 
 	return parts[part];
 }
