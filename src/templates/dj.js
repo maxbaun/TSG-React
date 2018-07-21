@@ -11,51 +11,14 @@ import {bioPosition, bioName, innerHtml} from '../utils/wordpressHelpers';
 import CSS from '../css/modules/dj.module.scss';
 
 export default class DJTemplate extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			windowWidth: 0
-		};
-
-		this.getSectionComponent = this.getSectionComponent.bind(this);
-		this.handleWindowResize = this.handleWindowResize.bind(this);
-	}
-
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired,
+		site: PropTypes.object.isRequired
 	};
 
-	componentDidMount() {
-		window.addEventListener('resize', this.handleWindowResize);
-		this.handleWindowResize();
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleWindowResize);
-	}
-
-	handleWindowResize() {
-		this.setState({
-			windowWidth: window.innerWidth
-		});
-	}
-
-	getSectionComponent(section) {
-		let sectionKey = null;
-
-		for (let key in SectionMap) {
-			if (section[key]) {
-				sectionKey = key;
-			}
-		}
-
-		return React.createElement(SectionMap[sectionKey], section[sectionKey]);
-	}
-
 	render() {
-		const {currentPage, site, djs} = this.props.data;
+		const {currentPage, djs} = this.props.data;
 
 		const otherDjs = djs.edges ? djs.edges.map(dj => dj.node) : [];
 
