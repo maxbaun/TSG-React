@@ -5,6 +5,7 @@ import graphql from 'graphql';
 import DJThumbnail from '../components/djThumbnail';
 import Image from '../components/image';
 import Link from '../components/link';
+import SectionContent from '../components/sectionContent';
 import {djLink} from '../utils/linkHelpers';
 import {bioPosition, bioName, innerHtml} from '../utils/wordpressHelpers';
 import CSS from '../css/modules/dj.module.scss';
@@ -72,7 +73,11 @@ export default class DJTemplate extends React.Component {
 						<div dangerouslySetInnerHTML={innerHtml(currentPage.content)} className={CSS.content}/>
 					</div>
 					<div className={CSS.other}>
-						<h4>Our Boston Wedding DJs</h4>
+						<SectionContent
+							content={{
+								header: `<h2>Our Boston Wedding DJs</h2>`
+							}}
+						/>
 						<ul>
 							{otherDjs.map(dj => {
 								return (
