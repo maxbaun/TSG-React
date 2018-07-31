@@ -18,7 +18,7 @@ exports.modifyWebpackConfig = ({config}) => {
 
 exports.createPages = ({graphql, boundActionCreators}) => {
 	const {createPage} = boundActionCreators;
-	return Promise.all([getPages(graphql, createPage), getDjs(graphql, createPage)]);
+	return Promise.all([getPages(graphql, createPage), getDjs(graphql, createPage), getVenues(graphql, createPage)]);
 };
 
 function getPages(graphql, createPage) {
@@ -104,6 +104,44 @@ function getDjs(graphql, createPage) {
 	});
 }
 
+function getVenues(graphql, createPage) {
+	return new Promise((resolve, reject) => {
+		graphql(
+			`
+				{
+					venues: allWordpressWpVenue {
+						edges {
+							node {
+								id
+								wpid: wordpress_id
+								title
+								slug
+							}
+						}
+					}
+				}
+			`
+		).then(result => {
+			if (result.errors) {
+				console.log(result.errors);
+				reject(result.errors);
+			}
+
+			result.data.venues.edges.forEach(edge => {
+				createPage({
+					path: slash(`/venue${getSlug(edge, result.data.venues.edges)}`),
+					component: slash(path.resolve(`./src/templates/venue.js`)),
+					context: {
+						id: edge.node.id
+					}
+				});
+			});
+
+			resolve();
+		});
+	});
+}
+
 function getSlug(edge, edges) {
 	if (!edge.node.parent) {
 		return `/${edge.node.slug}`;
@@ -115,5 +153,13 @@ function getSlug(edge, edges) {
 }
 
 function getPageTemplate(template) {
+	if (template === 'template-venues.php') {
+		return path.resolve('./src/templates/venues.js');
+	}
+
+	if (template === 'template-vendors.php') {
+		return path.resolve('./src/templates/vendors.js');
+	}
+
 	return path.resolve(`./src/templates/page.js`);
 }

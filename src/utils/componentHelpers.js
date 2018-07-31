@@ -22,12 +22,12 @@ export function fire(actions, func, val) {
 	return e => {
 		let _func = actions[func];
 
-		return (actions && func && typeof _func === 'function') ? _func(val || e) : null;
+		return actions && func && typeof _func === 'function' ? _func(val || e) : null;
 	};
 }
 
 export function click(func, val) {
-	return e => (func && typeof func === 'function') ? func(val || typeof val !== 'undefined' ? val : e) : null;
+	return e => (func && typeof func === 'function' ? func(val || typeof val !== 'undefined' ? val : e) : null);
 }
 
 export function clickPrevent(func, val) {
@@ -47,27 +47,27 @@ export function imageLoaded(func, val) {
 }
 
 export function key(func, val) {
-	return e => (func && typeof func === 'function') ? func(val || e) : null;
+	return e => (func && typeof func === 'function' ? func(val || e) : null);
 }
 
 export function enter(func) {
 	return e => {
-		return (func && typeof func === 'function' && e.keyCode === 13) ? func() : null;
+		return func && typeof func === 'function' && e.keyCode === 13 ? func() : null;
 	};
 }
 
 export function escape(func) {
 	return keyCode => {
-		return (func && typeof func === 'function' && keyCode === 27) ? func() : null;
+		return func && typeof func === 'function' && keyCode === 27 ? func() : null;
 	};
 }
 
 export function state(func, key) {
-	return e => (func && typeof func === 'function') ? func({[key]: e.target.value}) : null;
+	return e => (func && typeof func === 'function' ? func({[key]: e.target.value}) : null);
 }
 
 export function input(func, val) {
-	return e => (func && typeof func === 'function') ? func(val || e.target.value) : null;
+	return e => (func && typeof func === 'function' ? func(val || e.target.value) : null);
 }
 
 export function ref(target) {
@@ -201,7 +201,7 @@ export const stripHtml = string => {
 		return '';
 	}
 
-	return string.replace(/(<([^>]+)>)/ig, '');
+	return string.replace(/(<([^>]+)>)/gi, '');
 };
 
 export const htmlToString = string => {
@@ -213,3 +213,29 @@ export const htmlToString = string => {
 	div.innerHTML = string;
 	return div.textContent;
 };
+
+export function debounce(func, wait, immediate) {
+	var timeout;
+
+	return () => {
+		var context = this;
+		var args = arguments;
+
+		var later = () => {
+			timeout = null;
+			if (!immediate) {
+				func.apply(context, args);
+			}
+		};
+
+		var callNow = immediate && !timeout;
+
+		clearTimeout(timeout);
+
+		timeout = setTimeout(later, wait);
+
+		if (callNow) {
+			func.apply(context, args);
+		}
+	};
+}

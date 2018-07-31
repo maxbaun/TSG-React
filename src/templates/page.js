@@ -15,6 +15,9 @@ import SectionAwards from '../components/sectionAwards';
 import SectionServices from '../components/sectionServices';
 import FullWidthImage from '../components/fullWidthImage';
 import SectionComponents from '../components/sectionComponents';
+import SectionPlanning from '../components/sectionPlanning';
+import FullWidthContent from '../components/fullWidthContent';
+import SectionForm from '../components/sectionForm';
 
 const SectionMap = {
 	hero: Hero
@@ -82,7 +85,10 @@ export default class PageTemplate extends React.Component {
 				c.type === 'WordPressAcf_sectionFeatured' ||
 				c.type === 'WordPressAcf_sectionServices' ||
 				c.type === 'WordPressAcf_fullWidthImage' ||
-				c.type === 'WordPressAcf_sectionComponents'
+				c.type === 'WordPressAcf_sectionComponents' ||
+				c.type === 'WordPressAcf_sectionPlanning' ||
+				c.type === 'WordPressAcf_fullWidthContent' ||
+				c.type === 'WordPressAcf_sectionForm'
 			);
 		});
 
@@ -197,6 +203,21 @@ export default class PageTemplate extends React.Component {
 					if (child.type === 'WordPressAcf_sectionComponents') {
 						// eslint-disable-next-line react/no-array-index-key
 						return <SectionComponents key={index} header={child.header} components={child.components}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionPlanning') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionPlanning key={index} {...child} header={child.sectionHeader[0]}/>;
+					}
+
+					if (child.type === 'WordPressAcf_fullWidthContent') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <FullWidthContent key={index} {...child} content={child.sectionContent[0]} maxWidth={parseInt(child.maxWidth, 10)}/>;
+					}
+
+					if (child.type === 'WordPressAcf_sectionForm') {
+						// eslint-disable-next-line react/no-array-index-key
+						return <SectionForm key={index} {...child} content={child.sectionContent[0]} form={child.form}/>;
 					}
 
 					return null;

@@ -116,6 +116,32 @@ fragment SectionComponents on WordPressAcf_sectionComponents {
 	}
 }
 
+fragment SectionPlanning on WordPressAcf_sectionPlanning {
+	sectionHeader: sectionPlanningHeader {
+		header
+		content
+	}
+	tools: sectionPlanningTools {
+		image {
+			...LargeImage
+		}
+		title
+		text
+		link
+	}
+	help: sectionPlanningHelp
+}
+
+fragment FullWidthContent on WordPressAcf_fullWidthContent {
+	sectionContent: fullWidthContentContent {
+		icon
+		header
+		contentType
+		content
+	}
+	maxWidth: fullWidthContentMaxWidth
+}
+
 {
 	allWordpressPage {
 		edges {
@@ -143,6 +169,12 @@ fragment SectionComponents on WordPressAcf_sectionComponents {
 					}
 					... on WordPressAcf_sectionComponents {
 						...SectionComponents
+					}
+					... on WordPressAcf_sectionPlanning {
+						...SectionPlanning
+					}
+					... on WordPressAcf_fullWidthContent {
+						...FullWidthContent
 					}
 				}
 			}

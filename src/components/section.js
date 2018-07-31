@@ -3,33 +3,7 @@ import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/section.module.scss';
 import WindowSize from './windowSize';
-import {ref} from '../utils/componentHelpers';
-
-function debounce(func, wait, immediate) {
-	var timeout;
-
-	return () => {
-		var context = this;
-		var args = arguments;
-
-		var later = () => {
-			timeout = null;
-			if (!immediate) {
-				func.apply(context, args);
-			}
-		};
-
-		var callNow = immediate && !timeout;
-
-		clearTimeout(timeout);
-
-		timeout = setTimeout(later, wait);
-
-		if (callNow) {
-			func.apply(context, args);
-		}
-	};
-}
+import {ref, debounce} from '../utils/componentHelpers';
 
 // eslint-disable-next-line react/no-deprecated
 class Section extends Component {

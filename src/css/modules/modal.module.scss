@@ -4,6 +4,8 @@
 .wrap {
 	position: fixed;
 	height: 100%;
+	left: 0;
+	top: 0;
 	width: 100%;
 	z-index: 1002;
 }
@@ -37,6 +39,7 @@
 .large {
 	@extend .modal;
 
+	height: 85%;
 	width: 80%;
 
 	@include tabletUp {
@@ -92,7 +95,7 @@
 	right: 0;
 	height: 125%;
 	width: 100%;
-	background: #000;
+	background: rgba($grey1, 0.7);
 	// display: none;
 
 	will-change: opacity;

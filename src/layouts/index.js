@@ -7,6 +7,7 @@ import '../css/plugins/normalize.css';
 import '../css/plugins/icomoon/style.css';
 import '../css/plugins/bootstrap-grid.css';
 import '../css/plugins/fontawesome/css/all.css';
+import '../css/plugins/simple-line-icons/css/simple-line-icons.css';
 import '../css/utils/global.scss';
 
 import Header from '../components/header';
@@ -20,7 +21,6 @@ export default class DefaultLayout extends Component {
 	};
 
 	render() {
-		console.log(this.props.data);
 		return (
 			<div id="app">
 				<Header menu={this.props.data.mainMenu}/>

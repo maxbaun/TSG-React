@@ -6,7 +6,8 @@ export default function WindowSize(WrappedComponent) {
 			super(props);
 
 			this.state = {
-				windowWidth: 0
+				windowWidth: 0,
+				windowHeight: 0
 			};
 
 			this.handleResize = this.handleResize.bind(this);

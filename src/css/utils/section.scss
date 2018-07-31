@@ -17,6 +17,7 @@
 }
 
 .sectionActive {
+	@extend .section;
 	opacity: 1;
 	transform: scale(1);
 }

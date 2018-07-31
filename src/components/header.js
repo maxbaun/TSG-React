@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Logo from '../img/tsg-logo-color.png';
 import CSS from '../css/modules/header.module.scss';
-import {click, innerHtml} from '../utils/componentHelpers';
+import {click, noop, innerHtml} from '../utils/componentHelpers';
 import Link from './link';
 import WindowSize from './windowSize';
 import Button from './button';
@@ -14,10 +14,13 @@ class Header extends Component {
 		super(props);
 
 		this.state = {
-			menuActive: false
+			menuActive: false,
+			dropdownHover: false
 		};
 
 		this.handleToggle = this.handleToggle.bind(this);
+		this.handleMouseEnter = this.handleMouseEnter.bind(this);
+		this.handleMouseLeave = this.handleMouseLeave.bind(this);
 	}
 
 	static propTypes = {
@@ -31,12 +34,27 @@ class Header extends Component {
 	};
 
 	handleToggle(menuActive) {
-		this.setState({menuActive});
+		this.setState({
+			menuActive,
+			dropdownHover: false
+		});
+	}
+
+	handleMouseEnter(dropdownHover) {
+		this.setState({
+			dropdownHover
+		});
+	}
+
+	handleMouseLeave() {
+		this.setState({
+			dropdownHover: false
+		});
 	}
 
 	render() {
 		const {menu} = this.props;
-		const {menuActive} = this.state;
+		const {menuActive, dropdownHover} = this.state;
 
 		const fogCss = [CSS.headerFog];
 		const menuCss = [CSS.headerMenu];
@@ -66,12 +84,13 @@ class Header extends Component {
 						<div className={menuCss.join(' ')}>
 							<div className={CSS.menu}>
 								<div className={CSS.close}>
-									<Close backgroundColor="#3C3C3C" size={22} onClick={click(this.handleToggle, false)}/>
+									<Close backgroundColor="#bcbcbc" size={22} onClick={click(this.handleToggle, false)}/>
 								</div>
 								<ul>
 									{menu.items &&
-										menu.items.map(item => {
+										menu.items.map((item, index) => {
 											const isButton = item.classes && (item.classes.includes('button') || item.classes.includes('btn'));
+											const isHover = index === dropdownHover;
 
 											if (isButton) {
 												return (
@@ -95,14 +114,24 @@ class Header extends Component {
 
 											const isDropdown = item.children && item.children.length;
 
+											const itemCss = [];
 											const linkCss = [CSS.link];
 
 											if (isDropdown) {
 												linkCss.push([CSS.dropdownToggle]);
 											}
 
+											if (isHover) {
+												itemCss.push(CSS.dropdownHover);
+											}
+
 											return (
-												<li key={item.title} className={isDropdown ? CSS.hasDropdown : ''}>
+												<li
+													key={item.title}
+													className={itemCss.join(' ')}
+													onMouseEnter={isDropdown ? click(this.handleMouseEnter, index) : noop}
+													onMouseLeave={isDropdown ? this.handleMouseLeave : noop}
+												>
 													<Link to={item.url} classname={linkCss.join(' ')} onClick={click(this.handleToggle, false)}>
 														{/* eslint-disable-next-line react/no-danger */}
 														<span dangerouslySetInnerHTML={innerHtml(item.title)}/>

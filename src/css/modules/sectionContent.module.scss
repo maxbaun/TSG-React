@@ -23,7 +23,7 @@
 
 .header {
 	text-align: center;
-	margin-bottom: 17px;
+	margin-bottom: 25px;
 	padding-bottom: 19px;
 	position: relative;
 
@@ -222,4 +222,24 @@
 
 .sectionComponentsHeader {
 	@extend .sectionBiosContent;
+}
+
+.sectionPlanning {
+	@extend .sectionHalf;
+}
+
+.sectionForm {
+	@extend .sectionHalf;
+}
+
+.fullWidthContent {
+	@extend .sectionHalf;
+}
+
+.venueTemplate {
+	@extend .sectionHalf;
+}
+
+.otherDjs {
+	@extend .sectionHalf;
 }

@@ -1,0 +1,78 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+@import '../utils/section';
+
+.wrap {
+	max-width: 992px;
+	margin: 0 auto;
+}
+
+.header {
+	margin-bottom: 50px;
+}
+
+.tools {
+	margin: 0 0 30px;
+
+	ul {
+		@include noList();
+
+		li {
+			display: block;
+			margin: 0 0 30px;
+			width: 100%;
+		}
+	}
+}
+
+.tool {
+	display: flex;
+	flex-direction: column;
+
+	@include tabletUp {
+		align-items: flex-start;
+		flex-direction: row;
+	}
+}
+
+.toolImage {
+	flex: 100%;
+	width: 100%;
+	margin: 0 0 10px;
+
+	@include tabletUp {
+		flex: 25%;
+		width: 25%;
+		margin-right: 30px;
+	}
+}
+
+.toolContent {
+	flex: 100%;
+	width: 100%;
+
+	@include tabletUp {
+		width: calc(75% - 30px);
+	}
+
+	a {
+		color: $purple;
+
+		&:hover {
+			color: $purple;
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 0 0 10px;
+	}
+}
+
+.help {
+	text-align: center;
+}

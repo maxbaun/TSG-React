@@ -41,6 +41,7 @@ export default class Html extends React.Component {
 					<meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
 					<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"/>
 					<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet"/>
+					<link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet"/>
 					{css}
 				</head>
 				<body data-theme="default">

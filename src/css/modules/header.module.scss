@@ -31,12 +31,24 @@
 }
 
 .toggle {
-	background-color: red;
-	height: 44px;
-	width: 44px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 21px;
+	width: 36px;
+	transition: all 0.3s ease-in-out;
 
 	@include tabletUp {
 		display: none;
+	}
+
+	span {
+		background-color: lighten($grey1, 50%);
+		display: block;
+		height: 2px;
+		width: 36px;
+		transform: rotate(0);
+		transform-origin: 50%;
 	}
 }
 
@@ -44,7 +56,7 @@
 	display: none;
 	@include mobile {
 		@include absoluteFull();
-		background-color: rgba(#000, 0.6);
+		background-color: rgba($grey1, 0.7);
 		display: block;
 		position: fixed;
 		opacity: 0;
@@ -94,14 +106,6 @@
 	transition: all 0.3s ease-in-out;
 }
 
-.toggle {
-	display: block;
-
-	@include tabletUp {
-		display: none;
-	}
-}
-
 .close {
 	height: 22px;
 	right: 10px;
@@ -117,7 +121,7 @@
 
 .menu {
 	height: 100%;
-	padding: 10px 42px 10px 15px;
+	padding: 30px 42px 30px 15px;
 	position: relative;
 	overflow: auto;
 
@@ -236,19 +240,15 @@
 	}
 }
 
-.hasDropdown {
-	@include tabletUp {
-		&:hover {
-			.dropdown {
-				opacity: 1;
-				visibility: visible;
-				transition: opacity 0.3s 0.3s ease-in-out, visibility 0s;
+.dropdownHover {
+	.dropdown {
+		opacity: 1;
+		visibility: visible;
+		transition: opacity 0.3s 0.3s ease-in-out, visibility 0s;
 
-				.dropdownInner {
-					opacity: 1;
-					transform: skewY(0deg);
-				}
-			}
+		.dropdownInner {
+			opacity: 1;
+			transform: skewY(0deg);
 		}
 	}
 }

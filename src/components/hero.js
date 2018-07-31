@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
-import Link from 'gatsby-link';
 
 import CSS from '../css/modules/hero.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 import Button from './button';
 import Video from './video';
+import Image from './image';
 
 export default class Hero extends Component {
 	constructor(props) {
@@ -95,7 +94,6 @@ export default class Hero extends Component {
 					<div className={CSS.inner}>
 						<div className={CSS.images}>
 							{images.map((image, index) => {
-								const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
 								const imageCss = [CSS.image];
 								let imageStyle = {
 									opacity: 0
@@ -110,7 +108,7 @@ export default class Hero extends Component {
 
 								return (
 									<div key={image.id} className={imageCss.join(' ')} style={imageStyle}>
-										{sizes ? <Img sizes={sizes} imgStyle={{objectPosition: 'top center'}} onLoad={this.handleImageLoad}/> : null}
+										<Image image={image} imgStyle={{objectPosition: 'top center'}} onLoad={this.handleImageLoad}/>
 									</div>
 								);
 							})}

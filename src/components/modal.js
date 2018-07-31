@@ -4,22 +4,21 @@ import {Motion, spring, presets} from 'react-motion';
 
 import CSS from '../css/modules/modal.module.scss';
 import Close from './close';
+import WindowSize from './windowSize';
 
 // eslint-disable-next-line react/no-deprecated
-export default class Modal extends Component {
+class Modal extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			visibility: 'hidden',
 			display: 'none',
-			windowHeight: 0,
 			active: props.active
 		};
 
 		this.handleRest = this.handleRest.bind(this);
 		this.handleClose = this.handleClose.bind(this);
-		this.handleResize = this.handleResize.bind(this);
 	}
 
 	static propTypes = {
@@ -33,7 +32,8 @@ export default class Modal extends Component {
 		fogOpacity: PropTypes.number,
 		height: PropTypes.number,
 		width: PropTypes.number,
-		backgroundColor: PropTypes.string
+		backgroundColor: PropTypes.string,
+		windowHeight: PropTypes.number.isRequired
 	};
 
 	static defaultProps = {
@@ -50,15 +50,6 @@ export default class Modal extends Component {
 		backgroundColor: '#FAFAFA'
 	};
 
-	componentDidMount() {
-		this.handleResize();
-		window.addEventListener('resize', this.handleResize);
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleResize);
-	}
-
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.active) {
 			this.setState({
@@ -67,8 +58,6 @@ export default class Modal extends Component {
 				active: true
 			});
 
-			this.handleResize();
-
 			document.querySelector('body').style.overflow = 'hidden';
 		}
 
@@ -76,8 +65,6 @@ export default class Modal extends Component {
 			this.setState({
 				active: false
 			});
-
-			this.handleResize();
 
 			document.querySelector('body').style.overflow = null;
 		}
@@ -101,29 +88,11 @@ export default class Modal extends Component {
 		this.props.onClose();
 	}
 
-	handleResize() {
-		this.setState({
-			windowHeight: document.body.clientHeight
-		});
-	}
-
 	render() {
-		const {
-			children,
-			size,
-			showClose,
-			classname,
-			fogOpacity,
-			height,
-			width,
-			backgroundColor
-		} = this.props;
-		const {visibility, windowHeight, display, active} = this.state;
+		const {children, size, showClose, classname, fogOpacity, height, width, backgroundColor, windowHeight} = this.props;
+		const {visibility, display, active} = this.state;
 
-		const wrapClass = [
-			CSS.wrap,
-			classname && classname !== '' ? CSS[classname] : ''
-		];
+		const wrapClass = [CSS.wrap, classname && classname !== '' ? CSS[classname] : ''];
 		const modalClass = [CSS.modal, size ? CSS[size] : ''];
 
 		return (
@@ -134,19 +103,13 @@ export default class Modal extends Component {
 							opacity: 0
 						}}
 						style={{
-							opacity: active ?
-								spring(fogOpacity, presets.stiff) :
-								spring(0, presets.stiff)
+							opacity: active ? spring(fogOpacity, presets.stiff) : spring(0, presets.stiff)
 						}}
 					>
 						{style => {
 							return (
 								<span style={style} className={CSS.close}>
-									<Close
-										backgroundColor="#FAFAFA"
-										size={40}
-										onClick={this.handleClose}
-									/>
+									<Close backgroundColor="#FAFAFA" size={40} onClick={this.handleClose}/>
 								</span>
 							);
 						}}
@@ -160,26 +123,17 @@ export default class Modal extends Component {
 						top: 4
 					}}
 					style={{
-						opacity: active ?
-							spring(1, presets.stiff) :
-							spring(0, presets.stiff),
-						x: active ?
-							spring(1, presets.stiff) :
-							spring(0.8, presets.stiff),
-						y: active ?
-							spring(1, presets.stiff) :
-							spring(0.8, presets.stiff),
-						top: active ?
-							spring(10, presets.stiff) :
-							spring(4, presets.stiff)
+						opacity: active ? spring(1, presets.stiff) : spring(0, presets.stiff),
+						x: active ? spring(1, presets.stiff) : spring(0.8, presets.stiff),
+						y: active ? spring(1, presets.stiff) : spring(0.8, presets.stiff),
+						top: active ? spring(10, presets.stiff) : spring(4, presets.stiff)
 					}}
 					onRest={this.handleRest}
 				>
 					{styles => {
-						const fullHeight = windowHeight - windowHeight / 5;
+						const fullHeight = windowHeight - (windowHeight / styles.top) * 2;
 
 						const modalStyle = {
-							height: size === 'full' ? fullHeight : 'auto',
 							visibility: visibility,
 							display: display,
 							opacity: styles.opacity,
@@ -188,6 +142,10 @@ export default class Modal extends Component {
 							backgroundColor: backgroundColor,
 							transform: `scaleX(${styles.x}) scaleY(${styles.y})`
 						};
+
+						if (size === 'full') {
+							modalStyle.height = fullHeight;
+						}
 
 						if (height > 0) {
 							modalStyle.height = height;
@@ -200,10 +158,7 @@ export default class Modal extends Component {
 						}
 
 						return (
-							<div
-								className={modalClass.join(' ')}
-								style={modalStyle}
-							>
+							<div className={modalClass.join(' ')} style={modalStyle}>
 								{children}
 							</div>
 						);
@@ -214,9 +169,7 @@ export default class Modal extends Component {
 						opacity: 0
 					}}
 					style={{
-						opacity: active ?
-							spring(fogOpacity, presets.stiff) :
-							spring(0, presets.stiff)
+						opacity: active ? spring(fogOpacity, presets.stiff) : spring(0, presets.stiff)
 					}}
 				>
 					{styles => {
@@ -237,3 +190,5 @@ export default class Modal extends Component {
 		);
 	}
 }
+
+export default WindowSize(Modal);

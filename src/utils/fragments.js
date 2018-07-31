@@ -48,13 +48,6 @@ export const ImageSizes = graphql`
 export const LargeImage = graphql`
 	fragment LargeImage on wordpress__wp_media {
 		...BaseImage
-		localFile {
-			childImageSharp {
-				sizes(maxWidth: 1600) {
-					...ImageSizes
-				}
-			}
-		}
 	}
 `;
 
@@ -308,6 +301,46 @@ export const SectionComponents = graphql`
 	}
 `;
 
+export const SectionPlanning = graphql`
+	fragment SectionPlanning on WordPressAcf_sectionPlanning {
+		sectionHeader: sectionPlanningHeader {
+			header
+			content
+		}
+		tools: sectionPlanningTools {
+			image {
+				...LargeImage
+			}
+			title
+			text
+			link
+		}
+		help: sectionPlanningHelp
+	}
+`;
+
+export const FullWidthContent = graphql`
+	fragment FullWidthContent on WordPressAcf_fullWidthContent {
+		sectionContent: fullWidthContentContent {
+			icon
+			header
+			contentType
+			content
+		}
+		maxWidth: fullWidthContentMaxWidth
+	}
+`;
+
+export const SectionForm = graphql`
+	fragment SectionForm on WordPressAcf_sectionForm {
+		form: sectionFormForm
+		sectionContent: sectionFormContent {
+			header
+			content
+		}
+	}
+`;
+
 export const Page = graphql`
 	fragment Page on wordpress__PAGE {
 		id
@@ -375,6 +408,102 @@ export const Page = graphql`
 			}
 			... on WordPressAcf_sectionComponents {
 				...SectionComponents
+			}
+			... on WordPressAcf_sectionPlanning {
+				...SectionPlanning
+			}
+			... on WordPressAcf_fullWidthContent {
+				...FullWidthContent
+			}
+			... on WordPressAcf_sectionForm {
+				...SectionForm
+			}
+		}
+	}
+`;
+
+export const Venue = graphql`
+	fragment Venue on wordpress__wp_venue {
+		id
+		content
+		title
+		slug
+		yoast {
+			metaKeywords: focuskw
+			title: title
+			metaDescription: metadesc
+			linkdex
+			metakeywords
+			noIndex: meta_robots_noindex
+			noFollow: meta_robots_nofollow
+			meta_robots_adv
+			canonical
+			redirect
+			ogTitle: opengraph_title
+			ogDescription: opengraph_description
+			ogImage: opengraph_image
+			twitterTitle: twitter_title
+			twitterDescription: twitter_description
+			twitterImage: twitter_image
+		}
+		image: featured_media {
+			...LargeImage
+		}
+		acf {
+			location: venueLocation
+			gallery: venueGallery {
+				...LargeImage
+			}
+		}
+		children {
+			type: __typename
+			... on WordPressAcf_sectionHalf {
+				...SectionHalf
+			}
+			... on WordPressAcf_pageDescriptionImages {
+				...PageDescriptionImages
+			}
+			... on WordPressAcf_pageDescriptionContent {
+				...PageDescriptionContent
+			}
+			... on WordPressAcf_hero {
+				...Hero
+			}
+			... on WordPressAcf_sectionReviews {
+				...SectionReviews
+			}
+			... on WordPressAcf_sectionBios {
+				...SectionBios
+			}
+			... on WordPressAcf_sectionAwards {
+				...SectionAwards
+			}
+			... on WordPressAcf_sectionSlant {
+				...SectionSlant
+			}
+			... on WordPressAcf_sectionFacts {
+				...SectionFacts
+			}
+			... on WordPressAcf_sectionFeatured {
+				...SectionFeatured
+			}
+			... on WordPressAcf_sectionServices {
+				...SectionServices
+			}
+			... on WordPressAcf_fullWidthImage {
+				...FullWidthImage
+			}
+			... on WordPressAcf_sectionComponents {
+				...SectionComponents
+			}
+			... on WordPressAcf_sectionPlanning {
+				...SectionPlanning
+			}
+			... on WordPressAcf_fullWidthContent {
+				...FullWidthContent
+			}
+			... on WordPressAcf_sectionForm {
+				...SectionForm
 			}
 		}
 	}

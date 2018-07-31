@@ -1,0 +1,15 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+
+.page {
+	display: block;
+	padding: 40px 0;
+
+	@include tabletUp {
+		padding: 50px 0;
+	}
+
+	@include desktopUp {
+		padding: 60px 0;
+	}
+}

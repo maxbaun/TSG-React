@@ -1,0 +1,86 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+.wrapper {
+	height: 100%;
+	opacity: 0;
+	position: relative;
+	transition: all 0.15s ease-in-out;
+	transform: scale(0.95);
+	width: 100%;
+
+	@include tabletUp {
+		margin: 0 auto;
+		width: 80%;
+	}
+
+	@include desktopUp {
+		height: 634px;
+		width: 951px;
+	}
+}
+
+.wrapperActive {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.inner {
+	height: 100%;
+	padding: 32px 15px;
+	width: 100%;
+
+	> div {
+		height: 100%;
+		width: 100%;
+	}
+
+	@include tabletUp {
+		padding: 32px 85px;
+	}
+}
+
+.next,
+.prev {
+	background: none;
+	display: none;
+	height: 44px;
+	font-size: 40px;
+	line-height: 44px;
+	margin-top: -22px;
+	outline: none !important;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	z-index: 1;
+
+	@include tabletUp {
+		display: block;
+	}
+
+	> span {
+		color: #FFF;
+		display: block;
+		line-height: 44px;
+	}
+}
+
+.next {
+	right: 0;
+}
+
+.prev {
+	left: 0;
+}
+
+.close {
+	position: absolute;
+	height: 32px;
+	right: 15px;
+	top: 0;
+	width: 32px;
+
+	@include tabletUp {
+		right: 0;
+	}
+}

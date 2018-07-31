@@ -1,0 +1,8 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+@import '../utils/section';
+
+.wrap {
+	max-width: 992px;
+	margin: 0 auto;
+}

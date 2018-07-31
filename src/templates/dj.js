@@ -13,8 +13,7 @@ import CSS from '../css/modules/dj.module.scss';
 export default class DJTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired
 	};
 
 	render() {
@@ -37,6 +36,7 @@ export default class DJTemplate extends React.Component {
 					</div>
 					<div className={CSS.other}>
 						<SectionContent
+							classname="otherDjs"
 							content={{
 								header: `<h2>Our Boston Wedding DJs</h2>`
 							}}
