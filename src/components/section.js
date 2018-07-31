@@ -17,7 +17,7 @@ class Section extends Component {
 		};
 
 		this.section = null;
-		this.handleResize = debounce(this.handleResize.bind(this), 300);
+		this.handleResize = this.handleResize.bind(this);
 		this.getStyle = this.getStyle.bind(this);
 		this.isMobile = this.isMobile.bind(this);
 		this.isDesktop = this.isDesktop.bind(this);

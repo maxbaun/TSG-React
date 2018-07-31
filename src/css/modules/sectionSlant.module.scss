@@ -56,6 +56,10 @@
 	@include desktopUp {
 		padding: 200px 15px;
 	}
+
+	@include widescreen {
+		padding: 300px 15px;
+	}
 }
 
 .imageWrap {

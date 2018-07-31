@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/sectionContent.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
-import Image from './image';
 import Button from './button';
 import Tabs from './tabs';
 

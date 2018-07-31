@@ -19,7 +19,8 @@ export default class Image extends Component {
 		style: PropTypes.object,
 		imgStyle: PropTypes.object,
 		onLoad: PropTypes.func,
-		circle: PropTypes.bool
+		circle: PropTypes.bool,
+		showPlaceholder: PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -27,7 +28,8 @@ export default class Image extends Component {
 		style: {},
 		imgStyle: {},
 		onLoad: noop,
-		circle: false
+		circle: false,
+		showPlaceholder: false
 	};
 
 	handleImageLoad() {
@@ -72,21 +74,23 @@ export default class Image extends Component {
 						paddingBottom: `${ratio}%`
 					}}
 				/>
-				<div
-					style={{
-						backgroundColor: '#C3C3C3',
-						width: '100%',
-						height: '100%',
-						position: 'absolute',
-						left: 0,
-						right: 0,
-						top: 0,
-						bottom: 0,
-						transition: 'opacity 0.5s',
-						opacity: loaded ? 0 : 1,
-						borderRadius: circle ? '50%' : 0
-					}}
-				/>
+				{this.props.showPlaceholder ? (
+					<div
+						style={{
+							backgroundColor: '#C3C3C3',
+							width: '100%',
+							height: '100%',
+							position: 'absolute',
+							left: 0,
+							right: 0,
+							top: 0,
+							bottom: 0,
+							transition: 'opacity 0.5s',
+							opacity: loaded ? 0 : 0.2,
+							borderRadius: circle ? '50%' : 0
+						}}
+					/>
+				) : null}
 				<img
 					src={image.url}
 					style={{

@@ -21,14 +21,22 @@
 }
 
 .sectionInner {
-	padding: 22px 0;
+	padding: 40px 0;
 	width: 100%;
 
 	@include tabletUp {
-		padding: 40px 0;
+		padding: 50px 0;
 	}
 
 	@include desktopUp {
 		padding: 60px 0;
+	}
+}
+
+.video {
+	margin-top: 25px;
+
+	@include tabletUp {
+		margin-top: 57px;
 	}
 }

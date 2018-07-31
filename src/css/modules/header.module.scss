@@ -81,7 +81,7 @@
 	right: 0;
 	top: 0;
 	transform: translate3d(320px, 0, 0);
-	transition: all 0.3s ease-in-out, visibility 0s 0.3s;
+	transition: all 0.2s ease-in-out, visibility 0s 0.2s;
 	z-index: 5;
 
 	@include tabletUp {
@@ -103,7 +103,7 @@
 .headerMenuActive {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
-	transition: all 0.3s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 .close {

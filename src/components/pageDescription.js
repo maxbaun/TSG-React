@@ -110,7 +110,7 @@ export default class PageDescription extends Component {
 							) : (
 								<PageDescriptionGallery images={images}/>
 							)}
-							{video && video.url ? <Video {...video}/> : null}
+							<div className={CSS.video}>{video && video.url ? <Video {...video}/> : null}</div>
 						</div>
 					</div>
 				</div>
