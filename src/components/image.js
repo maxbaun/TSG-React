@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
-import {noop} from '../utils/componentHelpers';
+import {noop, cancellable} from '../utils/componentHelpers';
 
 export default class Image extends Component {
 	constructor(props) {
@@ -12,6 +12,7 @@ export default class Image extends Component {
 		};
 
 		this.handleImageLoad = this.handleImageLoad.bind(this);
+		this.loader = null;
 	}
 
 	static propTypes = {
@@ -32,7 +33,44 @@ export default class Image extends Component {
 		showPlaceholder: false
 	};
 
+	componentDidMount() {
+		const {image} = this.props;
+		const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
+		const resolutions = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.resolutions : null;
+
+		if (!sizes && !resolutions) {
+			this.loader = cancellable(this.preloadImage(this.props.image.url));
+			this.loader.then(this.handleImageLoad);
+		}
+	}
+
+	componentWillUnmount() {
+		if (this.loader) {
+			this.loader.cancel();
+		}
+	}
+
+	preloadImage(src) {
+		return new Promise((resolve, reject) => {
+			this.img = new window.Image();
+			this.img.onload = () => {
+				if (!this.img) {
+					return reject();
+				}
+
+				resolve();
+			};
+			this.img.onerror = () => resolve();
+			this.img.src = src;
+
+			if (this.img.complete) {
+				return resolve();
+			}
+		});
+	}
+
 	handleImageLoad() {
+		console.log(this.props.image.url);
 		this.setState({loaded: true});
 		this.props.onLoad();
 	}
@@ -98,6 +136,7 @@ export default class Image extends Component {
 						top: 0,
 						left: 0,
 						opacity: loaded ? 1 : 0,
+						visibility: loaded ? 'visible' : 'hidden',
 						transition: 'opacity 0.15s',
 						width: '100%',
 						height: '100%',
@@ -105,7 +144,6 @@ export default class Image extends Component {
 						objectPosition: 'center center',
 						...this.props.imgStyle
 					}}
-					onLoad={this.handleImageLoad}
 				/>
 			</div>
 		);

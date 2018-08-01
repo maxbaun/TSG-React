@@ -20,10 +20,6 @@ import FullWidthContent from '../components/fullWidthContent';
 import SectionForm from '../components/sectionForm';
 import Seo from '../components/seo';
 
-const SectionMap = {
-	hero: Hero
-};
-
 export default class PageTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,

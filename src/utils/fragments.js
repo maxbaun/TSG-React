@@ -48,6 +48,13 @@ export const ImageSizes = graphql`
 export const LargeImage = graphql`
 	fragment LargeImage on wordpress__wp_media {
 		...BaseImage
+		localFile {
+			childImageSharp {
+				sizes(maxWidth: 1600) {
+					...ImageSizes
+				}
+			}
+		}
 	}
 `;
 

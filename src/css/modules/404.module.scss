@@ -1,0 +1,15 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+
+.wrap {
+	align-items: center;
+	display: flex;
+	height: 500px;
+	justify-content: center;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.inner {
+	text-align: center;
+}

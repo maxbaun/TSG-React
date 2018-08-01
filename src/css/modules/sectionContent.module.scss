@@ -247,3 +247,14 @@
 .review {
 	@extend .sectionHalf;
 }
+
+.notFound {
+	.buttons {
+		justify-content: center;
+		margin-top: 20px;
+
+		> button {
+			width: auto;
+		}
+	}
+}

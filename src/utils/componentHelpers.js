@@ -239,3 +239,28 @@ export function debounce(func, wait, immediate) {
 		}
 	};
 }
+
+export function cancellable(promise) {
+	var cancelled = false;
+
+	const toReturn = new Promise((resolve, reject) => {
+		promise.then(
+			() => {
+				if (!cancelled) {
+					resolve.apply(this, arguments);
+				}
+			},
+			() => {
+				if (!cancelled) {
+					reject.apply(this, arguments);
+				}
+			}
+		);
+	});
+
+	toReturn.cancel = () => {
+		cancelled = true;
+	};
+
+	return toReturn;
+}

@@ -66,10 +66,8 @@ class Section extends Component {
 		this.handleResize();
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.windowWidth !== this.props.windowWidth) {
-			this.handleResize();
-		}
+	componentWillReceiveProps() {
+		this.handleResize();
 	}
 
 	isMobile() {
