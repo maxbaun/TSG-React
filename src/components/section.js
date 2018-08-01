@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/section.module.scss';
 import WindowSize from './windowSize';
-import {ref, debounce} from '../utils/componentHelpers';
+import {ref} from '../utils/componentHelpers';
 
 // eslint-disable-next-line react/no-deprecated
 class Section extends Component {
