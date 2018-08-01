@@ -1,6 +1,5 @@
 @import '../utils/variables';
 @import '../utils/mixins';
-@import '../utils/section';
 
 @keyframes scratch {
 	0% {
@@ -24,8 +23,7 @@
 }
 
 .wrap {
-	@extend .section;
-	@extend .sectionActive;
+	display: block;
 }
 
 .dj {
@@ -67,7 +65,7 @@
 		font-weight: 300;
 		font-size: 18px;
 		line-height: 23px;
-		margin: 0;
+		margin: 0 0 20px;
 		text-align: center;
 
 		@include desktopUp {

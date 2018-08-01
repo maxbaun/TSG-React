@@ -5,13 +5,15 @@ import graphql from 'graphql';
 import FlexibleContent from '../components/flexibleContent';
 import Image from '../components/image';
 import Link from '../components/link';
+import Seo from '../components/seo';
 import CSS from '../css/modules/venues.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 export default class PageTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired,
+		site: PropTypes.object.isRequired
 	};
 
 	transformVenues() {
@@ -44,11 +46,12 @@ export default class PageTemplate extends React.Component {
 	}
 
 	render() {
-		const {currentPage, site} = this.props.data;
+		const {currentPage} = this.props.data;
 		const venues = this.transformVenues();
 
 		return (
 			<div>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<FlexibleContent page={currentPage}/>
 				<div className={CSS.venues}>
 					<ul>
@@ -87,9 +90,6 @@ export const pageQuery = graphql`
 					...Venue
 				}
 			}
-		}
-		site {
-			...Site
 		}
 	}
 `;

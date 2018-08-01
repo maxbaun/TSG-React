@@ -61,7 +61,7 @@ class SectionCta extends Component {
 									<div className={CSS.boxButton}>
 										<Button
 											classname="secondary"
-											to="#"
+											to="/check-availability"
 											style={{
 												display: 'block',
 												maxWidth: 304,
@@ -88,7 +88,7 @@ class SectionCta extends Component {
 									<div className={CSS.boxButton}>
 										<Button
 											classname="secondary"
-											to="#"
+											to="/check-availability"
 											style={{
 												display: 'block',
 												maxWidth: 304,

@@ -6,6 +6,8 @@ import DJThumbnail from '../components/djThumbnail';
 import Image from '../components/image';
 import Link from '../components/link';
 import SectionContent from '../components/sectionContent';
+import Page from '../components/page';
+import Seo from '../components/seo';
 import {djLink} from '../utils/linkHelpers';
 import {bioPosition, bioName, innerHtml} from '../utils/wordpressHelpers';
 import CSS from '../css/modules/dj.module.scss';
@@ -13,7 +15,8 @@ import CSS from '../css/modules/dj.module.scss';
 export default class DJTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired,
+		site: PropTypes.object.isRequired
 	};
 
 	render() {
@@ -22,8 +25,9 @@ export default class DJTemplate extends React.Component {
 		const otherDjs = djs.edges ? djs.edges.map(dj => dj.node) : [];
 
 		return (
-			<div className={CSS.wrap}>
-				<div className="container">
+			<Page contain>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
+				<div className={CSS.wrap}>
 					<div className={CSS.dj}>
 						<div className={CSS.image}>
 							<DJThumbnail image={currentPage.image}/>
@@ -62,7 +66,7 @@ export default class DJTemplate extends React.Component {
 						</ul>
 					</div>
 				</div>
-			</div>
+			</Page>
 		);
 	}
 }

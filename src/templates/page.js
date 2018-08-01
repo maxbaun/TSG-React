@@ -18,58 +18,21 @@ import SectionComponents from '../components/sectionComponents';
 import SectionPlanning from '../components/sectionPlanning';
 import FullWidthContent from '../components/fullWidthContent';
 import SectionForm from '../components/sectionForm';
+import Seo from '../components/seo';
 
 const SectionMap = {
 	hero: Hero
 };
 
 export default class PageTemplate extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			windowWidth: 0
-		};
-
-		this.getSectionComponent = this.getSectionComponent.bind(this);
-		this.handleWindowResize = this.handleWindowResize.bind(this);
-	}
-
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired,
+		site: PropTypes.object.isRequired
 	};
 
-	componentDidMount() {
-		window.addEventListener('resize', this.handleWindowResize);
-		this.handleWindowResize();
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('resize', this.handleWindowResize);
-	}
-
-	handleWindowResize() {
-		this.setState({
-			windowWidth: window.innerWidth
-		});
-	}
-
-	getSectionComponent(section) {
-		let sectionKey = null;
-
-		for (let key in SectionMap) {
-			if (section[key]) {
-				sectionKey = key;
-			}
-		}
-
-		return React.createElement(SectionMap[sectionKey], section[sectionKey]);
-	}
-
 	render() {
-		const {windowWidth} = this.state;
-		const {currentPage, site} = this.props.data;
+		const {currentPage} = this.props.data;
 
 		const children = currentPage.children.filter(c => {
 			return (
@@ -94,6 +57,7 @@ export default class PageTemplate extends React.Component {
 
 		return (
 			<div>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				{children.map((child, index) => {
 					if (child.type === 'WordPressAcf_hero') {
 						return (
@@ -234,9 +198,6 @@ export const pageQuery = graphql`
 	query defaultPageQuery($id: String!) {
 		currentPage: wordpressPage(id: {eq: $id}) {
 			...Page
-		}
-		site {
-			...Site
 		}
 	}
 `;

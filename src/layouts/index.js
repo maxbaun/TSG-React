@@ -21,25 +21,27 @@ export default class DefaultLayout extends Component {
 	};
 
 	render() {
+		const {mainMenu, site, options, footerMenu1, footerMenu2} = this.props.data;
+
 		return (
 			<div id="app">
-				<Header menu={this.props.data.mainMenu}/>
-				<main className="main">{this.props.children()}</main>
+				<Header menu={mainMenu}/>
+				<main className="main">{this.props.children({...this.props, site})}</main>
 				<Footer
 					menus={[
 						{
 							title: 'Resources',
-							items: this.props.data.footerMenu1 ? this.props.data.footerMenu1.items : []
+							items: footerMenu1 ? footerMenu1.items : []
 						},
 						{
 							title: 'Services',
-							items: this.props.data.footerMenu2 ? this.props.data.footerMenu2.items : []
+							items: footerMenu2 ? footerMenu2.items : []
 						}
 					]}
-					phone={this.props.data.options.phone}
-					email={this.props.data.options.email}
-					social={this.props.data.options.social}
-					description={this.props.data.options.footerDescription}
+					phone={options.phone}
+					email={options.email}
+					social={options.social}
+					description={options.footerDescription}
 					copy="© TSG Weddings // The Sussman Group, LLC"
 				/>
 			</div>

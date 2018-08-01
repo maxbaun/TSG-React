@@ -6,13 +6,15 @@ import Page from '../components/page';
 import SectionContent from '../components/sectionContent';
 import Image from '../components/image';
 import Button from '../components/button';
+import Seo from '../components/seo';
 import CSS from '../css/modules/review.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 
 export default class ReviewTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired,
+		site: PropTypes.object.isRequired
 	};
 
 	render() {
@@ -26,6 +28,7 @@ export default class ReviewTemplate extends React.Component {
 
 		return (
 			<Page contain>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<div className={CSS.wrap}>
 					<SectionContent
 						classname="review"
@@ -81,9 +84,6 @@ export const pageQuery = graphql`
 	query reviewTemplateQuery($id: String!) {
 		currentPage: wordpressWpReview(id: {eq: $id}) {
 			...Review
-		}
-		site {
-			...Site
 		}
 		options: wordpressAcfOptions {
 			allReviewsLink

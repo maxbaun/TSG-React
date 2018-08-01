@@ -48,16 +48,20 @@ function getPages(graphql, createPage) {
 			}
 
 			result.data.pages.edges.forEach(edge => {
-				if (edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home') {
+				const isHome = edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home';
+
+				if (edge.node.slug === 'do-not-delete' || edge.node.title === 'DO NOT DELETE') {
 					return;
 				}
 
-				if (edge.node.slug === 'do-not-delete') {
-					return;
+				let path = slash(getSlug(edge, result.data.pages.edges));
+
+				if (isHome) {
+					path = slash('/');
 				}
 
 				createPage({
-					path: getSlug(edge, result.data.pages.edges),
+					path,
 					component: slash(getPageTemplate(edge.node.template)),
 					context: {
 						id: edge.node.id

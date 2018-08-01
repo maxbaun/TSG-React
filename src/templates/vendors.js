@@ -2,16 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import graphql from 'graphql';
 
-import DJThumbnail from '../components/djThumbnail';
-import Image from '../components/image';
-import SectionContent from '../components/sectionContent';
-import {djLink} from '../utils/linkHelpers';
-import {bioPosition, bioName, innerHtml} from '../utils/wordpressHelpers';
+import {innerHtml} from '../utils/wordpressHelpers';
 import {phoneLink, emailLink} from '../utils/componentHelpers';
 import Button from '../components/button';
 import PageWrap from '../components/page';
 import FlexibleContent from '../components/flexibleContent';
 import ScrollTo from '../components/scrollTo';
+import Seo from '../components/seo';
 import CSS from '../css/modules/vendors.module.scss';
 
 export default class VendorsTemplate extends React.Component {
@@ -24,7 +21,8 @@ export default class VendorsTemplate extends React.Component {
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		location: PropTypes.object.isRequired
+		location: PropTypes.object.isRequired,
+		site: PropTypes.object.isRequired
 	};
 
 	getVendorsInCategory(category) {
@@ -58,6 +56,7 @@ export default class VendorsTemplate extends React.Component {
 
 		return (
 			<PageWrap contain>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<FlexibleContent page={currentPage}/>
 				<div className={CSS.categories}>
 					<h3>{vendorTitle}</h3>
@@ -156,9 +155,6 @@ export const pageQuery = graphql`
 	query vendorsTemplateQuery($id: String!) {
 		currentPage: wordpressPage(id: {eq: $id}) {
 			...Page
-		}
-		site {
-			...Site
 		}
 		categories: allWordpressWpVendorcategory {
 			edges {
