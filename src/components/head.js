@@ -19,6 +19,7 @@ import AppleTouch152 from '../img/favicon/apple-touch-icon-152x152.png';
 import AppleTouch180 from '../img/favicon/apple-touch-icon-180x180.png';
 import DefaultImage from '../img/tsg-logo-color.png';
 
+// eslint-disable-next-line complexity
 const Head = ({
 	title,
 	defaultTitle,
@@ -101,6 +102,13 @@ const Head = ({
 		{rel: 'apple-touch-icon', href: AppleTouch180, sizes: '180x180'}
 	];
 
+	if (title) {
+		title = title.replace('%%sep%%', '|').replace('%%sitename%%', site.siteMeta.title);
+		title = title.includes(` | ${site.siteMeta.title}`) ? title : `${title} | ${site.siteMeta.title}`;
+	} else {
+		title = `${defaultTitle} | ${site.siteMeta.title}`;
+	}
+
 	return (
 		<Helmet
 			htmlAttributes={{lang: 'en', amp: undefined}}
@@ -108,7 +116,7 @@ const Head = ({
 			meta={meta.map(data => (data.content && data.content !== '' ? data : {}))}
 			link={links.map(link => (link.href && link.href !== '' ? link : {}))}
 		>
-			<title>{title && title !== '' ? `${title} | ${site.siteMeta.title}` : `${defaultTitle} | ${site.siteMeta.title}`}</title>
+			<title>{title}</title>
 		</Helmet>
 	);
 };
