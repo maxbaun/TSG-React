@@ -228,7 +228,7 @@ export default class PageTemplate extends React.Component {
 	}
 }
 
-import {Page} from '../utils/fragments'; // eslint-disable-line no-unused-vars
+import {Page, Site} from '../utils/fragments'; // eslint-disable-line no-unused-vars
 
 export const pageQuery = graphql`
 	query defaultPageQuery($id: String!) {

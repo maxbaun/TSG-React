@@ -1,6 +1,6 @@
 module.exports = {
 	siteMetadata: {
-		siteUrl: `https://tagprints.com`,
+		siteUrl: `https://tsgweddings.com`,
 		title: `TSG Weddings`,
 		subtitle: `Elegant & Classy Wedding DJs. Well spoken MCs. No Corny Games. No Embarrassing Moments. DJs, Photo Booths, Up Lighting, & Videography In Boston & Massachusetts.`
 	},
@@ -29,7 +29,9 @@ module.exports = {
 				// If useACF is true, then the source plugin will try to import the Wordpress ACF Plugin contents.
 				// This feature is untested for sites hosted on Wordpress.com
 				useACF: true,
-				verboseOutput: true
+				verboseOutput: true,
+				concurrentRequests: 5,
+				perPage: 50
 			}
 		},
 		`gatsby-transformer-sharp`,

@@ -18,7 +18,7 @@ exports.modifyWebpackConfig = ({config}) => {
 
 exports.createPages = ({graphql, boundActionCreators}) => {
 	const {createPage} = boundActionCreators;
-	return Promise.all([getPages(graphql, createPage), getDjs(graphql, createPage), getVenues(graphql, createPage)]);
+	return Promise.all([getPages(graphql, createPage), getDjs(graphql, createPage), getVenues(graphql, createPage), getReviews(graphql, createPage)]);
 };
 
 function getPages(graphql, createPage) {
@@ -49,6 +49,10 @@ function getPages(graphql, createPage) {
 
 			result.data.pages.edges.forEach(edge => {
 				if (edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home') {
+					return;
+				}
+
+				if (edge.node.slug === 'do-not-delete') {
 					return;
 				}
 
@@ -131,6 +135,44 @@ function getVenues(graphql, createPage) {
 				createPage({
 					path: slash(`/venue${getSlug(edge, result.data.venues.edges)}`),
 					component: slash(path.resolve(`./src/templates/venue.js`)),
+					context: {
+						id: edge.node.id
+					}
+				});
+			});
+
+			resolve();
+		});
+	});
+}
+
+function getReviews(graphql, createPage) {
+	return new Promise((resolve, reject) => {
+		graphql(
+			`
+				{
+					venues: allWordpressWpReview {
+						edges {
+							node {
+								id
+								wpid: wordpress_id
+								title
+								slug
+							}
+						}
+					}
+				}
+			`
+		).then(result => {
+			if (result.errors) {
+				console.log(result.errors);
+				reject(result.errors);
+			}
+
+			result.data.venues.edges.forEach(edge => {
+				createPage({
+					path: slash(`/review${getSlug(edge, result.data.venues.edges)}`),
+					component: slash(path.resolve(`./src/templates/review.js`)),
 					context: {
 						id: edge.node.id
 					}

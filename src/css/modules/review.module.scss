@@ -1,0 +1,93 @@
+@import '../utils/mixins.scss';
+@import '../utils/variables.scss';
+
+.wrap {
+	max-width: 992px;
+	margin: 0 auto;
+}
+
+.reviewHeader {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 40px;
+
+	@include tabletUp {
+		flex-direction: row;
+	}
+}
+
+.reviewImage {
+	border-radius: 50%;
+	height: 150px;
+	margin: 0 auto 20px;
+	overflow: hidden;
+	width: 150px;
+
+	@include tabletUp {
+		margin: 0 30px 0 0;
+	}
+}
+
+.reviewDetails {
+	width: 100%;
+
+	@include tabletUp {
+		width: calc(100% - 180px);
+	}
+
+	ul {
+		@include noList();
+		align-items: flex-start;
+		border-top: 1px solid lighten($grey1, 70%);
+		border-bottom: 1px solid lighten($grey1, 70%);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 15px 0;
+		width: 100%;
+
+		@include tabletUp {
+			flex-wrap: nowrap;
+		}
+
+		li {
+			padding: 0 15px;
+			margin: 0 0 15px;
+			width: 50%;
+
+			@include tabletUp {
+				margin: 0;
+				width: 25%;
+			}
+
+			&:not(:last-child) {
+				@include tabletUp {
+					border-right: 1px solid lighten($grey1, 70%);
+				}
+			}
+
+			h3 {
+				color: $purple;
+				font-family: $fontHeadingAlt;
+				margin: 0 0 15px;
+			}
+		}
+	}
+}
+
+.rating {
+	span {
+		position: relative;
+
+		&::before {
+			content: '\2605';
+			left: 0;
+			color: gold;
+		}
+	}
+}
+
+.cta {
+	margin-top: 40px;
+	text-align: center;
+}

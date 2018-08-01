@@ -509,6 +509,24 @@ export const Venue = graphql`
 	}
 `;
 
+export const Vendor = graphql`
+	fragment Vendor on wordpress__wp_vendor {
+		id
+		content
+		title
+		slug
+		vendorcategory
+		acf {
+			phone: vendorPhone
+			email: vendorEmail
+			link: vendorLink
+			venuePage: vendorVenuePage {
+				url
+			}
+		}
+	}
+`;
+
 export const DJ = graphql`
 	fragment DJ on wordpress__wp_dj {
 		id
@@ -536,6 +554,26 @@ export const DJ = graphql`
 			twitterTitle: twitter_title
 			twitterDescription: twitter_description
 			twitterImage: twitter_image
+		}
+	}
+`;
+
+export const Review = graphql`
+	fragment Review on wordpress__wp_review {
+		id
+		content
+		title
+		excerpt
+		slug
+		image: featured_media {
+			...LargeImage
+		}
+		acf {
+			link: reviewLink
+			services: reviewServices
+			rating: reviewRating
+			location: reviewLocation
+			date: reviewDate
 		}
 	}
 `;
