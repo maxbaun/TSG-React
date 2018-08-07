@@ -54,6 +54,7 @@
 
 	@include desktopUp {
 		height: 80vh;
+		min-height: 900px;
 	}
 }
 
@@ -106,7 +107,7 @@
 	z-index: 3;
 
 	@include desktopUp {
-		margin: 200px auto 0;
+		margin: 140px auto 0;
 	}
 }
 
