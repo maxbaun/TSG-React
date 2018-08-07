@@ -2,7 +2,45 @@
 @import '../utils/mixins';
 
 .header {
+	background-color: $white;
+	position: absolute;
+	width: 100%;
+	z-index: 11;
+}
+
+.headerSticky {
+	@extend .header;
+	left: 0;
+	position: fixed;
+	opacity: 0;
+	top: -75px;
+	width: 100%;
+	transition: opacity 0.15s ease-in-out, top 0s 1s ease-in-out;
+	z-index: 10;
+
+	@include desktopUp {
+		top: -90px;
+	}
+
+	.headerContainer {
+		height: 75px;
+
+		@include desktopUp {
+			height: 90px;
+		}
+	}
+}
+
+.headerStickyActive {
+	opacity: 1;
+	top: 0;
+	transition: opacity 0.3s 1s ease-in-out, top 0.15s 1s ease-in-out;
+}
+
+.headerWrap {
+	box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
 	position: relative;
+	top: 0;
 }
 
 .headerContainer {
@@ -12,6 +50,11 @@
 	height: 75px;
 	max-width: 1440px;
 	margin: 0 auto;
+	transition: height 0.15s 0.1s ease-in-out;
+
+	@include desktopUp {
+		height: 150px;
+	}
 }
 
 .headerInner {
@@ -28,6 +71,10 @@
 
 .logo {
 	display: block;
+
+	img {
+		transition: all 0.15s 0.1s ease-in-out;
+	}
 }
 
 .toggle {
@@ -85,6 +132,7 @@
 	z-index: 5;
 
 	@include tabletUp {
+		background-color: transparent;
 		flex: 1;
 		height: auto;
 		max-width: 75%;

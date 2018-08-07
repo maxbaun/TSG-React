@@ -4,14 +4,16 @@
 .hero {
 	position: relative;
 	height: 40vh;
-	min-height: 300px;
+	min-height: 650px;
 
 	@include tabletUp {
-		height: 50vh;
+		height: 70vh;
+		min-height: 800px;
 	}
 
 	@include desktopUp {
-		height: 60vh;
+		height: 80vh;
+		min-height: 900px;
 	}
 
 	&::after {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Swiper from 'swiper';
 
-import {ref, click} from '../utils/componentHelpers';
+import {ref} from '../utils/componentHelpers';
 import Modal from './modal';
 import Image from './image';
 import WindowSize from './windowSize';

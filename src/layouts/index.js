@@ -26,6 +26,7 @@ export default class DefaultLayout extends Component {
 		return (
 			<div id="app">
 				<Header menu={mainMenu}/>
+				<Header sticky menu={mainMenu}/>
 				<main className="main">{this.props.children({...this.props, site})}</main>
 				<Footer
 					menus={[
