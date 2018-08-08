@@ -50,11 +50,7 @@ class SectionSlant extends Component {
 		const {sectionActive} = this.state;
 		const contentAlign = slantDirection === 'rightToLeft' ? 'right' : 'left';
 
-		const sectionCss = [CSS.section];
-
-		if (sectionActive) {
-			sectionCss.push(CSS.sectionActive);
-		}
+		const sectionCss = [CSS.section, CSS.sectionActive];
 
 		if (slantTop === false) {
 			sectionCss.push(CSS.noSlantTop);
