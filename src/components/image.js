@@ -34,14 +34,17 @@ export default class Image extends Component {
 	};
 
 	componentDidMount() {
-		const {image} = this.props;
-		const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
-		const resolutions = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.resolutions : null;
+		// Const {image} = this.props;
+		// const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
+		// const resolutions = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.resolutions : null;
 
-		if (!sizes && !resolutions) {
-			this.loader = cancellable(this.preloadImage(this.props.image.url));
-			this.loader.then(this.handleImageLoad);
-		}
+		// if (!sizes && !resolutions) {
+		// 	this.loader = cancellable(this.preloadImage(this.props.image.url));
+		// 	this.loader.then(this.handleImageLoad);
+		// }
+
+		this.loader = cancellable(this.preloadImage(this.props.image.url));
+		this.loader.then(this.handleImageLoad);
 	}
 
 	componentWillUnmount() {
@@ -70,7 +73,6 @@ export default class Image extends Component {
 	}
 
 	handleImageLoad() {
-		console.log(this.props.image.url);
 		this.setState({loaded: true});
 		this.props.onLoad();
 	}
@@ -83,18 +85,18 @@ export default class Image extends Component {
 			return null;
 		}
 
-		const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
-		const resolutions = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.resolutions : null;
+		// Const sizes = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.sizes : null;
+		// const resolutions = image.localFile && image.localFile.childImageSharp ? image.localFile.childImageSharp.resolutions : null;
 
-		const props = {...this.props};
+		// const props = {...this.props};
 
-		if (sizes) {
-			return <Img {...props} sizes={sizes}/>;
-		}
+		// if (sizes) {
+		// 	return <Img {...props} sizes={sizes}/>;
+		// }
 
-		if (resolutions) {
-			return <Img {...props} resolutions={resolutions}/>;
-		}
+		// if (resolutions) {
+		// 	return <Img {...props} resolutions={resolutions}/>;
+		// }
 
 		const ratio = (image.mediaDetails.height * 100) / image.mediaDetails.width;
 

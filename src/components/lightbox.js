@@ -163,6 +163,7 @@ class Lightbox extends Component {
 									const {height: imageHeight, width: imageWidth} = image.mediaDetails;
 
 									let style = {
+										height: '100%',
 										width: '100%'
 									};
 
@@ -173,11 +174,6 @@ class Lightbox extends Component {
 									};
 
 									if (imageHeight > imageWidth) {
-										style = {
-											...style,
-											height: '100%'
-										};
-
 										imgStyle = {
 											...imgStyle,
 											height: '100%',
@@ -196,7 +192,7 @@ class Lightbox extends Component {
 													justifyContent: 'center'
 												}}
 											>
-												<Image image={image} style={style} imgStyle={imgStyle}/>
+												<Image image={{...image, localFile: null}} style={style} imgStyle={imgStyle}/>
 											</div>
 										</div>
 									);
