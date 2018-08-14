@@ -41,8 +41,6 @@ export default class PostTemplate extends React.Component {
 			bodyCss.push(CSS.bodyActive);
 		}
 
-		console.log(currentPost);
-
 		return (
 			<div>
 				<Seo currentPage={currentPost} site={this.props.site} location={this.props.location}/>
