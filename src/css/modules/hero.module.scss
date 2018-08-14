@@ -79,7 +79,7 @@
 .overlay {
 	@include absoluteFull;
 	display: none;
-	background-color: rgba(190, 1, 147, 0.25);
+	background-color: rgba(190, 1, 147, 0.2);
 	z-index: 2;
 }
 
@@ -169,6 +169,11 @@
 	@include tabletUp {
 		margin-bottom: 44px;
 		padding: 0;
+	}
+
+	h1,
+	h3 {
+		text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9);
 	}
 
 	h1 {
