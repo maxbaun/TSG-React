@@ -7,13 +7,12 @@
 	min-height: 650px;
 
 	@include tabletUp {
-		height: 70vh;
-		min-height: 800px;
+		height: calc(70vh - #{$headerDesktopHeight});
+		min-height: 750px;
 	}
 
 	@include desktopUp {
-		height: 80vh;
-		min-height: 900px;
+		height: calc(80vh - #{$headerDesktopHeight});
 	}
 
 	&::after {
@@ -53,8 +52,21 @@
 	}
 
 	@include desktopUp {
-		height: 80vh;
+		height: calc(80vh - #{$headerDesktopHeight});
 		min-height: 900px;
+	}
+
+	.contentWrap {
+		height: auto;
+		margin: 70px auto 0;
+
+		@include desktopUp {
+			margin: 140px auto 0;
+		}
+	}
+
+	.contentInner {
+		display: block;
 	}
 }
 
@@ -67,7 +79,7 @@
 .overlay {
 	@include absoluteFull;
 	display: none;
-	background-color: rgba(190, 1, 147, 0.25);
+	background-color: rgba(190, 1, 147, 0.4);
 	z-index: 2;
 }
 
@@ -95,8 +107,9 @@
 
 .contentWrap {
 	color: $white;
+	height: 100%;
 	max-width: 720px;
-	margin: 70px auto 0;
+	margin: auto 0;
 	left: 0;
 	opacity: 0;
 	position: absolute;
@@ -104,11 +117,20 @@
 	text-align: center;
 	transform: scaleY(0.95) scaleX(0.95);
 	transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+	width: 100%;
 	z-index: 3;
 
 	@include desktopUp {
-		margin: 140px auto 0;
+		margin: 0 auto;
 	}
+}
+
+.contentInner {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
 }
 
 .hasSubtitle {

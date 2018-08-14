@@ -8,7 +8,7 @@ import SectionContent from './sectionContent';
 import WindowSize from './windowSize';
 import Button from './button';
 import {ref, click} from '../utils/componentHelpers';
-import {innerHtml} from '../utils/wordpressHelpers';
+import {innerHtml, limitToWords, limitToCharacters} from '../utils/wordpressHelpers';
 
 // eslint-disable-next-line react/no-deprecated
 class SectionReviews extends Component {
@@ -17,7 +17,8 @@ class SectionReviews extends Component {
 
 		this.state = {
 			activeSlide: 0,
-			sectionActive: false
+			sectionActive: false,
+			tallestSlide: 0
 		};
 
 		this.slider = null;
@@ -134,29 +135,43 @@ class SectionReviews extends Component {
 									const slideCss = ['swiper-slide', CSS.slide];
 
 									return (
-										<div key={`${review.name}+${review.content}`} className={slideCss.join(' ')}>
+										<div key={`${review.title}+${review.excerpt}`} className={slideCss.join(' ')}>
 											<div className={CSS.slideInner}>
 												<div className={CSS.slideBody}>
-													{/* eslint-disable-next-line react/no-danger */}
-													<div dangerouslySetInnerHTML={innerHtml(review.review)} className={CSS.slideContent}/>
-													<div className={CSS.slideName}>{review.name}</div>
-													<ul className={CSS.slideStars}>
-														<li>
-															<span className="fa fa-star"/>
-														</li>
-														<li>
-															<span className="fa fa-star"/>
-														</li>
-														<li>
-															<span className="fa fa-star"/>
-														</li>
-														<li>
-															<span className="fa fa-star"/>
-														</li>
-														<li>
-															<span className="fa fa-star"/>
-														</li>
-													</ul>
+													<div className={CSS.slideMain}>
+														<div
+															// eslint-disable-next-line react/no-danger
+															dangerouslySetInnerHTML={innerHtml(limitToCharacters(review.content, 450))}
+															className={CSS.slideContent}
+														/>
+														<div className={CSS.slideName}>
+															{review.title} - {review.acf.location}
+														</div>
+													</div>
+													<div className={CSS.slideFooter}>
+														<ul className={CSS.slideStars}>
+															<li>
+																<span className="fa fa-star"/>
+															</li>
+															<li>
+																<span className="fa fa-star"/>
+															</li>
+															<li>
+																<span className="fa fa-star"/>
+															</li>
+															<li>
+																<span className="fa fa-star"/>
+															</li>
+															<li>
+																<span className="fa fa-star"/>
+															</li>
+														</ul>
+														<div className={CSS.readMore}>
+															<Button size="sm" to={review.url}>
+																Read More
+															</Button>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -170,7 +185,7 @@ class SectionReviews extends Component {
 							{reviews.map((review, index) => {
 								return (
 									<li
-										key={`${review.name}+${review.content}`}
+										key={`${review.title}+${review.excerpt}`}
 										className={index === activeSlide ? CSS.bulletActive : CSS.bullet}
 										onClick={click(this.handlePaginationClick, index)}
 									/>

@@ -62,3 +62,18 @@ function getBioPart(name, part) {
 
 	return parts[part];
 }
+
+export const limitToWords = (str, numberOfWords) => {
+	let result = str;
+	let resultArray = result.split(' ');
+	if (resultArray.length > numberOfWords) {
+		resultArray = resultArray.slice(0, numberOfWords);
+		result = resultArray.join(' ') + '...';
+	}
+
+	return result;
+};
+
+export const limitToCharacters = (str, numberOfCharacters) => {
+	return str.substring(0, numberOfCharacters) + '...';
+};

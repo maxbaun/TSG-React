@@ -116,26 +116,28 @@ export default class Hero extends Component {
 						</div>
 						{showContent ? (
 							<div className={contentCss.join(' ')}>
-								<div className={CSS.content}>
-									{/* eslint-disable-next-line react/no-danger */}
-									<h1 dangerouslySetInnerHTML={innerHtml(title)}/>
-									{/* eslint-disable-next-line react/no-danger */}
-									{hasSubtitle ? <h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/> : null}
+								<div className={CSS.contentInner}>
+									<div className={CSS.content}>
+										{/* eslint-disable-next-line react/no-danger */}
+										<h1 dangerouslySetInnerHTML={innerHtml(title)}/>
+										{/* eslint-disable-next-line react/no-danger */}
+										{hasSubtitle ? <h3 dangerouslySetInnerHTML={innerHtml(subtitle)}/> : null}
+									</div>
+									{link && link.url ? (
+										<Button
+											to={link.url}
+											classname="primary"
+											style={{
+												display: 'block',
+												maxWidth: 268,
+												margin: '0 auto'
+											}}
+										>
+											{link.title}
+										</Button>
+									) : null}
+									{video && video.url ? this.renderVideo(video) : null}
 								</div>
-								{link && link.url ? (
-									<Button
-										to={link.url}
-										classname="primary"
-										style={{
-											display: 'block',
-											maxWidth: 268,
-											margin: '0 auto'
-										}}
-									>
-										{link.title}
-									</Button>
-								) : null}
-								{video && video.url ? this.renderVideo(video) : null}
 							</div>
 						) : null}
 					</div>

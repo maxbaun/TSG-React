@@ -116,8 +116,15 @@ export default class PageTemplate extends React.Component {
 					}
 
 					if (child.type === 'WordPressAcf_sectionBios') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <SectionBios key={index} header={child.header} content={child.content} bios={child.bios}/>;
+						return (
+							<SectionBios
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								header={child.header}
+								content={child.content}
+								bios={child.bios}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_sectionSlant') {
@@ -136,8 +143,15 @@ export default class PageTemplate extends React.Component {
 					}
 
 					if (child.type === 'WordPressAcf_sectionFacts') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <SectionFacts key={index} title={child.title} facts={child.facts} link={child.link}/>;
+						return (
+							<SectionFacts
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								title={child.title}
+								facts={child.facts}
+								link={child.link}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_sectionFeatured') {
@@ -146,13 +160,25 @@ export default class PageTemplate extends React.Component {
 					}
 
 					if (child.type === 'WordPressAcf_sectionAwards') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <SectionAwards key={index} title={child.title} images={child.images}/>;
+						return (
+							<SectionAwards
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								title={child.title}
+								images={child.images}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_sectionServices') {
-						// eslint-disable-next-line react/no-array-index-key
-						return <SectionServices key={index} content={child.sectionContent[0]} services={child.services}/>;
+						return (
+							<SectionServices
+								// eslint-disable-next-line react/no-array-index-key
+								key={index}
+								content={child.sectionContent[0]}
+								services={child.services}
+							/>
+						);
 					}
 
 					if (child.type === 'WordPressAcf_fullWidthImage') {

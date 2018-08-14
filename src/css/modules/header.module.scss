@@ -15,20 +15,20 @@
 	left: 0;
 	position: fixed;
 	opacity: 0;
-	top: -75px;
+	top: $headerCollapsedHeight * -1;
 	width: 100%;
 	transition: opacity 0.15s ease-in-out, top 0s 1s ease-in-out;
 	z-index: 10;
 
 	@include desktopUp {
-		top: -90px;
+		top: $headerDesktopHeight * -1;
 	}
 
 	.headerContainer {
-		height: 75px;
+		height: $headerCollapsedHeight;
 
 		@include desktopUp {
-			height: 90px;
+			height: $headerDesktopHeight;
 		}
 	}
 }
@@ -49,13 +49,13 @@
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
-	height: 75px;
+	height: $headerCollapsedHeight;
 	max-width: 1440px;
 	margin: 0 auto;
 	transition: height 0.15s 0.1s ease-in-out;
 
 	@include desktopUp {
-		height: 150px;
+		height: $headerDesktopHeight;
 	}
 }
 
@@ -196,8 +196,6 @@
 
 			&:hover {
 				.link {
-					font-weight: 700;
-
 					&::after {
 						opacity: 1;
 						transform: rotateY(0deg);
@@ -214,7 +212,7 @@
 	display: block;
 	font-family: $fontBody;
 	font-size: 14px;
-	font-weight: 300;
+	font-weight: 700;
 	line-height: 14px;
 	position: relative;
 	text-decoration: none !important;

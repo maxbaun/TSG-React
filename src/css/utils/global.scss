@@ -46,13 +46,13 @@ body {
 	font-family: $fontBody;
 	font-size: 16px;
 	line-height: 24px;
-	padding-top: 75px;
+	padding-top: $headerCollapsedHeight;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	// transition: padding 0.15s 0.1s ease-in-out;
 
 	@include desktopUp {
-		padding-top: 150px;
+		padding-top: $headerDesktopHeight;
 	}
 }
 
@@ -168,7 +168,8 @@ pre,
 code,
 kbd,
 samp {
-	font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+		'Courier New', monospace;
 	font-size: 1em;
 }
 

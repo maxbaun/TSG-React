@@ -172,9 +172,14 @@ export const SectionReviews = graphql`
 	fragment SectionReviews on WordPressAcf_sectionReviews {
 		header: sectionReviewsHeader
 		content: sectionReviewsContent
-		reviews: sectionReviewsReviews {
-			name
-			review
+		reviews: sectionReviewsItems {
+			title: post_title
+			content: post_content
+			excerpt: post_excerpt
+			url
+			acf {
+				location: reviewLocation
+			}
 		}
 		link: sectionReviewsLink {
 			title
@@ -338,16 +343,6 @@ export const FullWidthContent = graphql`
 	}
 `;
 
-export const SectionForm = graphql`
-	fragment SectionForm on WordPressAcf_sectionForm {
-		form: sectionFormForm
-		sectionContent: sectionFormContent {
-			header
-			content
-		}
-	}
-`;
-
 export const Page = graphql`
 	fragment Page on wordpress__PAGE {
 		id
@@ -421,9 +416,6 @@ export const Page = graphql`
 			}
 			... on WordPressAcf_fullWidthContent {
 				...FullWidthContent
-			}
-			... on WordPressAcf_sectionForm {
-				...SectionForm
 			}
 		}
 	}
@@ -508,9 +500,6 @@ export const Venue = graphql`
 			}
 			... on WordPressAcf_fullWidthContent {
 				...FullWidthContent
-			}
-			... on WordPressAcf_sectionForm {
-				...SectionForm
 			}
 		}
 	}
