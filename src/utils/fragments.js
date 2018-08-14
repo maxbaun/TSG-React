@@ -554,6 +554,37 @@ export const DJ = graphql`
 	}
 `;
 
+export const Post = graphql`
+	fragment Post on wordpress__POST {
+		id
+		content
+		title
+		excerpt
+		slug
+		image: featured_media {
+			...LargeImage
+		}
+		yoast {
+			metaKeywords: focuskw
+			title: title
+			metaDescription: metadesc
+			linkdex
+			metakeywords
+			noIndex: meta_robots_noindex
+			noFollow: meta_robots_nofollow
+			meta_robots_adv
+			canonical
+			redirect
+			ogTitle: opengraph_title
+			ogDescription: opengraph_description
+			ogImage: opengraph_image
+			twitterTitle: twitter_title
+			twitterDescription: twitter_description
+			twitterImage: twitter_image
+		}
+	}
+`;
+
 export const Review = graphql`
 	fragment Review on wordpress__wp_review {
 		id

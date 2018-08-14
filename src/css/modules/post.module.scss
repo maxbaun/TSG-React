@@ -1,0 +1,17 @@
+@import '../utils/mixins.scss';
+@import '../utils/variables.scss';
+@import '../utils/section.scss';
+
+.body {
+	@extend .section;
+	max-width: 992px;
+	margin: 0 auto;
+	opacity: 0;
+	transform: translateY(-10px);
+	transition: all 0.3s ease-in-out;
+}
+
+.bodyActive {
+	opacity: 1;
+	transform: translateY(0);
+}

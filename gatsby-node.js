@@ -18,7 +18,13 @@ exports.modifyWebpackConfig = ({config}) => {
 
 exports.createPages = ({graphql, boundActionCreators}) => {
 	const {createPage} = boundActionCreators;
-	return Promise.all([getPages(graphql, createPage), getDjs(graphql, createPage), getVenues(graphql, createPage), getReviews(graphql, createPage)]);
+	return Promise.all([
+		getPages(graphql, createPage),
+		getDjs(graphql, createPage),
+		getVenues(graphql, createPage),
+		getReviews(graphql, createPage),
+		getPosts(graphql, createPage)
+	]);
 };
 
 function getPages(graphql, createPage) {
@@ -63,6 +69,45 @@ function getPages(graphql, createPage) {
 				createPage({
 					path,
 					component: slash(getPageTemplate(edge.node.template)),
+					context: {
+						id: edge.node.id
+					}
+				});
+			});
+
+			resolve();
+		});
+	});
+}
+
+function getPosts(graphql, createPage) {
+	return new Promise((resolve, reject) => {
+		graphql(
+			`
+				{
+					posts: allWordpressPost {
+						edges {
+							node {
+								id
+								wpid: wordpress_id
+								title
+								slug
+								status
+							}
+						}
+					}
+				}
+			`
+		).then(result => {
+			if (result.errors) {
+				console.log(result.errors);
+				reject(result.errors);
+			}
+
+			result.data.posts.edges.forEach(edge => {
+				createPage({
+					path: slash(`/${edge.node.slug}`),
+					component: path.resolve(`./src/templates/post.js`),
 					context: {
 						id: edge.node.id
 					}
