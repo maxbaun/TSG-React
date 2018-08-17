@@ -13,3 +13,15 @@
 		padding: 60px 0;
 	}
 }
+
+.noPadding {
+	padding: 0;
+
+	@include tabletUp {
+		padding: 0;
+	}
+
+	@include desktopUp {
+		padding: 0;
+	}
+}

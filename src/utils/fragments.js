@@ -343,6 +343,16 @@ export const FullWidthContent = graphql`
 	}
 `;
 
+export const SectionForm = graphql`
+	fragment SectionForm on WordPressAcf_sectionForm {
+		sectionContent: sectionFormContent {
+			header
+			content
+		}
+		form: sectionFormForm
+	}
+`;
+
 export const Page = graphql`
 	fragment Page on wordpress__PAGE {
 		id
@@ -365,7 +375,9 @@ export const Page = graphql`
 			redirect
 			ogTitle: opengraph_title
 			ogDescription: opengraph_description
-			ogImage: opengraph_image
+			ogImage: opengraph_image {
+				...LargeImage
+			}
 			twitterTitle: twitter_title
 			twitterDescription: twitter_description
 			twitterImage: twitter_image
@@ -416,6 +428,9 @@ export const Page = graphql`
 			}
 			... on WordPressAcf_fullWidthContent {
 				...FullWidthContent
+			}
+			... on WordPressAcf_sectionForm {
+				...SectionForm
 			}
 		}
 	}

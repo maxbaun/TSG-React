@@ -27,7 +27,7 @@
 }
 
 .dj {
-	max-width: 950px;
+	max-width: $containMedium;
 	margin: 0 auto 30px;
 
 	@include tabletUp {

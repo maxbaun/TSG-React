@@ -27,7 +27,7 @@ export default class DefaultLayout extends Component {
 			<div id="app">
 				<Header menu={mainMenu}/>
 				<Header sticky menu={mainMenu}/>
-				<main className="main">{this.props.children({...this.props, site})}</main>
+				<main className="main">{this.props.children({...this.props, site, options})}</main>
 				<Footer
 					menus={[
 						{
@@ -69,6 +69,9 @@ export const mainLayoutQuery = graphql`
 			footerDescription
 			phone: contactPhoneNumber
 			email: contactEmail
+			fax: contactFax
+			address: contactAddress
+			findUsMessage: contactFindUsMessage
 			social: contactSocial {
 				facebook
 				pinterest

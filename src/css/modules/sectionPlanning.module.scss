@@ -3,7 +3,7 @@
 @import '../utils/section';
 
 .wrap {
-	max-width: 992px;
+	max-width: $containMedium;
 	margin: 0 auto;
 }
 

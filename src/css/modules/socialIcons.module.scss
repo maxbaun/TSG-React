@@ -1,0 +1,29 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.socialIcons {
+	ul {
+		@include noList();
+		display: flex;
+
+		li {
+			margin-right: 14px;
+		}
+	}
+}
+
+.icon {
+	background-color: $pink;
+	color: $white;
+	display: block;
+	font-size: 20px;
+	height: 35px;
+	line-height: 35px;
+	width: 35px;
+	text-align: center;
+	transition: background-color 0.2s ease-in-out;
+
+	&:hover {
+		background-color: darken($pink, 8%);
+	}
+}

@@ -232,6 +232,19 @@
 	@extend .sectionHalf;
 }
 
+.sectionFormLeft {
+	@extend .sectionForm;
+
+	.header {
+		text-align: left;
+
+		&::after {
+			margin: 0;
+			right: auto;
+		}
+	}
+}
+
 .fullWidthContent {
 	@extend .sectionHalf;
 }

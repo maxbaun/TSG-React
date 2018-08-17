@@ -6,6 +6,7 @@ import CSS from '../css/modules/footer.module.scss';
 import {phoneLink, emailLink} from '../utils/componentHelpers';
 import Link from './link';
 import WindowSize from './windowSize';
+import SocialIcons from './socialIcons';
 
 class Footer extends Component {
 	static propTypes = {
@@ -76,13 +77,13 @@ class Footer extends Component {
 								</li>
 							</ul>
 							<div className={CSS.socialIcons}>
-								<ul>
-									{this.renderIcon(this.props.social.facebook, 'facebook-f')}
-									{this.renderIcon(this.props.social.pinterest, 'pinterest')}
-									{this.renderIcon(this.props.social.instagram, 'instagram')}
-									{this.renderIcon(this.props.social.vimeo, 'vimeo')}
-									{this.renderIcon(this.props.social.youtube, 'youtube')}
-								</ul>
+								<SocialIcons
+									facebook={this.props.social.facebook}
+									pinterest={this.props.social.pinterest}
+									instagram={this.props.social.instagram}
+									vimeo={this.props.social.vimeo}
+									youtube={this.props.social.youtube}
+								/>
 							</div>
 						</div>
 					</div>

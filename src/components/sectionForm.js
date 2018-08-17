@@ -1,32 +1,38 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+
+import '../css/utils/forms.scss';
 
 import CSS from '../css/modules/sectionForm.module.scss';
 import SectionContent from './sectionContent';
-import ConnectAFriendForm from '../forms/connectAFriend';
+import ContactForm from '../services/contactForm';
 import {innerHtml} from '../utils/wordpressHelpers';
+import {ref} from '../utils/componentHelpers';
 
 export default class SectionForm extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			active: false
+			active: false,
+			sending: false,
+			message: null
 		};
 
-		this.renderForm = this.renderForm.bind(this);
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+		this.wrap = null;
+		this.form = null;
 	}
 
 	static propTypes = {
 		content: PropTypes.object,
-		form: PropTypes.string
+		form: PropTypes.string,
+		contain: PropTypes.bool
 	};
 
 	static defaultProps = {
 		content: {},
-		form: ''
+		form: '',
+		contain: true
 	};
 
 	componentDidMount() {
@@ -35,57 +41,75 @@ export default class SectionForm extends Component {
 				active: true
 			});
 		}, 300);
+
+		if (this.wrap) {
+			const form = this.wrap.querySelector('form');
+
+			if (form) {
+				this.form = new ContactForm(form, {});
+				this.form.form.addEventListener('submit', ::this.handleSubmit);
+			}
+		}
 	}
 
-	handleFormSubmit(e) {
+	componentWillUnmount() {
+		if (this.form && this.form.form) {
+			this.form.form.removeEventListener('submit', ::this.handleSubmit);
+		}
+	}
+
+	handleSubmit(e) {
 		e.preventDefault();
-		axios
-			.post('https://formspree.io/max@d3applications.com', {
-				message: 'test',
-				_subject: 'Form Test',
-				_replyto: 'boobs@gmail.com'
+
+		this.setState({
+			sending: true,
+			message: null
+		});
+
+		this.form
+			.submit()
+			.then(data => {
+				this.setState({
+					sending: false,
+					message: data.message
+				});
 			})
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.error(err);
+			.catch(() => {
+				this.setState({
+					sending: false
+				});
 			});
 	}
 
 	render() {
-		const {active} = this.state;
+		const {active, message, sending} = this.state;
+		const {contain} = this.props;
 
 		const sectionCss = [CSS.section];
+		let contentCss = 'sectionForm';
 
 		if (active) {
 			sectionCss.push(CSS.sectionActive);
 		}
 
-		console.log(this.props.form);
+		if (contain === false) {
+			contentCss = 'sectionFormLeft';
+		}
 
 		return (
 			<section className={sectionCss.join(' ')}>
-				<div className="container">
-					<div className={CSS.wrap}>
+				<div className={contain ? 'container' : ''}>
+					<div ref={ref.call(this, 'wrap')} className={CSS.wrap}>
 						<div className={CSS.content}>
-							<SectionContent content={this.props.content} classname="sectionForm"/>
+							<SectionContent content={this.props.content} classname={contentCss}/>
 						</div>
+						{message ? message : null}
+						{sending ? 'Sending...' : null}
 						{/* eslint-disable-next-line react/no-danger */}
 						<div dangerouslySetInnerHTML={innerHtml(this.props.form)} className={CSS.form}/>
 					</div>
 				</div>
 			</section>
 		);
-	}
-
-	renderForm() {
-		const {form} = this.props;
-
-		if (form.form === 'connectAFriend') {
-			return <ConnectAFriendForm/>;
-		}
-
-		return null;
 	}
 }

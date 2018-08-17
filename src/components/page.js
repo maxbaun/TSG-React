@@ -3,13 +3,19 @@ import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/page.module.scss';
 
-const Page = ({children, contain, style}) => {
+const Page = ({children, contain, style, padding}) => {
 	if (contain) {
 		children = <div className="container">{children}</div>;
 	}
 
+	const pageCss = [CSS.page];
+
+	if (!padding) {
+		pageCss.push(CSS.noPadding);
+	}
+
 	return (
-		<div className={CSS.page} style={style}>
+		<div className={pageCss.join(' ')} style={style}>
 			{children}
 		</div>
 	);
@@ -18,12 +24,14 @@ const Page = ({children, contain, style}) => {
 Page.propTypes = {
 	children: PropTypes.node.isRequired,
 	contain: PropTypes.bool,
-	style: PropTypes.object
+	style: PropTypes.object,
+	padding: PropTypes.bool
 };
 
 Page.defaultProps = {
 	contain: false,
-	style: {}
+	style: {},
+	padding: true
 };
 
 export default Page;

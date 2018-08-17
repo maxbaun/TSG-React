@@ -131,12 +131,12 @@ class Header extends Component {
 						<div className={CSS.headerContainer}>
 							<div className={CSS.headerInner}>
 								<div className={CSS.logo}>
-									<Link to="/">
+									<Link to="/" classname="">
 										<img
 											src={Logo}
 											alt="TSG Weddings Logo"
-											width={this.isMobile() || sticky ? 156 : 250}
-											height={this.isMobile() || sticky ? 55.33 : 88.67}
+											width={this.isMobile() ? 156 : 250}
+											height={this.isMobile() ? 55.33 : 88.67}
 										/>
 									</Link>
 								</div>

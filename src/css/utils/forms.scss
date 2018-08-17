@@ -1,0 +1,62 @@
+@import './variables';
+@import './mixins';
+
+form {
+	@import '../modules/button.module.scss';
+}
+
+@mixin inputFont() {
+	color: $grey1;
+	font-family: $fontBody;
+	font-size: 14px;
+	line-height: 42px;
+}
+
+input,
+textarea {
+	@include inputFont();
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea {
+	background-color: rgba(247, 230, 240, 0.4);
+	border: 1px solid transparent;
+	height: 46px;
+	outline: none !important;
+	padding: 10px 13px;
+	vertical-align: middle;
+	transition: border-color 0.14s 0.1s ease-in-out;
+	width: 100%;
+
+	&:focus {
+		border-color: $purple;
+	}
+}
+
+textarea {
+	height: 230px;
+	resize: none;
+}
+
+input[type='submit'] {
+	@extend .btn;
+	@extend .lg;
+	@extend .primary;
+}
+
+.wpcf7-form-control-wrap {
+	small {
+		color: $purple;
+		display: block;
+		margin-top: 2px;
+	}
+}
+
+::-webkit-input-placeholder,
+::-moz-placeholder,
+:-ms-input-placeholder,
+:-moz-placeholder {
+	@include inputFont();
+}

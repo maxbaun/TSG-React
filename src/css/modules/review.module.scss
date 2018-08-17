@@ -2,7 +2,7 @@
 @import '../utils/variables.scss';
 
 .wrap {
-	max-width: 992px;
+	max-width: $containMedium;
 	margin: 0 auto;
 }
 

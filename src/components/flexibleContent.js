@@ -17,7 +17,7 @@ import SectionPlanning from './sectionPlanning';
 import FullWidthContent from './fullWidthContent';
 import SectionForm from './sectionForm';
 
-const FlexibleContent = ({page}) => {
+const FlexibleContent = ({page, formContain}) => {
 	const children = page.children.filter(c => {
 		return (
 			c.type === 'WordPressAcf_hero' ||
@@ -164,7 +164,7 @@ const FlexibleContent = ({page}) => {
 
 				if (child.type === 'WordPressAcf_sectionForm') {
 					// eslint-disable-next-line react/no-array-index-key
-					return <SectionForm key={index} {...child} content={child.sectionContent[0]} form={child.form}/>;
+					return <SectionForm key={index} {...child} content={child.sectionContent[0]} form={child.form} contain={formContain}/>;
 				}
 
 				return null;
@@ -174,7 +174,12 @@ const FlexibleContent = ({page}) => {
 };
 
 FlexibleContent.propTypes = {
-	page: PropTypes.object.isRequired
+	page: PropTypes.object.isRequired,
+	formContain: PropTypes.bool
+};
+
+FlexibleContent.defaultProps = {
+	formContain: true
 };
 
 export default FlexibleContent;
