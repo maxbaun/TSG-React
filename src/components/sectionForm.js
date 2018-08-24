@@ -16,7 +16,7 @@ export default class SectionForm extends Component {
 
 		this.state = {
 			active: false,
-			sending: true,
+			sending: false,
 			message: null
 		};
 
