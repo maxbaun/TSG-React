@@ -170,7 +170,8 @@ class Lightbox extends Component {
 									let imgStyle = {
 										left: 0,
 										right: 0,
-										margin: '0 auto'
+										margin: '0 auto',
+										objectFit: 'contain'
 									};
 
 									if (imageHeight > imageWidth) {

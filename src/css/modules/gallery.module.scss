@@ -1,6 +1,17 @@
 @import '../utils/variables';
 @import '../utils/mixins';
 
+.wrap {
+	position: relative;
+}
+
+.loader {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	z-index: 1;
+}
+
 .gallery {
 	@include noList();
 	margin: 0 -7.5px;

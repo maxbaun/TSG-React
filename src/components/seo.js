@@ -12,6 +12,7 @@ const Seo = ({currentPage, location, site}) => {
 			location={location}
 			defaultTitle={`${htmlToString(currentPage.title)}`}
 			image={currentPage.image ? currentPage.image.url : null}
+			ogImage={currentPage.image ? currentPage.image.url : null}
 			excerpt={currentPage.excerpt}
 		/>
 	);

@@ -12,15 +12,15 @@ module.exports = {
 		*/
 		'gatsby-plugin-sass',
 		{
-			resolve: `gatsby-source-wordpress`,
+			resolve: `gatsby-source-max`,
 			options: {
 				/*
 				* The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
 				* Example : 'gatsbyjswpexample.wordpress.com' or 'www.example-site.com'
 				*/
-				baseUrl: `tsg.d3applications.com`,
+				baseUrl: `tsg.info`,
 				// The protocol. This can be http or https.
-				protocol: `https`,
+				protocol: `http`,
 				// Indicates whether the site is hosted on wordpress.com.
 				// If false, then the asumption is made that the site is self hosted.
 				// If true, then the plugin will source its content on wordpress.com using the JSON REST API V2.
@@ -31,7 +31,8 @@ module.exports = {
 				useACF: true,
 				verboseOutput: true,
 				concurrentRequests: 5,
-				perPage: 50
+				perPage: 100,
+				excludedRoutes: ['/wp/v2/venue']
 			}
 		},
 		`gatsby-transformer-sharp`,

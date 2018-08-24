@@ -6,6 +6,7 @@ import CSS from '../css/modules/gallery.module.scss';
 import Image from './image';
 import WindowSize from './windowSize';
 import LightBox from './lightbox';
+import Loading from './loading';
 import {clickPrevent} from '../utils/componentHelpers';
 
 class Gallery extends Component {
@@ -22,7 +23,12 @@ class Gallery extends Component {
 	}
 
 	static propTypes = {
-		images: PropTypes.array.isRequired
+		images: PropTypes.array.isRequired,
+		loading: PropTypes.bool
+	};
+
+	static defaultProps = {
+		loading: false
 	};
 
 	handleModalClose() {
@@ -39,10 +45,15 @@ class Gallery extends Component {
 	}
 
 	render() {
-		const {images} = this.props;
+		const {images, loading} = this.props;
 
 		return (
 			<div className={CSS.wrap}>
+				{loading ? (
+					<div className={CSS.loader}>
+						<Loading/>
+					</div>
+				) : null}
 				<Masonry
 					className={CSS.gallery}
 					elementType="ul" // Default 'div'

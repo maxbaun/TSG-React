@@ -9,7 +9,7 @@ import Seo from '../components/seo';
 import CSS from '../css/modules/venues.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 
-export default class PageTemplate extends React.Component {
+export default class BlogTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
@@ -46,8 +46,7 @@ export default class PageTemplate extends React.Component {
 	}
 
 	render() {
-		const {currentPage} = this.props.data;
-		const venues = this.transformVenues();
+		const {currentPage, posts, categories, tags} = this.props.data;
 
 		return (
 			<div>
@@ -55,16 +54,17 @@ export default class PageTemplate extends React.Component {
 				<FlexibleContent page={currentPage}/>
 				<div className={CSS.venues}>
 					<ul>
-						{venues.map(venue => {
+						{posts.edges.map(p => {
+							const {node: post} = p;
 							return (
-								<li key={venue.id}>
-									<Link to={`/venue/${venue.slug}`} classname={CSS.venue}>
+								<li key={post.id}>
+									<Link to={`/${post.slug}`} classname={CSS.venue}>
 										<div className={CSS.venueImage}>
-											<Image image={venue.image.url} style={{height: '100%'}}/>
+											{post.image ? <Image image={post.image} style={{height: '100%'}}/> : null}
 										</div>
 										<div className={CSS.venueTitle}>
 											{/* eslint-disable-next-line react/no-danger */}
-											<h3 dangerouslySetInnerHTML={innerHtml(venue.title)}/>
+											<h3 dangerouslySetInnerHTML={innerHtml(post.title)}/>
 										</div>
 									</Link>
 								</li>
@@ -77,17 +77,40 @@ export default class PageTemplate extends React.Component {
 	}
 }
 
-import {Page, Venue} from '../utils/fragments'; // eslint-disable-line no-unused-vars
+import {Page, LargeImage} from '../utils/fragments'; // eslint-disable-line no-unused-vars
 
-export const pageQuery = graphql`
-	query venueTemplateQuery($id: String!) {
+export const blogQuery = graphql`
+	query blogQuery($id: String!) {
 		currentPage: wordpressPage(id: {eq: $id}) {
 			...Page
 		}
-		venues: allWordpressTsgVenues {
+		posts: allWordpressPost {
 			edges {
 				node {
-					...Venue
+					id: wordpress_id
+					slug
+					title
+					link
+					excerpt
+					image: featured_media {
+						...LargeImage
+					}
+				}
+			}
+		}
+		tags: allWordpressTag {
+			edges {
+				node {
+					name
+					link
+				}
+			}
+		}
+		categories: allWordpressCategory {
+			edges {
+				node {
+					name
+					link
 				}
 			}
 		}

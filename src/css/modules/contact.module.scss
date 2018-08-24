@@ -17,6 +17,7 @@
 
 .content {
 	margin: 0;
+	position: relative;
 	width: 100%;
 
 	@include tabletUp {
@@ -66,11 +67,11 @@
 	@include noList();
 
 	li {
-		align-items: center;
+		align-items: flex-start;
 		display: flex;
 		margin-bottom: 10px;
 
-		span {
+		span:first-child {
 			color: $purple;
 			display: inline-block;
 			margin-right: 15px;

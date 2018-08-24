@@ -2,16 +2,98 @@
 @import '../utils/variables.scss';
 @import '../utils/section.scss';
 
-.body {
-	@extend .section;
-	max-width: $containMedium;
-	margin: 0 auto;
-	opacity: 0;
-	transform: translateY(-10px);
-	transition: all 0.3s ease-in-out;
+.hero {
+	height: 450px;
+	position: relative;
 }
 
-.bodyActive {
-	opacity: 1;
-	transform: translateY(0);
+.heroActive {
+	.heroContent {
+		h1 {
+			transition: all 0.3s 0.4s ease-in-out;
+		}
+
+		h3 {
+			transition: all 0.3s 0.5s ease-in-out;
+		}
+
+		h1,
+		h3 {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+.heroImage {
+	height: 100%;
+	position: relative;
+
+	&::after {
+		@include absoluteFull();
+		content: ' ';
+		background-color: rgba($grey1, 0.5);
+		z-index: 1;
+	}
+}
+
+@mixin headerTitle() {
+	text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9);
+	color: $white;
+	font-family: $fontHeading;
+	font-weight: 400;
+	font-size: 30px;
+	line-height: 38px;
+	margin: 0;
+	position: relative;
+
+	@include tabletUp {
+		font-size: 52px;
+		line-height: 60px;
+		margin: 0;
+	}
+}
+
+.heroContent {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	padding: 15px;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	z-index: 2;
+	width: 100%;
+
+	h1,
+	h3 {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	h1 {
+		@include headerTitle();
+	}
+}
+
+.post {
+	@extend .section;
+	@extend .sectionActive;
+	max-width: $containMedium;
+	margin: 0 auto;
+}
+
+.header {
+	@extend .heroContent;
+	background-color: rgba($grey1, 0.7);
+	position: relative;
+	height: 250px;
+
+	h1 {
+		@include headerTitle();
+		opacity: 1;
+		transform: none;
+	}
 }

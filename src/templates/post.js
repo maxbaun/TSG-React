@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import graphql from 'graphql';
 
 import {innerHtml} from '../utils/wordpressHelpers';
-import Hero from '../components/hero';
+import Image from '../components/image';
 import Seo from '../components/seo';
-import SectionContent from '../components/sectionContent';
+import Page from '../components/page';
 import CSS from '../css/modules/post.module.scss';
 
 export default class PostTemplate extends React.Component {
@@ -13,53 +13,60 @@ export default class PostTemplate extends React.Component {
 		super(props);
 
 		this.state = {
-			active: false
+			heroActive: false
 		};
+
+		this.handleImageLoad = this.handleImageLoad.bind(this);
 	}
 
 	static propTypes = {
-		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
+		data: PropTypes.object.isRequired,
 		site: PropTypes.object.isRequired
 	};
 
-	componentDidMount() {
-		setTimeout(() => {
-			this.setState({
-				active: true
-			});
-		}, 150);
+	handleImageLoad() {
+		this.setState({heroActive: true});
 	}
 
 	render() {
-		const {active} = this.state;
-		const {currentPost} = this.props.data;
+		const {currentPost: post} = this.props.data;
 
-		const bodyCss = [CSS.body];
+		const heroCss = [CSS.hero];
 
-		if (active) {
-			bodyCss.push(CSS.bodyActive);
+		if (this.state.heroActive) {
+			heroCss.push(CSS.heroActive);
 		}
 
 		return (
-			<div>
-				<Seo currentPage={currentPost} site={this.props.site} location={this.props.location}/>
-				<div className={CSS.wrap}>
-					{currentPost.image && currentPost.image.url ? <Hero images={[currentPost.image]}/> : null}
-					<div className={bodyCss.join(' ')}>
-						<SectionContent
-							content={{
-								header: `<h1>${currentPost.title}</h1>`
-							}}
-							contentContainerWidth={950}
-							classname="postHeader"
-						/>
-						{/* <Image image={currentPost.image}/> */}
-						{/* eslint-disable-next-line react/no-danger */}
-						<div dangerouslySetInnerHTML={innerHtml(currentPost.content)} className={CSS.content}/>
+			<Page padding={false}>
+				<Seo currentPage={post} site={this.props.site} location={this.props.location}/>
+
+				{post.image ? (
+					<div className={heroCss.join(' ')}>
+						<div className={CSS.heroImage}>
+							<Image
+								placeholder
+								image={post.image}
+								onLoad={this.handleImageLoad}
+								style={{height: '100%'}}
+								imgStyle={{height: '100%'}}
+							/>
+						</div>
+						<div className={CSS.heroContent}>
+							<h1>{post.title}</h1>
+						</div>
 					</div>
+				) : (
+					<div className={CSS.header}>
+						<h1>{post.title}</h1>
+					</div>
+				)}
+				<div className={CSS.post}>
+					{/* eslint-disable-next-line react/no-danger */}
+					<div dangerouslySetInnerHTML={innerHtml(post.content)}/>
 				</div>
-			</div>
+			</Page>
 		);
 	}
 }

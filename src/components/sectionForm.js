@@ -5,8 +5,9 @@ import '../css/utils/forms.scss';
 
 import CSS from '../css/modules/sectionForm.module.scss';
 import SectionContent from './sectionContent';
-import ContactForm from '../services/contactForm';
+import Loading from './loading';
 import {innerHtml} from '../utils/wordpressHelpers';
+import ContactForm from '../services/contactForm';
 import {ref} from '../utils/componentHelpers';
 
 export default class SectionForm extends Component {
@@ -15,7 +16,7 @@ export default class SectionForm extends Component {
 
 		this.state = {
 			active: false,
-			sending: false,
+			sending: true,
 			message: null
 		};
 
@@ -101,10 +102,14 @@ export default class SectionForm extends Component {
 				<div className={contain ? 'container' : ''}>
 					<div ref={ref.call(this, 'wrap')} className={CSS.wrap}>
 						<div className={CSS.content}>
+							{sending ? (
+								<div className={CSS.loader}>
+									<Loading/>
+								</div>
+							) : null}
 							<SectionContent content={this.props.content} classname={contentCss}/>
 						</div>
-						{message ? message : null}
-						{sending ? 'Sending...' : null}
+						{message ? <p className={CSS.message}> {message} </p> : null}
 						{/* eslint-disable-next-line react/no-danger */}
 						<div dangerouslySetInnerHTML={innerHtml(this.props.form)} className={CSS.form}/>
 					</div>

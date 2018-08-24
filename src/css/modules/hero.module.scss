@@ -5,6 +5,8 @@
 	position: relative;
 	height: 40vh;
 	min-height: 650px;
+	opacity: 0;
+	transition: all 0.3s 0.1s ease-in-out;
 
 	@include tabletUp {
 		height: calc(70vh - #{$headerDesktopHeight});
@@ -30,6 +32,48 @@
 		@include desktopUp {
 			content: ' ';
 		}
+	}
+}
+
+.heroActive {
+	opacity: 1;
+
+	.overlay {
+		opacity: 1;
+	}
+
+	.contentWrap {
+		opacity: 1;
+		transform: scaleY(1) scaleX(1);
+		transition: all 0.3s 0.3s ease-in-out;
+	}
+
+	.content {
+		h1 {
+			transition: all 0.3s 0.4s ease-in-out;
+		}
+
+		h3 {
+			transition: all 0.3s 0.5s ease-in-out;
+		}
+
+		h1,
+		h3 {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.cta {
+		opacity: 1;
+		transform: translateY(0);
+		transition: all 0.3s 0.6s ease-in-out;
+	}
+
+	.video {
+		opacity: 1;
+		transform: translateY(0);
+		transition: all 0.3s 0.7s ease-in-out;
 	}
 }
 
@@ -80,6 +124,8 @@
 	@include absoluteFull;
 	display: none;
 	background-color: rgba(190, 1, 147, 0.2);
+	opacity: 0;
+	transition: all 0.3s 0.1s ease-in-out;
 	z-index: 2;
 }
 
@@ -158,8 +204,7 @@
 }
 
 .contentActive {
-	opacity: 1;
-	transform: scaleY(1) scaleX(1);
+
 }
 
 .content {
@@ -174,6 +219,8 @@
 	h1,
 	h3 {
 		text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9);
+		opacity: 0;
+		transform: translateY(20px);
 	}
 
 	h1 {
@@ -205,10 +252,18 @@
 	}
 }
 
+.cta {
+	opacity: 0;
+	transform: translateY(20px);
+
+}
+
 .video {
 	max-width: 70%;
 	margin: 0 auto;
 	margin-top: 53px;
+	opacity: 0;
+	transform: translateY(20px);
 	z-index: 4;
 
 	@include tabletUp {

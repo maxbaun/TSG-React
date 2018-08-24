@@ -1,0 +1,72 @@
+{
+  "_from": "gatsby-source-wordpress@2.0.93",
+  "_id": "gatsby-source-wordpress@2.0.93",
+  "_inBundle": false,
+  "_integrity": "sha1-5aWJVv0k4FRLMaR5HMBiJa/h2Io=",
+  "_location": "/gatsby-source-wordpress",
+  "_phantomChildren": {
+    "follow-redirects": "1.5.5",
+    "is-buffer": "1.1.6"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "gatsby-source-wordpress@2.0.93",
+    "name": "gatsby-source-wordpress",
+    "escapedName": "gatsby-source-wordpress",
+    "rawSpec": "2.0.93",
+    "saveSpec": null,
+    "fetchSpec": "2.0.93"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/gatsby-source-wordpress/-/gatsby-source-wordpress-2.0.93.tgz",
+  "_shasum": "e5a58956fd24e0544b31a4791cc06225afe1d88a",
+  "_spec": "gatsby-source-wordpress@2.0.93",
+  "_where": "/Users/maxbaun/Projects/Tsg-React",
+  "author": {
+    "name": "Sebastien Fichot",
+    "email": "fichot.sebastien@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-runtime": "^6.26.0",
+    "better-queue": "^3.8.6",
+    "bluebird": "^3.5.0",
+    "deep-map": "^1.5.0",
+    "deep-map-keys": "^1.2.0",
+    "gatsby-source-filesystem": "^1.5.39",
+    "json-stringify-safe": "^5.0.1",
+    "lodash": "^4.17.4",
+    "minimatch": "^3.0.4",
+    "qs": "^6.4.0"
+  },
+  "deprecated": false,
+  "description": "Gatsby source plugin for building websites using the Wordpress CMS as a data source.",
+  "devDependencies": {
+    "cross-env": "^5.0.5"
+  },
+  "homepage": "https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-wordpress#readme",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source-plugin"
+  ],
+  "license": "MIT",
+  "name": "gatsby-source-wordpress",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-wordpress"
+  },
+  "scripts": {
+    "build": "babel src --out-dir . --ignore __tests__",
+    "prepublish": "cross-env NODE_ENV=production npm run build",
+    "watch": "babel -w src --out-dir . --ignore __tests__"
+  },
+  "version": "2.0.93"
+}

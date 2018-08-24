@@ -11,18 +11,20 @@ export default class Button extends Component {
 		children: PropTypes.node.isRequired,
 		classname: PropTypes.string,
 		size: PropTypes.string,
-		style: PropTypes.object
+		style: PropTypes.object,
+		type: PropTypes.string
 	};
 
 	static defaultProps = {
 		to: null,
 		classname: 'primary',
 		size: 'md',
-		style: {}
+		style: {},
+		type: 'button'
 	};
 
 	render() {
-		const {to, classname, children, size, style} = this.props;
+		const {to, classname, children, size, style, type: buttonType} = this.props;
 
 		const btnClass = [CSS.btn, CSS[size], CSS[classname]].join(' ');
 		const isExternal = isExternalLink(to);
@@ -43,7 +45,7 @@ export default class Button extends Component {
 		}
 
 		return (
-			<button type="button" className={btnClass} style={style}>
+			<button type={buttonType} className={btnClass} style={style}>
 				{children}
 			</button>
 		);

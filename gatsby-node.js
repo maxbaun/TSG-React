@@ -162,7 +162,7 @@ function getVenues(graphql, createPage) {
 		graphql(
 			`
 				{
-					venues: allWordpressWpVenue {
+					venues: allWordpressTsgVenues {
 						edges {
 							node {
 								id
@@ -254,6 +254,14 @@ function getPageTemplate(template) {
 
 	if (template === 'template-contact.php') {
 		return path.resolve('./src/templates/contact.js');
+	}
+
+	if (template === 'template-availability.php') {
+		return path.resolve('./src/templates/availability.js');
+	}
+
+	if (template === 'template-blog.php') {
+		return path.resolve('./src/templates/blog.js');
 	}
 
 	return path.resolve(`./src/templates/page.js`);

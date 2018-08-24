@@ -1,62 +1,143 @@
 @import './variables';
 @import './mixins';
 
-form {
-	@import '../modules/button.module.scss';
-}
+:global {
+	form {
+		@import '../modules/button.module.scss';
+		position: relative;
 
-@mixin inputFont() {
-	color: $grey1;
-	font-family: $fontBody;
-	font-size: 14px;
-	line-height: 42px;
-}
+		&::after {
+			@include absoluteFull();
+			content: ' ';
+			background-color: rgba($white, 0.5);
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 0.2s ease-in-out, visibility 0s 0.2s ease-in-out;
+		}
 
-input,
-textarea {
-	@include inputFont();
-}
+		&.sending {
+			&::after {
+				opacity: 1;
+				visibility: visible;
+				transition: opacity 0.2s ease-in-out, visibility 0s;
+			}
+		}
 
-input[type='text'],
-input[type='email'],
-input[type='password'],
-textarea {
-	background-color: rgba(247, 230, 240, 0.4);
-	border: 1px solid transparent;
-	height: 46px;
-	outline: none !important;
-	padding: 10px 13px;
-	vertical-align: middle;
-	transition: border-color 0.14s 0.1s ease-in-out;
-	width: 100%;
+		ul {
+			@include noList();
 
-	&:focus {
-		border-color: $purple;
+			li {
+				margin-bottom: 10px;
+			}
+		}
 	}
-}
 
-textarea {
-	height: 230px;
-	resize: none;
-}
+	@mixin inputFont() {
+		color: $grey1;
+		font-family: $fontBody;
+		font-size: 14px;
+		line-height: 42px;
+	}
 
-input[type='submit'] {
-	@extend .btn;
-	@extend .lg;
-	@extend .primary;
-}
+	input,
+	textarea,
+	select {
+		@include inputFont();
+	}
 
-.wpcf7-form-control-wrap {
-	small {
+	input[type='text'],
+	input[type='email'],
+	input[type='password'],
+	textarea,
+	select {
+		background-color: rgba(247, 230, 240, 0.4);
+		border: 1px solid transparent;
+		height: 46px;
+		outline: none !important;
+		padding: 10px 13px;
+		vertical-align: middle;
+		transition: border-color 0.14s 0.1s ease-in-out;
+		width: 100%;
+
+		&:focus {
+			border-color: $purple;
+		}
+	}
+
+	textarea {
+		height: 230px;
+		resize: none;
+	}
+
+	input[type='submit'] {
+		@extend .btn;
+		@extend .lg;
+		@extend .primary;
+	}
+
+	label {
 		color: $purple;
-		display: block;
-		margin-top: 2px;
+		font-family: $fontBody;
+		font-size: 14px;
+		margin-bottom: 5px;
 	}
-}
 
-::-webkit-input-placeholder,
-::-moz-placeholder,
-:-ms-input-placeholder,
-:-moz-placeholder {
-	@include inputFont();
+	.checkbox {
+		display: block;
+		position: relative;
+		width: 100%;
+
+		input {
+			margin-right: 10px;
+			outline: none !important;
+			opacity: 0;
+		}
+
+		input:checked + span {
+			&::before {
+				opacity: 0;
+			}
+
+			&::after {
+				opacity: 1;
+			}
+		}
+
+		span {
+			&::before,
+			&::after {
+				font-family: 'Font Awesome 5 Free';
+				font-size: 14px;
+				font-weight: 400;
+				position: absolute;
+				left: 0;
+				transition: all 0.3s ease-in-out;
+			}
+
+			&::before {
+				content: '\f0c8';
+				opacity: 1;
+			}
+
+			&::after {
+				content: '\f14a';
+				opacity: 0;
+			}
+		}
+	}
+
+	.wpcf7-form-control-wrap {
+		small {
+			color: $purple;
+			display: block;
+			margin-top: 2px;
+		}
+	}
+
+	::-webkit-input-placeholder,
+	::-moz-placeholder,
+	:-ms-input-placeholder,
+	:-moz-placeholder {
+		@include inputFont();
+	}
 }

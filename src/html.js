@@ -42,6 +42,7 @@ export default class Html extends React.Component {
 					<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700" rel="stylesheet"/>
 					<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet"/>
 					<link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet"/>
+					<script src="https://tsgtools.com/check_req_info_form.js"/>
 					{css}
 				</head>
 				<body data-theme="default">

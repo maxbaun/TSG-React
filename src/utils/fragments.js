@@ -35,26 +35,19 @@ export const BaseImage = graphql`
 	}
 `;
 
-export const ImageSizes = graphql`
-	fragment ImageSizes on ImageSharpSizes {
-		base64
-		aspectRatio
-		src
-		srcSet
-		sizes
-	}
-`;
+// Export const ImageSizes = graphql`
+// 	fragment ImageSizes on ImageSharpSizes {
+// 		base64
+// 		aspectRatio
+// 		src
+// 		srcSet
+// 		sizes
+// 	}
+// `;
 
 export const LargeImage = graphql`
 	fragment LargeImage on wordpress__wp_media {
 		...BaseImage
-		localFile {
-			childImageSharp {
-				sizes(maxWidth: 1600) {
-					...ImageSizes
-				}
-			}
-		}
 	}
 `;
 
@@ -437,86 +430,20 @@ export const Page = graphql`
 `;
 
 export const Venue = graphql`
-	fragment Venue on wordpress__wp_venue {
+	fragment Venue on wordpress__tsg_venues {
 		id
-		content
 		title
 		slug
-		yoast {
-			metaKeywords: focuskw
-			title: title
-			metaDescription: metadesc
-			linkdex
-			metakeywords
-			noIndex: meta_robots_noindex
-			noFollow: meta_robots_nofollow
-			meta_robots_adv
-			canonical
-			redirect
-			ogTitle: opengraph_title
-			ogDescription: opengraph_description
-			ogImage: opengraph_image
-			twitterTitle: twitter_title
-			twitterDescription: twitter_description
-			twitterImage: twitter_image
-		}
-		image: featured_media {
-			...LargeImage
-		}
-		acf {
-			location: venueLocation
-			gallery: venueGallery {
+		image {
+			url {
 				...LargeImage
 			}
-		}
-		children {
-			type: __typename
-			... on WordPressAcf_sectionHalf {
-				...SectionHalf
-			}
-			... on WordPressAcf_pageDescriptionImages {
-				...PageDescriptionImages
-			}
-			... on WordPressAcf_pageDescriptionContent {
-				...PageDescriptionContent
-			}
-			... on WordPressAcf_hero {
-				...Hero
-			}
-			... on WordPressAcf_sectionReviews {
-				...SectionReviews
-			}
-			... on WordPressAcf_sectionBios {
-				...SectionBios
-			}
-			... on WordPressAcf_sectionAwards {
-				...SectionAwards
-			}
-			... on WordPressAcf_sectionSlant {
-				...SectionSlant
-			}
-			... on WordPressAcf_sectionFacts {
-				...SectionFacts
-			}
-			... on WordPressAcf_sectionFeatured {
-				...SectionFeatured
-			}
-			... on WordPressAcf_sectionServices {
-				...SectionServices
-			}
-			... on WordPressAcf_fullWidthImage {
-				...FullWidthImage
-			}
-			... on WordPressAcf_sectionComponents {
-				...SectionComponents
-			}
-			... on WordPressAcf_sectionPlanning {
-				...SectionPlanning
-			}
-			... on WordPressAcf_fullWidthContent {
-				...FullWidthContent
+			mediaDetails {
+				height
+				width
 			}
 		}
+		location
 	}
 `;
 

@@ -58,7 +58,7 @@ export default class ContactTemplate extends React.Component {
 									<a href={emailLink(this.props.options.email)}>{this.props.options.email}</a>
 								</li>
 								<li>
-									<span className="fa fa-map-marker-o"/>
+									<span className="fa fa-map-marker-alt"/>
 									{/* eslint-disable-next-line react/no-danger */}
 									<span dangerouslySetInnerHTML={innerHtml(this.props.options.address)}/>
 								</li>
