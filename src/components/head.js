@@ -64,7 +64,7 @@ const Head = ({
 		},
 		{
 			property: 'og:image',
-			content: ogImage && ogImage !== '' ? ogImage : image
+			content: image
 		},
 		{property: 'og:url', content: 'https://tsgweddings.com/'},
 		{property: 'og:site_name', content: 'TSGWeddings'},
@@ -78,7 +78,7 @@ const Head = ({
 		},
 		{
 			property: 'twitter:image',
-			content: twitterImage && twitterImage !== '' ? twitterImage : image
+			content: image
 		},
 		{property: 'robots', content: noIndex},
 		{property: 'robots', content: noFollow}

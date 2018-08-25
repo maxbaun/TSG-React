@@ -352,6 +352,9 @@ export const Page = graphql`
 		content
 		title
 		excerpt
+		image: featured_media {
+			...LargeImage
+		}
 		acf {
 			hasCallToAction
 		}
@@ -368,12 +371,8 @@ export const Page = graphql`
 			redirect
 			ogTitle: opengraph_title
 			ogDescription: opengraph_description
-			ogImage: opengraph_image {
-				...LargeImage
-			}
 			twitterTitle: twitter_title
 			twitterDescription: twitter_description
-			twitterImage: twitter_image
 		}
 		children {
 			type: __typename
@@ -488,10 +487,8 @@ export const DJ = graphql`
 			redirect
 			ogTitle: opengraph_title
 			ogDescription: opengraph_description
-			ogImage: opengraph_image
 			twitterTitle: twitter_title
 			twitterDescription: twitter_description
-			twitterImage: twitter_image
 		}
 	}
 `;
@@ -519,10 +516,8 @@ export const Post = graphql`
 			redirect
 			ogTitle: opengraph_title
 			ogDescription: opengraph_description
-			ogImage: opengraph_image
 			twitterTitle: twitter_title
 			twitterDescription: twitter_description
-			twitterImage: twitter_image
 		}
 	}
 `;
