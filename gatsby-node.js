@@ -105,8 +105,17 @@ function getPosts(graphql, createPage) {
 			}
 
 			result.data.posts.edges.forEach(edge => {
+				if (
+					edge.node.slug.includes('delete') ||
+					edge.node.slug === 'do-not-delete' ||
+					edge.node.title === 'DO NOT DELETE' ||
+					edge.node.title.includes('DELETE')
+				) {
+					return;
+				}
+
 				createPage({
-					path: slash(`/${edge.node.slug}`),
+					path: slash(`/blog/${edge.node.slug}`),
 					component: path.resolve(`./src/templates/post.js`),
 					context: {
 						id: edge.node.id

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 
 import {replaceLinks, isExternalLink} from '../utils/wordpressHelpers';
+import {noop} from '../utils/componentHelpers';
 import CSS from '../css/modules/button.module.scss';
 
 export default class Button extends Component {
@@ -12,7 +13,8 @@ export default class Button extends Component {
 		classname: PropTypes.string,
 		size: PropTypes.string,
 		style: PropTypes.object,
-		type: PropTypes.string
+		type: PropTypes.string,
+		onClick: PropTypes.func
 	};
 
 	static defaultProps = {
@@ -20,11 +22,12 @@ export default class Button extends Component {
 		classname: 'primary',
 		size: 'md',
 		style: {},
-		type: 'button'
+		type: 'button',
+		onClick: noop
 	};
 
 	render() {
-		const {to, classname, children, size, style, type: buttonType} = this.props;
+		const {to, classname, children, size, style, type: buttonType, onClick} = this.props;
 
 		const btnClass = [CSS.btn, CSS[size], CSS[classname]].join(' ');
 		const isExternal = isExternalLink(to);
@@ -32,7 +35,8 @@ export default class Button extends Component {
 		if (to) {
 			const props = {
 				className: btnClass,
-				style
+				style,
+				onClick
 			};
 
 			if (isExternal) {
@@ -45,7 +49,7 @@ export default class Button extends Component {
 		}
 
 		return (
-			<button type={buttonType} className={btnClass} style={style}>
+			<button type={buttonType} className={btnClass} style={style} onClick={onClick}>
 				{children}
 			</button>
 		);

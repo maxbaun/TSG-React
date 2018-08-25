@@ -163,6 +163,7 @@ class Header extends Component {
 															<Button
 																classname="primary"
 																to={item.url}
+																onClick={click(this.handleToggle, false)}
 																style={{
 																	display: 'block',
 																	padding: '9px 25px',

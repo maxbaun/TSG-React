@@ -38,6 +38,8 @@ export default class PostTemplate extends React.Component {
 			heroCss.push(CSS.heroActive);
 		}
 
+		const title = <h1 dangerouslySetInnerHTML={innerHtml(post.title)}/>; // eslint-disable-line react/no-danger
+
 		return (
 			<Page padding={false}>
 				<Seo currentPage={post} site={this.props.site} location={this.props.location}/>
@@ -53,14 +55,10 @@ export default class PostTemplate extends React.Component {
 								imgStyle={{height: '100%'}}
 							/>
 						</div>
-						<div className={CSS.heroContent}>
-							<h1>{post.title}</h1>
-						</div>
+						<div className={CSS.heroContent}>{title}</div>
 					</div>
 				) : (
-					<div className={CSS.header}>
-						<h1>{post.title}</h1>
-					</div>
+					<div className={CSS.header}>{title}</div>
 				)}
 				<div className={CSS.post}>
 					{/* eslint-disable-next-line react/no-danger */}

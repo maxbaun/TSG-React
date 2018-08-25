@@ -33,9 +33,10 @@ export default class VenueTemplate extends React.Component {
 		this.setState({
 			loading: true
 		});
+
 		axios
 			.get(`${API_URL}/tsg/v1/venue`, {
-				data: {
+				params: {
 					slug: this.props.data.venue.slug
 				}
 			})

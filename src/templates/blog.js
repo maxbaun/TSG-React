@@ -48,17 +48,19 @@ export default class BlogTemplate extends React.Component {
 	render() {
 		const {currentPage, posts, categories, tags} = this.props.data;
 
+		const filteredPosts = posts.edges.filter(n => n.node.slug !== 'do-not-delete');
+
 		return (
 			<div>
 				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<FlexibleContent page={currentPage}/>
 				<div className={CSS.venues}>
 					<ul>
-						{posts.edges.map(p => {
+						{filteredPosts.map(p => {
 							const {node: post} = p;
 							return (
 								<li key={post.id}>
-									<Link to={`/${post.slug}`} classname={CSS.venue}>
+									<Link to={`/blog/${post.slug}`} classname={CSS.venue}>
 										<div className={CSS.venueImage}>
 											{post.image ? <Image image={post.image} style={{height: '100%'}}/> : null}
 										</div>

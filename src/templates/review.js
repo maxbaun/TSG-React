@@ -53,15 +53,11 @@ export default class ReviewTemplate extends React.Component {
 									</li>
 									<li>
 										<h3>Location</h3>
-										{currentPage.acf.location}
-									</li>
-									<li>
-										<h3>Date</h3>
-										<span>{currentPage.acf.date}</span>
+										{currentPage.location}
 									</li>
 									<li>
 										<h3>Services</h3>
-										<span>{currentPage.acf.services}</span>
+										<span>{currentPage.services}</span>
 									</li>
 								</ul>
 							</div>

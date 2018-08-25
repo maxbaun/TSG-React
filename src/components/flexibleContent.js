@@ -42,7 +42,7 @@ const FlexibleContent = ({page, formContain}) => {
 	return (
 		<div>
 			{children.map((child, index) => {
-				if (child.type === 'WordPressAcf_hero') {
+				if (child.type === 'WordPressAcf_hero' && child.images) {
 					return (
 						<Hero
 							// eslint-disable-next-line react/no-array-index-key
@@ -50,7 +50,7 @@ const FlexibleContent = ({page, formContain}) => {
 							title={child.title}
 							subtitle={child.subtitle}
 							link={child.link}
-							images={child.images}
+							images={child.images || []}
 							video={child.video ? child.video[0] : null}
 						/>
 					);
