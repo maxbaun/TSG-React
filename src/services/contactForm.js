@@ -38,7 +38,7 @@ export default class ContactForm {
 	}
 
 	sendForm() {
-		const url = `https://tsg.d3applications.com/wp-json/contact-form-7/v1/contact-forms/${this.getFormId()}/feedback`;
+		const url = `${API_URL}/contact-form-7/v1/contact-forms/${this.getFormId()}/feedback`;
 		this.toggleSending(true);
 		return axios({
 			url,

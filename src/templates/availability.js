@@ -26,12 +26,9 @@ export default class ContactTemplate extends React.Component {
 	handleSubmit(e) {
 		const valid = window.submitIt(this.form);
 
-		console.log('here');
 		if (!valid) {
 			return e.preventDefault();
 		}
-
-		return true;
 	}
 
 	render() {

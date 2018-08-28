@@ -8,7 +8,7 @@ exports.modifyWebpackConfig = ({config}) => {
 	config.merge({
 		plugins: [
 			new webpack.DefinePlugin({
-				API_URL: JSON.stringify(isDev ? 'http://tsg.info/wp-json' : 'https://tsg.d3applications.com/wp-json')
+				API_URL: JSON.stringify(isDev ? 'http://tsg.info/wp-json' : 'https://admin.tsgweddings.com/wp-json')
 			})
 		]
 	});
