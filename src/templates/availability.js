@@ -45,7 +45,7 @@ export default class ContactTemplate extends React.Component {
 						<form
 							ref={ref.call(this, 'form')}
 							method="post"
-							action="http://tsgtools.com/request_information.asp"
+							action="https://tsgtools.com/request_information.asp"
 							onSubmit={this.handleSubmit}
 							name="reqinfoform"
 						>
