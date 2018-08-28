@@ -18,9 +18,9 @@ module.exports = {
 				* The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
 				* Example : 'gatsbyjswpexample.wordpress.com' or 'www.example-site.com'
 				*/
-				baseUrl: `tsg.d3applications.com`,
+				baseUrl: `admin.tsgweddings.com`,
 				// The protocol. This can be http or https.
-				protocol: `https`,
+				protocol: `http`,
 				// Indicates whether the site is hosted on wordpress.com.
 				// If false, then the asumption is made that the site is self hosted.
 				// If true, then the plugin will source its content on wordpress.com using the JSON REST API V2.
@@ -34,6 +34,15 @@ module.exports = {
 				perPage: 100,
 				excludedRoutes: ['/wp/v2/venue']
 			}
+		},
+		{
+			resolve: `gatsby-plugin-google-analytics`,
+			options: {
+				trackingId: `UA-10151471-3`
+			}
+		},
+		{
+			resolve: `gatsby-plugin-sitemap`
 		},
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-sharp`,
