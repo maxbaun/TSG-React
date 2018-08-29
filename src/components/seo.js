@@ -6,6 +6,7 @@ import {htmlToString} from '../utils/componentHelpers';
 import {replaceLinks} from '../utils/wordpressHelpers';
 
 const Seo = ({currentPage, location, site}) => {
+	const isHome = currentPage.link && currentPage.link.includes('/home');
 	return (
 		<Head
 			{...currentPage.yoast}
@@ -24,7 +25,11 @@ const Seo = ({currentPage, location, site}) => {
 					null
 			}
 			excerpt={currentPage.excerpt}
-			pageUrl={replaceLinks(currentPage.link, site.siteMeta.siteUrl)}
+			pageUrl={
+				isHome ?
+					site.siteMeta.siteUrl :
+					replaceLinks(currentPage.link, site.siteMeta.siteUrl)
+			}
 		/>
 	);
 };
