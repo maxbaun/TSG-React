@@ -38,9 +38,6 @@ export default class ReviewTemplate extends React.Component {
 					/>
 					<div className={CSS.review}>
 						<div className={CSS.reviewHeader}>
-							<div className={CSS.reviewImage}>
-								<Image circle showPlaceholder image={currentPage.image}/>
-							</div>
 							<div className={CSS.reviewDetails}>
 								<ul>
 									<li>
@@ -51,14 +48,12 @@ export default class ReviewTemplate extends React.Component {
 											})}
 										</div>
 									</li>
-									<li>
-										<h3>Location</h3>
-										{currentPage.location}
-									</li>
-									<li>
-										<h3>Services</h3>
-										<span>{currentPage.services}</span>
-									</li>
+									{currentPage && currentPage.acf && currentPage.acf.location !== '' ? (
+										<li>
+											<h3>Location</h3>
+											{currentPage.acf.location}
+										</li>
+									) : null}
 								</ul>
 							</div>
 						</div>

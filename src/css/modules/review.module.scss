@@ -12,25 +12,14 @@
 	margin-bottom: 40px;
 
 	@include tabletUp {
+		justify-content: flex-start;
 		flex-direction: row;
-	}
-}
-
-.reviewImage {
-	border-radius: 50%;
-	height: 150px;
-	margin: 0 auto 20px;
-	overflow: hidden;
-	width: 150px;
-
-	@include tabletUp {
-		margin: 0 30px 0 0;
 	}
 }
 
 .reviewDetails {
 	margin: 0 auto;
-	max-width: 800px;
+	max-width: 600px;
 	width: 100%;
 
 	ul {
@@ -40,7 +29,7 @@
 		border-bottom: 1px solid lighten($grey1, 70%);
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: space-evenly;
 		padding: 15px 0;
 		width: 100%;
 
@@ -51,10 +40,12 @@
 		li {
 			padding: 0 15px;
 			margin: 0 0 15px;
-			width: calc(100% / 3);
+			width: 100%;
 
 			@include tabletUp {
+				flex: 1;
 				margin: 0;
+				width: calc(100% / 3);
 			}
 
 			&:not(:last-child) {
