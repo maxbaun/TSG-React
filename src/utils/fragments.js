@@ -1,15 +1,5 @@
 import graphql from 'graphql';
 
-export const Site = graphql`
-	fragment Site on Site {
-		id
-		siteMeta: siteMetadata {
-			title
-			subtitle
-		}
-	}
-`;
-
 export const MenuItems = graphql`
 	fragment MenuItems on wordpress__wp_api_menus_menus_items {
 		items {
@@ -352,6 +342,7 @@ export const Page = graphql`
 		content
 		title
 		excerpt
+		link
 		image: featured_media {
 			...LargeImage
 		}
@@ -439,6 +430,7 @@ export const Venue = graphql`
 		id
 		title
 		slug
+		link
 		image {
 			url {
 				...LargeImage
@@ -499,6 +491,7 @@ export const DJ = graphql`
 		title
 		excerpt
 		slug
+		link
 		image: featured_media {
 			...LargeImage
 		}
@@ -534,6 +527,7 @@ export const Post = graphql`
 		title
 		excerpt
 		slug
+		link
 		image: featured_media {
 			...LargeImage
 		}
@@ -569,6 +563,7 @@ export const Review = graphql`
 		title
 		excerpt
 		slug
+		link
 		image: featured_media {
 			...LargeImage
 		}

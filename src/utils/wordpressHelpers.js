@@ -1,17 +1,17 @@
-export const replaceLinks = str => {
+export const replaceLinks = (str, replace = '') => {
 	if (!str) {
 		return '';
 	}
 
 	return str
-		.replace('http://tsg.info', '')
-		.replace('https://tsg.info', '')
-		.replace('http://tsgweddings.com', '')
-		.replace('https://tsgweddings.com', '')
-		.replace('http://tsg.d3applications.com', '')
-		.replace('https://tsg.d3applications.com', '')
-		.replace('http://admin.tsgweddings.com', '')
-		.replace('https://admin.tsgweddings.com', '');
+		.replace('http://tsg.info', replace)
+		.replace('https://tsg.info', replace)
+		.replace('http://tsgweddings.com', replace)
+		.replace('https://tsgweddings.com', replace)
+		.replace('http://tsg.d3applications.com', replace)
+		.replace('https://tsg.d3applications.com', replace)
+		.replace('http://admin.tsgweddings.com', replace)
+		.replace('https://admin.tsgweddings.com', replace);
 };
 
 export const isExternalLink = str => {

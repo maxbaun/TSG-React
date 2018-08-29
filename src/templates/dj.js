@@ -26,17 +26,26 @@ export default class DJTemplate extends React.Component {
 
 		return (
 			<Page contain>
-				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
+				<Seo
+					currentPage={currentPage}
+					site={this.props.site}
+					location={this.props.location}
+				/>
 				<div className={CSS.wrap}>
 					<div className={CSS.dj}>
 						<div className={CSS.image}>
 							<DJThumbnail image={currentPage.image}/>
 						</div>
-						{/* eslint-disable-next-line react/no-danger */}
-						<h1 dangerouslySetInnerHTML={innerHtml(bioName(currentPage.title))}/>
+						<h1
+							// eslint-disable-next-line react/no-danger
+							dangerouslySetInnerHTML={innerHtml(bioName(currentPage.title))}
+						/>
 						<h3>{bioPosition(currentPage.title)}</h3>
-						{/* eslint-disable-next-line react/no-danger */}
-						<div dangerouslySetInnerHTML={innerHtml(currentPage.content)} className={CSS.content}/>
+						<div
+							// eslint-disable-next-line react/no-danger
+							dangerouslySetInnerHTML={innerHtml(currentPage.content)}
+							className={CSS.content}
+						/>
 					</div>
 					<div className={CSS.other}>
 						<SectionContent
@@ -55,8 +64,12 @@ export default class DJTemplate extends React.Component {
 													<Image image={dj.image}/>
 												</div>
 												<div className={CSS.otherDJOverlay}>
-													{/* eslint-disable-next-line react/no-danger */}
-													<h5 dangerouslySetInnerHTML={innerHtml(bioName(dj.title))}/>
+													<h5
+														// eslint-disable-next-line react/no-danger
+														dangerouslySetInnerHTML={innerHtml(
+															bioName(dj.title)
+														)}
+													/>
 												</div>
 											</Link>
 										</div>
@@ -77,9 +90,6 @@ export const pageQuery = graphql`
 	query djTemplateQuery($id: String!) {
 		currentPage: wordpressWpDj(id: {eq: $id}) {
 			...DJ
-		}
-		site {
-			...Site
 		}
 		djs: allWordpressWpDj(filter: {id: {ne: $id}}) {
 			edges {

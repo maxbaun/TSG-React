@@ -27,7 +27,9 @@ export default class DefaultLayout extends Component {
 			<div id="app">
 				<Header menu={mainMenu}/>
 				<Header sticky menu={mainMenu}/>
-				<main className="main">{this.props.children({...this.props, site, options})}</main>
+				<main className="main">
+					{this.props.children({...this.props, site, options})}
+				</main>
 				<Footer
 					menus={[
 						{
@@ -50,7 +52,7 @@ export default class DefaultLayout extends Component {
 	}
 }
 
-import {Site, MenuItems} from '../utils/fragments'; // eslint-disable-line no-unused-vars
+import {MenuItems} from '../utils/fragments'; // eslint-disable-line no-unused-vars
 export const mainLayoutQuery = graphql`
 	query mainLayoutQuery {
 		mainMenu: wordpressWpApiMenusMenusItems(name: {eq: "Main Nav"}) {
@@ -63,7 +65,12 @@ export const mainLayoutQuery = graphql`
 			...MenuItems
 		}
 		site {
-			...Site
+			id
+			siteMeta: siteMetadata {
+				title
+				subtitle
+				siteUrl
+			}
 		}
 		options: wordpressAcfOptions {
 			footerDescription

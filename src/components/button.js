@@ -27,7 +27,15 @@ export default class Button extends Component {
 	};
 
 	render() {
-		const {to, classname, children, size, style, type: buttonType, onClick} = this.props;
+		const {
+			to,
+			classname,
+			children,
+			size,
+			style,
+			type: buttonType,
+			onClick
+		} = this.props;
 
 		const btnClass = [CSS.btn, CSS[size], CSS[classname]].join(' ');
 		const isExternal = isExternalLink(to);
@@ -45,11 +53,20 @@ export default class Button extends Component {
 				props.to = replaceLinks(to);
 			}
 
-			return isExternal ? <a {...props}>{children}</a> : <Link {...props}>{children}</Link>;
+			return isExternal ? (
+				<a {...props}>{children}</a>
+			) : (
+				<Link {...props}>{children}</Link>
+			);
 		}
 
 		return (
-			<button type={buttonType} className={btnClass} style={style} onClick={onClick}>
+			<button
+				type={buttonType}
+				className={btnClass}
+				style={style}
+				onClick={onClick}
+			>
 				{children}
 			</button>
 		);

@@ -36,7 +36,8 @@ const Head = ({
 	twitterImage,
 	image,
 	excerpt,
-	site
+	site,
+	pageUrl
 }) => {
 	if (!metaDescription || metaDescription === '') {
 		const ex = excerpt ? stripHtml(excerpt) : site.siteMeta.subtitle;
@@ -60,21 +61,29 @@ const Head = ({
 		{property: 'og:title', content: ogTitle},
 		{
 			property: 'og:description',
-			content: ogDescription && ogDescription !== '' ? ogDescription : metaDescription
+			content:
+				ogDescription && ogDescription !== '' ? ogDescription : metaDescription
 		},
 		{
 			property: 'og:image',
 			content: ogImage ? ogImage : image ? image : null
 		},
-		{property: 'og:url', content: 'https://tsgweddings.com/'},
+		{
+			property: 'og:url',
+			content: pageUrl && pageUrl !== '' ? pageUrl : site.siteUrl
+		},
 		{property: 'og:site_name', content: 'TSGWeddings'},
+		{property: 'fb:app_id', content: '2179590042311519'},
 		{property: 'twitter:card', content: 'summary'},
 		{property: 'twitter:site', content: '@TSGWeddings'},
 		{property: 'twitter:creator', content: '@TSGWeddings'},
 		{property: 'twitter:title', content: twitterTitle},
 		{
 			property: 'twitter:description',
-			content: twitterDescription && twitterDescription === '' ? metaDescription : twitterDescription
+			content:
+				twitterDescription && twitterDescription === '' ?
+					twitterDescription :
+					metaDescription
 		},
 		{
 			property: 'twitter:image',
@@ -103,8 +112,12 @@ const Head = ({
 	];
 
 	if (title) {
-		title = title.replace('%%sep%%', '|').replace('%%sitename%%', site.siteMeta.title);
-		title = title.includes(` | ${site.siteMeta.title}`) ? title : `${title} | ${site.siteMeta.title}`;
+		title = title
+			.replace('%%sep%%', '|')
+			.replace('%%sitename%%', site.siteMeta.title);
+		title = title.includes(` | ${site.siteMeta.title}`) ?
+			title :
+			`${title} | ${site.siteMeta.title}`;
 	} else {
 		title = `${defaultTitle} | ${site.siteMeta.title}`;
 	}
@@ -127,6 +140,7 @@ Head.propTypes = {
 	image: PropTypes.string,
 	excerpt: PropTypes.string,
 	site: PropTypes.object,
+	pageUrl: PropTypes.string,
 	focusKw: PropTypes.string,
 	title: PropTypes.string,
 	linkdex: PropTypes.string,
@@ -153,9 +167,11 @@ Head.defaultProps = {
 		siteMeta: {
 			title: 'TSG Weddings',
 			subtitle:
-				'Elegant & Classy Wedding DJs. Well spoken MCs. No Corny Games. No Embarrassing Moments. DJs, Photo Booths, Up Lighting, & Videography In Boston & Massachusetts.'
+				'Elegant & Classy Wedding DJs. Well spoken MCs. No Corny Games. No Embarrassing Moments. DJs, Photo Booths, Up Lighting, & Videography In Boston & Massachusetts.',
+			siteUrl: 'https://tsgweddings.com'
 		}
 	},
+	pageUrl: '',
 	focusKw: '',
 	title: '',
 	linkdex: '',

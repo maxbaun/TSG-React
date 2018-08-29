@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Head from './head';
 import {htmlToString} from '../utils/componentHelpers';
+import {replaceLinks} from '../utils/wordpressHelpers';
 
 const Seo = ({currentPage, location, site}) => {
 	return (
@@ -12,9 +13,18 @@ const Seo = ({currentPage, location, site}) => {
 			location={location}
 			defaultTitle={`${htmlToString(currentPage.title)}`}
 			image={currentPage.image ? currentPage.image.url : null}
-			ogImage={currentPage.yoast && currentPage.yoast.ogImage ? currentPage.yoast.ogImage.url : null}
-			twitterImage={currentPage.yoast && currentPage.yoast.twitterImage ? currentPage.yoast.twitterImage.url : null}
+			ogImage={
+				currentPage.yoast && currentPage.yoast.ogImage ?
+					currentPage.yoast.ogImage.url :
+					null
+			}
+			twitterImage={
+				currentPage.yoast && currentPage.yoast.twitterImage ?
+					currentPage.yoast.twitterImage.url :
+					null
+			}
 			excerpt={currentPage.excerpt}
+			pageUrl={replaceLinks(currentPage.link, site.siteMeta.siteUrl)}
 		/>
 	);
 };
