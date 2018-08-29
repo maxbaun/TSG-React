@@ -359,20 +359,26 @@ export const Page = graphql`
 			hasCallToAction
 		}
 		yoast {
-			metaKeywords: focuskw
-			title: title
-			metaDescription: metadesc
+			focusKw
+			title
 			linkdex
-			metakeywords
-			noIndex: meta_robots_noindex
-			noFollow: meta_robots_nofollow
-			meta_robots_adv
+			metaDescription
+			metaKeywords
+			metaRobotsNoIndex
+			metaRobotsNoFollow
+			metaRobotsAdv
 			canonical
 			redirect
-			ogTitle: opengraph_title
-			ogDescription: opengraph_description
-			twitterTitle: twitter_title
-			twitterDescription: twitter_description
+			ogTitle
+			ogDescription
+			ogImage {
+				...LargeImage
+			}
+			twitterTitle
+			twitterImage {
+				...LargeImage
+			}
+			twitterDescription
 		}
 		children {
 			type: __typename
@@ -443,6 +449,28 @@ export const Venue = graphql`
 			}
 		}
 		location
+		yoast {
+			focusKw
+			title
+			linkdex
+			metaDescription
+			metaKeywords
+			metaRobotsNoIndex
+			metaRobotsNoFollow
+			metaRobotsAdv
+			canonical
+			redirect
+			ogTitle
+			ogDescription
+			ogImage {
+				...LargeImage
+			}
+			twitterTitle
+			twitterImage {
+				...LargeImage
+			}
+			twitterDescription
+		}
 	}
 `;
 
@@ -475,20 +503,26 @@ export const DJ = graphql`
 			...LargeImage
 		}
 		yoast {
-			metaKeywords: focuskw
-			title: title
-			metaDescription: metadesc
+			focusKw
+			title
 			linkdex
-			metakeywords
-			noIndex: meta_robots_noindex
-			noFollow: meta_robots_nofollow
-			meta_robots_adv
+			metaDescription
+			metaKeywords
+			metaRobotsNoIndex
+			metaRobotsNoFollow
+			metaRobotsAdv
 			canonical
 			redirect
-			ogTitle: opengraph_title
-			ogDescription: opengraph_description
-			twitterTitle: twitter_title
-			twitterDescription: twitter_description
+			ogTitle
+			ogDescription
+			ogImage {
+				...LargeImage
+			}
+			twitterTitle
+			twitterImage {
+				...LargeImage
+			}
+			twitterDescription
 		}
 	}
 `;
@@ -504,20 +538,26 @@ export const Post = graphql`
 			...LargeImage
 		}
 		yoast {
-			metaKeywords: focuskw
-			title: title
-			metaDescription: metadesc
+			focusKw
+			title
 			linkdex
-			metakeywords
-			noIndex: meta_robots_noindex
-			noFollow: meta_robots_nofollow
-			meta_robots_adv
+			metaDescription
+			metaKeywords
+			metaRobotsNoIndex
+			metaRobotsNoFollow
+			metaRobotsAdv
 			canonical
 			redirect
-			ogTitle: opengraph_title
-			ogDescription: opengraph_description
-			twitterTitle: twitter_title
-			twitterDescription: twitter_description
+			ogTitle
+			ogDescription
+			ogImage {
+				...LargeImage
+			}
+			twitterTitle
+			twitterImage {
+				...LargeImage
+			}
+			twitterDescription
 		}
 	}
 `;

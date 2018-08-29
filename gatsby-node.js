@@ -56,7 +56,7 @@ function getPages(graphql, createPage) {
 			result.data.pages.edges.forEach(edge => {
 				const isHome = edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home';
 
-				if (edge.node.slug === 'do-not-delete' || edge.node.title === 'DO NOT DELETE') {
+				if (isDeletePage(edge.node)) {
 					return;
 				}
 
@@ -105,12 +105,7 @@ function getPosts(graphql, createPage) {
 			}
 
 			result.data.posts.edges.forEach(edge => {
-				if (
-					edge.node.slug.includes('delete') ||
-					edge.node.slug === 'do-not-delete' ||
-					edge.node.title === 'DO NOT DELETE' ||
-					edge.node.title.includes('DELETE')
-				) {
+				if (isDeletePage(edge.node)) {
 					return;
 				}
 
@@ -152,6 +147,10 @@ function getDjs(graphql, createPage) {
 			}
 
 			result.data.pages.edges.forEach(edge => {
+				if (isDeletePage(edge.node)) {
+					return;
+				}
+
 				createPage({
 					path: slash(`/dj${getSlug(edge, result.data.pages.edges)}`),
 					component: slash(path.resolve(`./src/templates/dj.js`)),
@@ -190,6 +189,10 @@ function getVenues(graphql, createPage) {
 			}
 
 			result.data.venues.edges.forEach(edge => {
+				if (isDeletePage(edge.node)) {
+					return;
+				}
+
 				createPage({
 					path: slash(`/venue${getSlug(edge, result.data.venues.edges)}`),
 					component: slash(path.resolve(`./src/templates/venue.js`)),
@@ -240,6 +243,10 @@ function getReviews(graphql, createPage) {
 			resolve();
 		});
 	});
+}
+
+function isDeletePage(node) {
+	return node.slug.includes('delete') || node.slug === 'do-not-delete' || node.title === 'DO NOT DELETE' || node.title.includes('DELETE');
 }
 
 function getSlug(edge, edges) {

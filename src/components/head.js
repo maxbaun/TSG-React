@@ -26,8 +26,8 @@ const Head = ({
 	metaKeywords,
 	metaDescription,
 	canonical,
-	noFollow,
-	noIndex,
+	metaRobotsNoFollow,
+	metaRobotsNoIndex,
 	ogDescription,
 	ogImage,
 	ogTitle,
@@ -64,7 +64,7 @@ const Head = ({
 		},
 		{
 			property: 'og:image',
-			content: image
+			content: ogImage ? ogImage : image ? image : null
 		},
 		{property: 'og:url', content: 'https://tsgweddings.com/'},
 		{property: 'og:site_name', content: 'TSGWeddings'},
@@ -78,10 +78,10 @@ const Head = ({
 		},
 		{
 			property: 'twitter:image',
-			content: image
+			content: twitterImage ? twitterImage : image ? image : null
 		},
-		{property: 'robots', content: noIndex},
-		{property: 'robots', content: noFollow}
+		{property: 'robots', content: metaRobotsNoIndex},
+		{property: 'robots', content: metaRobotsNoFollow}
 	];
 
 	const links = [
@@ -123,38 +123,30 @@ const Head = ({
 
 Head.propTypes = {
 	location: PropTypes.object.isRequired,
-	title: PropTypes.string,
 	defaultTitle: PropTypes.string,
-	metaKeywords: PropTypes.string,
-	metaDescription: PropTypes.string,
-	canonical: PropTypes.string,
-	noFollow: PropTypes.string,
-	noIndex: PropTypes.string,
-	ogDescription: PropTypes.string,
-	ogImage: PropTypes.string,
-	ogTitle: PropTypes.string,
-	twitterTitle: PropTypes.string,
-	twitterDescription: PropTypes.string,
-	twitterImage: PropTypes.string,
 	image: PropTypes.string,
 	excerpt: PropTypes.string,
-	site: PropTypes.object
+	site: PropTypes.object,
+	focusKw: PropTypes.string,
+	title: PropTypes.string,
+	linkdex: PropTypes.string,
+	metaDescription: PropTypes.string,
+	metaKeywords: PropTypes.string,
+	metaRobotsNoIndex: PropTypes.string,
+	metaRobotsNoFollow: PropTypes.string,
+	metaRobotsAdv: PropTypes.string,
+	canonical: PropTypes.string,
+	redirect: PropTypes.string,
+	ogTitle: PropTypes.string,
+	ogDescription: PropTypes.string,
+	ogImage: PropTypes.string,
+	twitterTitle: PropTypes.string,
+	twitterImage: PropTypes.string,
+	twitterDescription: PropTypes.string
 };
 
 Head.defaultProps = {
-	title: '',
 	defaultTitle: '',
-	metaDescription: '',
-	metaKeywords: '',
-	canonical: '',
-	noFollow: '',
-	noIndex: '',
-	ogDescription: '',
-	ogImage: '',
-	ogTitle: '',
-	twitterTitle: '',
-	twitterDescription: '',
-	twitterImage: '',
 	image: DefaultImage,
 	excerpt: '',
 	site: {
@@ -163,7 +155,23 @@ Head.defaultProps = {
 			subtitle:
 				'Elegant & Classy Wedding DJs. Well spoken MCs. No Corny Games. No Embarrassing Moments. DJs, Photo Booths, Up Lighting, & Videography In Boston & Massachusetts.'
 		}
-	}
+	},
+	focusKw: '',
+	title: '',
+	linkdex: '',
+	metaDescription: '',
+	metaKeywords: '',
+	metaRobotsNoIndex: '',
+	metaRobotsNoFollow: '',
+	metaRobotsAdv: '',
+	canonical: '',
+	redirect: '',
+	ogTitle: '',
+	ogDescription: '',
+	ogImage: '',
+	twitterTitle: '',
+	twitterImage: '',
+	twitterDescription: ''
 };
 
 export default Head;
