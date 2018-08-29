@@ -1,0 +1,35 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+@import './blog.module.scss';
+
+.sidebar {
+	display: block;
+}
+
+.sidebarList {
+	margin-bottom: 20px;
+
+	h3 {
+		color: $purple;
+	}
+
+	ul {
+		@include noList();
+
+		li {
+			font-size: 14px;
+			line-height: 28px;
+		}
+	}
+}
+
+.sidebarListTags {
+	@extend .sidebarList;
+
+	ul {
+		li {
+			font-size: 12px;
+			line-height: 18px;
+		}
+	}
+}

@@ -8,7 +8,11 @@ exports.modifyWebpackConfig = ({config}) => {
 	config.merge({
 		plugins: [
 			new webpack.DefinePlugin({
-				API_URL: JSON.stringify(isDev ? 'http://tsg.info/wp-json' : 'https://admin.tsgweddings.com/wp-json')
+				API_URL: JSON.stringify(
+					isDev ?
+						'http://tsg.info/wp-json' :
+						'https://admin.tsgweddings.com/wp-json'
+				)
 			})
 		]
 	});
@@ -23,7 +27,9 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 		getDjs(graphql, createPage),
 		getVenues(graphql, createPage),
 		getReviews(graphql, createPage),
-		getPosts(graphql, createPage)
+		getPosts(graphql, createPage),
+		getCategories(graphql, createPage),
+		getTags(graphql, createPage)
 	]);
 };
 
@@ -54,7 +60,8 @@ function getPages(graphql, createPage) {
 			}
 
 			result.data.pages.edges.forEach(edge => {
-				const isHome = edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home';
+				const isHome =
+					edge.node.title.toLowerCase() === 'home' || edge.node.slug === 'home';
 
 				if (isDeletePage(edge.node)) {
 					return;
@@ -114,6 +121,82 @@ function getPosts(graphql, createPage) {
 					component: path.resolve(`./src/templates/post.js`),
 					context: {
 						id: edge.node.id
+					}
+				});
+			});
+
+			resolve();
+		});
+	});
+}
+
+function getCategories(graphql, createPage) {
+	return new Promise((resolve, reject) => {
+		graphql(
+			`
+				{
+					categories: allWordpressCategory(filter: {count: {gt: 0}}) {
+						edges {
+							node {
+								id
+								wpid: wordpress_id
+								name
+								slug
+							}
+						}
+					}
+				}
+			`
+		).then(result => {
+			if (result.errors) {
+				console.log(result.errors);
+				reject(result.errors);
+			}
+
+			result.data.categories.edges.forEach(category => {
+				createPage({
+					path: slash(`/blog/category/${category.node.slug}`),
+					component: path.resolve(`./src/templates/category.js`),
+					context: {
+						name: category.node.name
+					}
+				});
+			});
+
+			resolve();
+		});
+	});
+}
+
+function getTags(graphql, createPage) {
+	return new Promise((resolve, reject) => {
+		graphql(
+			`
+				{
+					tags: allWordpressTag(filter: {count: {gt: 0}}) {
+						edges {
+							node {
+								id
+								wpid: wordpress_id
+								name
+								slug
+							}
+						}
+					}
+				}
+			`
+		).then(result => {
+			if (result.errors) {
+				console.log(result.errors);
+				reject(result.errors);
+			}
+
+			result.data.tags.edges.forEach(edge => {
+				createPage({
+					path: slash(`/blog/tag/${edge.node.slug}`),
+					component: path.resolve(`./src/templates/tag.js`),
+					context: {
+						name: edge.node.name
 					}
 				});
 			});
@@ -246,7 +329,12 @@ function getReviews(graphql, createPage) {
 }
 
 function isDeletePage(node) {
-	return node.slug.includes('delete') || node.slug === 'do-not-delete' || node.title === 'DO NOT DELETE' || node.title.includes('DELETE');
+	return (
+		node.slug.includes('delete') ||
+		node.slug === 'do-not-delete' ||
+		node.title === 'DO NOT DELETE' ||
+		node.title.includes('DELETE')
+	);
 }
 
 function getSlug(edge, edges) {

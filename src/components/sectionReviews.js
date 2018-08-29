@@ -8,7 +8,7 @@ import SectionContent from './sectionContent';
 import WindowSize from './windowSize';
 import Button from './button';
 import {ref, click} from '../utils/componentHelpers';
-import {innerHtml, limitToWords, limitToCharacters} from '../utils/wordpressHelpers';
+import {innerHtml, limitToCharacters} from '../utils/wordpressHelpers';
 
 // eslint-disable-next-line react/no-deprecated
 class SectionReviews extends Component {
@@ -17,8 +17,7 @@ class SectionReviews extends Component {
 
 		this.state = {
 			activeSlide: 0,
-			sectionActive: false,
-			tallestSlide: 0
+			sectionActive: false
 		};
 
 		this.slider = null;
@@ -135,13 +134,18 @@ class SectionReviews extends Component {
 									const slideCss = ['swiper-slide', CSS.slide];
 
 									return (
-										<div key={`${review.title}+${review.excerpt}`} className={slideCss.join(' ')}>
+										<div
+											key={`${review.title}+${review.excerpt}`}
+											className={slideCss.join(' ')}
+										>
 											<div className={CSS.slideInner}>
 												<div className={CSS.slideBody}>
 													<div className={CSS.slideMain}>
 														<div
 															// eslint-disable-next-line react/no-danger
-															dangerouslySetInnerHTML={innerHtml(limitToCharacters(review.content, 450))}
+															dangerouslySetInnerHTML={innerHtml(
+																limitToCharacters(review.content, 450)
+															)}
 															className={CSS.slideContent}
 														/>
 														<div className={CSS.slideName}>
@@ -186,7 +190,9 @@ class SectionReviews extends Component {
 								return (
 									<li
 										key={`${review.title}+${review.excerpt}`}
-										className={index === activeSlide ? CSS.bulletActive : CSS.bullet}
+										className={
+											index === activeSlide ? CSS.bulletActive : CSS.bullet
+										}
 										onClick={click(this.handlePaginationClick, index)}
 									/>
 								);
@@ -195,7 +201,11 @@ class SectionReviews extends Component {
 					</div>
 					{link && link.url ? (
 						<div className={CSS.reviewsCta}>
-							<Button classname="secondary" to={link.url} style={{display: 'block', maxWidth: 300, margin: '0 auto'}}>
+							<Button
+								classname="secondary"
+								to={link.url}
+								style={{display: 'block', maxWidth: 300, margin: '0 auto'}}
+							>
 								{link.title}
 							</Button>
 						</div>
