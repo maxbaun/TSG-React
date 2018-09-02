@@ -1,0 +1,44 @@
+@import './variables';
+@import './mixins';
+
+.tsg-calendar {
+	.react-calendar {
+		border: none;
+		font-family: $fontBody;
+
+		@include tabletUp {
+			font-size: 20px;
+			width: 600px;
+		}
+
+		@include desktopUp {
+			font-size: 24px;
+			width: 800px;
+		}
+
+		&__tile {
+			&--hasActive,
+			&--active {
+				background: $pink;
+				color: $white;
+
+				&:enabled:hover,
+				&:enabled:focus,
+				&:hover {
+					background: $pink;
+					color: $white;
+				}
+			}
+		}
+
+		&__month-view {
+			&__days {
+				&__day {
+					&--weekend {
+						color: $grey1;
+					}
+				}
+			}
+		}
+	}
+}

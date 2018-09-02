@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import graphql from 'graphql';
 
-import SectionCta from '../components/sectionCta';
+import SectionAvailability from '../components/sectionAvailability';
 import FlexibleContent from '../components/flexibleContent';
 import Seo from '../components/seo';
 
@@ -24,7 +24,7 @@ export default class PageTemplate extends React.Component {
 					location={this.props.location}
 				/>
 				<FlexibleContent page={currentPage}/>
-				{currentPage.acf.hasCallToAction ? <SectionCta/> : null}
+				{currentPage.acf.hasCallToAction ? <SectionAvailability/> : null}
 			</div>
 		);
 	}

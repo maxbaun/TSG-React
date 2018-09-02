@@ -1,0 +1,107 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+$dropdownBg: rgba($white, 1);
+
+.wrap {
+	display: block;
+	position: relative;
+}
+
+.wrapActive {
+	.dropdownInner {
+		height: 300px;
+		opacity: 1;
+		transition: all 0.2s ease-in-out;
+		visibility: visible;
+	}
+
+	.label {
+		span {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+.label {
+	background-color: $dropdownBg;
+	color: $grey1;
+	cursor: pointer;
+	display: block;
+	font-family: $fontBody;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 18px;
+	padding: 15px 20px;
+	position: relative;
+	user-select: none;
+	white-space: nowrap;
+
+	@include tabletUp {
+		font-size: 20px;
+		line-height: 20px;
+	}
+
+	span {
+		font-size: 24px;
+		height: 20px;
+		margin-top: -10px;
+		position: absolute;
+		right: 15px;
+		text-align: center;
+		top: 50%;
+		transform: rotate(0deg);
+		transform-origin: center;
+		transition: transform 0.2s 0.1s ease-in-out;
+		width: 20px;
+	}
+}
+
+.dropdown {
+	left: 50%;
+	position: absolute;
+	top: 100%;
+	transform: translateX(-50%);
+	width: 100%;
+	z-index: 1000;
+}
+
+.dropdownInner {
+	height: 0;
+	max-height: 300px;
+	opacity: 0;
+	overflow: hidden;
+	transition: all 0.2s ease-in-out, visibility 0s 0.2s;
+	visibility: hidden;
+}
+
+.list {
+	@include noList();
+	background-color: $dropdownBg;
+	height: 100%;
+	overflow: auto;
+
+	li {
+		background-color: transparent;
+		cursor: pointer;
+		display: block;
+		padding: 15px 20px;
+		transition: background-color 0.2s ease-in-out;
+		user-select: none;
+
+		&:hover {
+			background-color: rgba($grey1, 0.3);
+		}
+	}
+}
+
+.list::-webkit-scrollbar {
+	display: none;
+	width: 0; /* remove scrollbar space */
+	background: transparent; /* optional: just make scrollbar invisible */
+}
+
+input {
+	@include absoluteFull;
+	opacity: 0;
+}

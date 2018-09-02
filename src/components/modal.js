@@ -66,8 +66,19 @@ class Modal extends Component {
 				active: false
 			});
 
-			document.querySelector('body').style.overflow = null;
+			if (!this.anyModalOpen()) {
+				document.querySelector('body').style.overflow = null;
+			}
 		}
+	}
+
+	anyModalOpen() {
+		const modals = Array.from(document.querySelectorAll(`.${CSS.wrap}`));
+		const openModals = modals.filter(
+			modal => modal.getAttribute('data-active') === 'true'
+		);
+
+		return openModals.length > 0;
 	}
 
 	handleRest() {
@@ -89,27 +100,50 @@ class Modal extends Component {
 	}
 
 	render() {
-		const {children, size, showClose, classname, fogOpacity, height, width, backgroundColor, windowHeight} = this.props;
+		const {
+			children,
+			size,
+			showClose,
+			classname,
+			fogOpacity,
+			height,
+			width,
+			backgroundColor,
+			windowHeight
+		} = this.props;
 		const {visibility, display, active} = this.state;
 
-		const wrapClass = [CSS.wrap, classname && classname !== '' ? CSS[classname] : ''];
+		const wrapClass = [
+			CSS.wrap,
+			classname && classname !== '' ? CSS[classname] : ''
+		];
 		const modalClass = [CSS.modal, size ? CSS[size] : ''];
 
 		return (
-			<div className={wrapClass.join(' ')} style={{visibility}}>
+			<div
+				className={wrapClass.join(' ')}
+				style={{visibility}}
+				data-active={active}
+			>
 				{showClose ? (
 					<Motion
 						defaultStyle={{
 							opacity: 0
 						}}
 						style={{
-							opacity: active ? spring(fogOpacity, presets.stiff) : spring(0, presets.stiff)
+							opacity: active ?
+								spring(fogOpacity, presets.stiff) :
+								spring(0, presets.stiff)
 						}}
 					>
 						{style => {
 							return (
 								<span style={style} className={CSS.close}>
-									<Close backgroundColor="#FAFAFA" size={40} onClick={this.handleClose}/>
+									<Close
+										backgroundColor="#FAFAFA"
+										size={40}
+										onClick={this.handleClose}
+									/>
 								</span>
 							);
 						}}
@@ -123,7 +157,9 @@ class Modal extends Component {
 						top: 4
 					}}
 					style={{
-						opacity: active ? spring(1, presets.stiff) : spring(0, presets.stiff),
+						opacity: active ?
+							spring(1, presets.stiff) :
+							spring(0, presets.stiff),
 						x: active ? spring(1, presets.stiff) : spring(0.8, presets.stiff),
 						y: active ? spring(1, presets.stiff) : spring(0.8, presets.stiff),
 						top: active ? spring(10, presets.stiff) : spring(4, presets.stiff)
@@ -169,7 +205,9 @@ class Modal extends Component {
 						opacity: 0
 					}}
 					style={{
-						opacity: active ? spring(fogOpacity, presets.stiff) : spring(0, presets.stiff)
+						opacity: active ?
+							spring(fogOpacity, presets.stiff) :
+							spring(0, presets.stiff)
 					}}
 				>
 					{styles => {

@@ -1,0 +1,148 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+
+.section {
+	padding: 2rem 0;
+	position: relative;
+
+	@include tabletUp {
+		padding: 5rem 0;
+	}
+
+	@include desktopUp {
+		padding: 7rem 0;
+	}
+}
+
+.header {
+	max-width: 500px;
+	margin: 0 auto 30px;
+	text-align: center;
+
+	@include tabletUp {
+		margin: 0 auto 60px;
+	}
+
+	h2,
+	h4 {
+		color: $white;
+		text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.9);
+	}
+
+	h2 {
+		font-size: 30px;
+		font-family: $fontHeadingAlt;
+		line-height: 34px;
+		margin: 0 0 20px;
+		text-transform: uppercase;
+
+		@include tabletUp {
+			font-size: 30px;
+			line-height: 34px;
+		}
+
+		@include desktopUp {
+			font-size: 40px;
+			line-height: 44px;
+		}
+	}
+
+	h4 {
+		font-family: $fontBody;
+		font-weight: 300;
+		font-size: 22px;
+		line-height: 27px;
+		margin: 0;
+
+		@include desktopUp {
+			font-size: 22px;
+			line-height: 27px;
+		}
+	}
+}
+
+.sectionBackground {
+	@include absoluteFull();
+	z-index: -1;
+
+	&::after {
+		@include absoluteFull();
+		background-color: rgba($black, 0.5);
+		content: '';
+	}
+
+	img {
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		width: 100%;
+	}
+}
+
+.calendar {
+	display: flex;
+	justify-content: center;
+}
+
+.checker {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 800px;
+	margin: 0 auto;
+
+	@include tabletUp {
+		flex-wrap: nowrap;
+	}
+
+	.checkerBtn {
+		margin: 10px auto;
+		width: 170px;
+
+		@include tabletUp {
+			margin: 10px 12px;
+		}
+
+		button {
+			align-items: center;
+			display: flex;
+			font-size: 18px;
+			justify-content: center;
+			height: 50px;
+			padding: 0;
+			width: 100%;
+
+			@include tabletUp {
+				font-size: 20px;
+				line-height: 20px;
+			}
+		}
+	}
+
+	> ul {
+		@include noList();
+		background-color: rgba($white, 0.4);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		max-width: 320px;
+		margin: 0 auto;
+		padding: 10px 0 8px;
+		width: 100%;
+
+		@include tabletUp {
+			flex-wrap: nowrap;
+			max-width: none;
+			width: calc(100% - 170px);
+		}
+
+		> li {
+			margin: 0 15px;
+			width: 100%;
+
+			@include tabletUp {
+				flex: 1;
+				width: calc(100% / 3 - 30px);
+			}
+		}
+	}
+}
