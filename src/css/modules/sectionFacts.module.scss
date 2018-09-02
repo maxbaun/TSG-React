@@ -34,30 +34,30 @@
 				width: 22%;
 			}
 
-			&::before {
-				@include tabletUp {
-					content: '';
-					display: block;
-					padding-top: 70%;
-				}
-
-				@include desktopUp {
-					padding-top: 110%;
-				}
-
-				@include widescreen {
-					padding-top: 100%;
-				}
-			}
+			// &::before {
+			// 	@include tabletUp {
+			// 		content: '';
+			// 		display: block;
+			// 		padding-top: 70%;
+			// 	}
+			//
+			// 	@include desktopUp {
+			// 		padding-top: 110%;
+			// 	}
+			//
+			// 	@include widescreen {
+			// 		padding-top: 100%;
+			// 	}
+			// }
 		}
 	}
 }
 
 .fact {
-	background-color: #FFF;
+	background-color: $white;
 	box-shadow: 8px 8px 15px 0 rgba(0, 0, 0, 0.2);
 	max-width: 271px;
-	max-height: 255px;
+	// max-height: 255px;
 	margin: 0 auto;
 	padding: 28px 33px;
 	text-align: center;
@@ -65,7 +65,9 @@
 	transition: transform 0.4s ease-in-out;
 
 	@include tabletUp {
-		@include absoluteFull();
+		// @include absoluteFull();
+		height: 100%;
+		width: 100%;
 	}
 
 	@include desktopUp {
