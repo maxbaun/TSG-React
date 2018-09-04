@@ -100,8 +100,3 @@ $dropdownBg: rgba($white, 1);
 	width: 0; /* remove scrollbar space */
 	background: transparent; /* optional: just make scrollbar invisible */
 }
-
-input {
-	@include absoluteFull;
-	opacity: 0;
-}
