@@ -91,7 +91,9 @@ export const pageQuery = graphql`
 		currentPage: wordpressWpDj(id: {eq: $id}) {
 			...DJ
 		}
-		djs: allWordpressWpDj(filter: {id: {ne: $id}}) {
+		djs: allWordpressWpDj(
+			filter: {id: {ne: $id}, slug: {ne: "do-not-delete"}}
+		) {
 			edges {
 				node {
 					...DJ
