@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import graphql from 'graphql';
 
@@ -9,7 +9,17 @@ import Seo from '../components/seo';
 import CSS from '../css/modules/venues.module.scss';
 import {innerHtml} from '../utils/wordpressHelpers';
 
-export default class PageTemplate extends React.Component {
+export default class PageTemplate extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			query: ''
+		};
+
+		this.handleSearchQuery = this.handleSearchQuery.bind(this);
+	}
+
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
@@ -17,6 +27,7 @@ export default class PageTemplate extends React.Component {
 	};
 
 	transformVenues() {
+		const {query} = this.state;
 		const {venues: venueData} = this.props.data;
 
 		if (!venueData || !venueData.edges) {
@@ -26,8 +37,16 @@ export default class PageTemplate extends React.Component {
 		// Pull out the nodes
 		const venueNodes = venueData.edges.map(v => v.node);
 
+		// Filter out the venues vased on the search query
+		const filteredVenues = venueNodes.filter(v => {
+			const title = v.title.toLowerCase();
+			const location = v.location.toLowerCase();
+
+			return title.includes(query) || location.includes(query);
+		});
+
 		// Sort the venues alphabetically
-		const sortedVenues = venueNodes.sort((a, b) => {
+		const sortedVenues = filteredVenues.sort((a, b) => {
 			const aTitle = a.title.toLowerCase();
 			const bTitle = b.title.toLowerCase();
 
@@ -45,6 +64,12 @@ export default class PageTemplate extends React.Component {
 		return sortedVenues;
 	}
 
+	handleSearchQuery(e) {
+		const query = e.target.value || '';
+
+		this.setState({query: query.toLowerCase()});
+	}
+
 	render() {
 		const {currentPage} = this.props.data;
 		const venues = this.transformVenues();
@@ -57,6 +82,16 @@ export default class PageTemplate extends React.Component {
 					location={this.props.location}
 				/>
 				<FlexibleContent page={currentPage}/>
+				<div className={CSS.searchWrap}>
+					<div className={CSS.searchInput}>
+						<input
+							type="text"
+							onChange={this.handleSearchQuery}
+							value={this.state.query}
+							placeholder="Search Venues..."
+						/>
+					</div>
+				</div>
 				<div className={CSS.venues}>
 					<ul>
 						{venues.map(venue => {
