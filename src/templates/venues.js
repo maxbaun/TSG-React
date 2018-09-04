@@ -51,7 +51,11 @@ export default class PageTemplate extends React.Component {
 
 		return (
 			<div>
-				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
+				<Seo
+					currentPage={currentPage}
+					site={this.props.site}
+					location={this.props.location}
+				/>
 				<FlexibleContent page={currentPage}/>
 				<div className={CSS.venues}>
 					<ul>
@@ -84,7 +88,7 @@ export const pageQuery = graphql`
 		currentPage: wordpressPage(id: {eq: $id}) {
 			...Page
 		}
-		venues: allWordpressTsgVenues {
+		venues: allWordpressTsgVenues(filter: {slug: {ne: "do-not-delete"}}) {
 			edges {
 				node {
 					...Venue
