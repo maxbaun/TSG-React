@@ -26,11 +26,7 @@ export default class DJTemplate extends React.Component {
 
 		return (
 			<Page contain>
-				<Seo
-					currentPage={currentPage}
-					site={this.props.site}
-					location={this.props.location}
-				/>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<div className={CSS.wrap}>
 					<div className={CSS.dj}>
 						<div className={CSS.image}>
@@ -61,14 +57,12 @@ export default class DJTemplate extends React.Component {
 										<div className={CSS.otherDJ}>
 											<Link to={djLink(dj.slug)}>
 												<div className={CSS.otherDJImage}>
-													<Image image={dj.image}/>
+													<Image image={dj.image} size="medium"/>
 												</div>
 												<div className={CSS.otherDJOverlay}>
 													<h5
 														// eslint-disable-next-line react/no-danger
-														dangerouslySetInnerHTML={innerHtml(
-															bioName(dj.title)
-														)}
+														dangerouslySetInnerHTML={innerHtml(bioName(dj.title))}
 													/>
 												</div>
 											</Link>
@@ -91,9 +85,7 @@ export const pageQuery = graphql`
 		currentPage: wordpressWpDj(id: {eq: $id}) {
 			...DJ
 		}
-		djs: allWordpressWpDj(
-			filter: {id: {ne: $id}, slug: {ne: "do-not-delete"}}
-		) {
+		djs: allWordpressWpDj(filter: {id: {ne: $id}, slug: {ne: "do-not-delete"}}) {
 			edges {
 				node {
 					...DJ

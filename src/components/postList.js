@@ -44,21 +44,14 @@ export default class BlogTemplate extends React.Component {
 	}
 
 	getVisiblePosts() {
-		return this.props.posts
-			.filter(n => n.node.slug !== 'do-not-delete')
-			.slice(0, this.state.visible);
+		return this.props.posts.filter(n => n.node.slug !== 'do-not-delete').slice(0, this.state.visible);
 	}
 
 	render() {
 		const posts = this.getVisiblePosts();
 
 		return (
-			<InfinitScroll
-				initialLoad={false}
-				pageStart={0}
-				loadMore={this.handleLoadMore}
-				hasMore={this.hasMore()}
-			>
+			<InfinitScroll initialLoad={false} pageStart={0} loadMore={this.handleLoadMore} hasMore={this.hasMore()}>
 				<ul className={CSS.postList}>
 					{posts.map(p => {
 						const {node: post} = p;
@@ -67,7 +60,7 @@ export default class BlogTemplate extends React.Component {
 								<Link to={`/blog/${post.slug}`} classname={CSS.post}>
 									<div className={CSS.postImage}>
 										{post.image ? (
-											<Image image={post.image} style={{height: '100%'}}/>
+											<Image image={post.image} style={{height: '100%'}} size="medium_large"/>
 										) : (
 											<div className={CSS.postImagePlaceholder}/>
 										)}

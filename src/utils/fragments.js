@@ -21,6 +21,28 @@ export const BaseImage = graphql`
 		mediaDetails: media_details {
 			width
 			height
+			sizes {
+				large {
+					url: source_url
+					width
+					height
+				}
+				medium_large {
+					url: source_url
+					width
+					height
+				}
+				medium {
+					url: source_url
+					width
+					height
+				}
+				thumbnail {
+					url: source_url
+					width
+					height
+				}
+			}
 		}
 	}
 `;

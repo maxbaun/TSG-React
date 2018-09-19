@@ -62,7 +62,7 @@ export default class SectionPlanning extends Component {
 											<div className={CSS.tool}>
 												<div className={CSS.toolImage}>
 													<Link to={tool.link}>
-														<Image image={tool.image}/>
+														<Image image={tool.image} size="thumbnail"/>
 													</Link>
 												</div>
 												<div className={CSS.toolContent}>

@@ -19,7 +19,7 @@ const DJThumbnail = ({image, height, width}) => {
 
 	return (
 		<div className={CSS.thumbnail} style={wrapStyle}>
-			<Image circle image={image} imgStyle={imgStyle}/>
+			<Image circle image={image} imgStyle={imgStyle} size="medium"/>
 		</div>
 	);
 };

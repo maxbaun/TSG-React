@@ -61,7 +61,7 @@ class SectionServices extends Component {
 												<li key={service.title}>
 													<div className={CSS.service}>
 														<div className={CSS.serviceImage}>
-															<Image image={service.image}/>
+															<Image image={service.image} size="medium"/>
 														</div>
 														<div className={CSS.serviceContent}>
 															<h4>{service.title}</h4>

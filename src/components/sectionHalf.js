@@ -112,7 +112,7 @@ class SectionHalf extends Component {
 		if (column.image) {
 			mediaJsx = (
 				<div className={CSS.image}>
-					<Image image={column.image}/>
+					<Image image={column.image} size="medium_large"/>
 				</div>
 			);
 		}

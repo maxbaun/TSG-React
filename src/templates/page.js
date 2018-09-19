@@ -18,11 +18,7 @@ export default class PageTemplate extends React.Component {
 
 		return (
 			<div>
-				<Seo
-					currentPage={currentPage}
-					site={this.props.site}
-					location={this.props.location}
-				/>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<FlexibleContent page={currentPage}/>
 				{currentPage.acf.hasCallToAction ? <SectionAvailability/> : null}
 			</div>

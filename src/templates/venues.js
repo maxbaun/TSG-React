@@ -76,20 +76,11 @@ export default class PageTemplate extends Component {
 
 		return (
 			<div>
-				<Seo
-					currentPage={currentPage}
-					site={this.props.site}
-					location={this.props.location}
-				/>
+				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
 				<FlexibleContent page={currentPage}/>
 				<div className={CSS.searchWrap}>
 					<div className={CSS.searchInput}>
-						<input
-							type="text"
-							onChange={this.handleSearchQuery}
-							value={this.state.query}
-							placeholder="Search Venues..."
-						/>
+						<input type="text" onChange={this.handleSearchQuery} value={this.state.query} placeholder="Search Venues..."/>
 					</div>
 				</div>
 				<div className={CSS.venues}>
@@ -99,7 +90,7 @@ export default class PageTemplate extends Component {
 								<li key={venue.id}>
 									<Link to={`/venue/${venue.slug}`} classname={CSS.venue}>
 										<div className={CSS.venueImage}>
-											<Image image={venue.image.url} style={{height: '100%'}}/>
+											<Image image={venue.image.url} style={{height: '100%'}} size="medium_large"/>
 										</div>
 										<div className={CSS.venueTitle}>
 											{/* eslint-disable-next-line react/no-danger */}

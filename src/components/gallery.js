@@ -64,7 +64,7 @@ class Gallery extends Component {
 						return (
 							<li key={image.id}>
 								<a href={image.url} onClick={clickPrevent(this.handleImageClick, index)}>
-									<Image showPlacholder image={image}/>
+									<Image showPlacholder image={image} size="medium"/>
 								</a>
 							</li>
 						);

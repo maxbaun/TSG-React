@@ -193,7 +193,7 @@ class Lightbox extends Component {
 													justifyContent: 'center'
 												}}
 											>
-												<Image image={{...image, localFile: null}} style={style} imgStyle={imgStyle}/>
+												<Image image={{...image, localFile: null}} style={style} imgStyle={imgStyle} size="large"/>
 											</div>
 										</div>
 									);

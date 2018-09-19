@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
 import {noop, cancellable} from '../utils/componentHelpers';
 
 export default class Image extends Component {
@@ -8,7 +7,12 @@ export default class Image extends Component {
 		super(props);
 
 		this.state = {
-			loaded: false
+			loaded: false,
+			image: {
+				url: null,
+				width: null,
+				height: null
+			}
 		};
 
 		this.handleImageLoad = this.handleImageLoad.bind(this);
@@ -21,7 +25,8 @@ export default class Image extends Component {
 		imgStyle: PropTypes.object,
 		onLoad: PropTypes.func,
 		circle: PropTypes.bool,
-		showPlaceholder: PropTypes.bool
+		showPlaceholder: PropTypes.bool,
+		size: PropTypes.string
 	};
 
 	static defaultProps = {
@@ -30,7 +35,8 @@ export default class Image extends Component {
 		imgStyle: {},
 		onLoad: noop,
 		circle: false,
-		showPlaceholder: false
+		showPlaceholder: false,
+		size: null
 	};
 
 	componentDidMount() {
@@ -42,8 +48,26 @@ export default class Image extends Component {
 		// 	this.loader = cancellable(this.preloadImage(this.props.image.url));
 		// 	this.loader.then(this.handleImageLoad);
 		// }
+		const {image: wpImage, size} = this.props;
+		let image = {};
 
-		this.loader = cancellable(this.preloadImage(this.props.image.url));
+		if (size && wpImage.mediaDetails.sizes[size]) {
+			image = {
+				url: wpImage.mediaDetails.sizes[size].url,
+				width: wpImage.mediaDetails.sizes[size].width,
+				height: wpImage.mediaDetails.sizes[size].height
+			};
+		} else {
+			image = {
+				url: wpImage.url,
+				width: wpImage.mediaDetails.width,
+				height: wpImage.mediaDetails.height
+			};
+		}
+
+		this.setState({image});
+
+		this.loader = cancellable(this.preloadImage(image.url));
 		this.loader.then(this.handleImageLoad);
 	}
 
@@ -78,10 +102,10 @@ export default class Image extends Component {
 	}
 
 	render() {
-		const {image, circle} = this.props;
-		const {loaded} = this.state;
+		const {circle} = this.props;
+		const {loaded, image} = this.state;
 
-		if (!image) {
+		if (!image || !image.url) {
 			return null;
 		}
 
@@ -98,7 +122,7 @@ export default class Image extends Component {
 		// 	return <Img {...props} resolutions={resolutions}/>;
 		// }
 
-		const ratio = (image.mediaDetails.height * 100) / image.mediaDetails.width;
+		const ratio = (image.height * 100) / image.width;
 
 		return (
 			<div

@@ -8,6 +8,12 @@ import Section from './section';
 import WindowSize from './windowSize';
 
 class SectionSlant extends Component {
+	constructor(props) {
+		super(props);
+
+		this.handleImageLoad = this.handleImageLoad.bind(this);
+	}
+
 	static propTypes = {
 		style: PropTypes.object,
 		slantDirection: PropTypes.oneOf(['leftToRight', 'rightToLeft']),
@@ -28,6 +34,10 @@ class SectionSlant extends Component {
 		slantTop: true,
 		slantBottom: true
 	};
+
+	handleImageLoad() {
+		this.setState({loaded: true});
+	}
 
 	render() {
 		const {slantDirection, windowWidth, id, slantTop, slantBottom} = this.props;
@@ -80,11 +90,7 @@ class SectionSlant extends Component {
 		return (
 			<div className={CSS.content}>
 				<div className={CSS.contentInner}>
-					<SectionContent
-						classname="sectionSlant"
-						contentContainerWidth={580}
-						content={content}
-					/>
+					<SectionContent classname="sectionSlant" contentContainerWidth={580} content={content}/>
 				</div>
 			</div>
 		);
@@ -96,7 +102,7 @@ class SectionSlant extends Component {
 		return (
 			<div className={CSS.imageWrap}>
 				<div className={CSS.image}>
-					<Image image={image}/>
+					<Image image={image} size="large" onLoad={this.handleImageLoad}/>
 				</div>
 			</div>
 		);
