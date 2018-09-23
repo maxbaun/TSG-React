@@ -51,7 +51,7 @@ export default class Image extends Component {
 		const {image: wpImage, size} = this.props;
 		let image = {};
 
-		if (size && wpImage.mediaDetails.sizes[size]) {
+		if (size & wpImage.mediaDetails.sizes && wpImage.mediaDetails.sizes[size]) {
 			image = {
 				url: wpImage.mediaDetails.sizes[size].url,
 				width: wpImage.mediaDetails.sizes[size].width,
