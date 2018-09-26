@@ -189,7 +189,8 @@ export default class AvailabilityTemplate extends React.Component {
 											</div>
 											<div className="col-6">
 												<label htmlFor="question_1">* Phone</label>
-												<input type="text" name="q1_mapto" required/>
+												<input type="hidden" name="q1_mapto" value="cell_phone"/>
+												<input type="text" name="question_1" size="30" maxlength="50"/>
 											</div>
 										</li>
 										<li>
