@@ -55,14 +55,20 @@ export default class PostTemplate extends React.Component {
 								imgStyle={{height: '100%'}}
 							/>
 						</div>
-						<div className={CSS.heroContent}>{title}</div>
+						<div className={CSS.heroContent}>
+							<div className="container">{title}</div>
+						</div>
 					</div>
 				) : (
-					<div className={CSS.header}>{title}</div>
+					<div className={CSS.header}>
+						<div className="container">{title}</div>
+					</div>
 				)}
 				<div className={CSS.post}>
-					{/* eslint-disable-next-line react/no-danger */}
-					<div dangerouslySetInnerHTML={innerHtml(post.content)}/>
+					<div className="container">
+						{/* eslint-disable-next-line react/no-danger */}
+						<div dangerouslySetInnerHTML={innerHtml(post.content)}/>
+					</div>
 				</div>
 			</Page>
 		);
