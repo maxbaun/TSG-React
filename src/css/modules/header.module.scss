@@ -2,297 +2,307 @@
 @import '../utils/mixins';
 
 .header {
-	background-color: $white;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 11;
+  background-color: $white;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 11;
 }
 
 .headerSticky {
-	@extend .header;
-	left: 0;
-	position: fixed;
-	opacity: 0;
-	top: $headerCollapsedHeight * -1;
-	width: 100%;
-	transition: opacity 0.15s ease-in-out, top 0s 1s ease-in-out;
-	z-index: 10;
+  @extend .header;
+  left: 0;
+  position: fixed;
+  opacity: 0;
+  top: $headerCollapsedHeight * -1;
+  width: 100%;
+  transition: opacity 0.15s ease-in-out, top 0s 1s ease-in-out;
+  z-index: 10;
 
-	@include desktopUp {
-		top: $headerDesktopHeight * -1;
-	}
+  @include desktopUp {
+    top: $headerDesktopHeight * -1;
+  }
 
-	.headerContainer {
-		height: $headerCollapsedHeight;
+  .headerContainer {
+    height: $headerCollapsedHeight;
 
-		@include desktopUp {
-			height: $headerDesktopHeight;
-		}
-	}
+    @include desktopUp {
+      height: $headerDesktopHeight;
+    }
+  }
 }
 
 .headerStickyActive {
-	opacity: 1;
-	top: 0;
-	transition: opacity 0.3s 1s ease-in-out, top 0.15s 1s ease-in-out;
+  opacity: 1;
+  top: 0;
+  transition: opacity 0.3s 1s ease-in-out, top 0.15s 1s ease-in-out;
 }
 
 .headerWrap {
-	box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
-	position: relative;
-	top: 0;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  top: 0;
 }
 
 .headerContainer {
-	align-items: center;
-	display: flex;
-	justify-content: space-between;
-	height: $headerCollapsedHeight;
-	max-width: 1440px;
-	margin: 0 auto;
-	transition: height 0.15s 0.1s ease-in-out;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  height: $headerCollapsedHeight;
+  max-width: 1440px;
+  margin: 0 auto;
+  transition: height 0.15s 0.1s ease-in-out;
 
-	@include desktopUp {
-		height: $headerDesktopHeight;
-	}
+  @include desktopUp {
+    height: $headerDesktopHeight;
+  }
 }
 
 .headerInner {
-	align-items: center;
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
-	@include tabletUp {
-		justify-content: flex-start;
-		width: auto;
-	}
+  @include tabletUp {
+    justify-content: flex-start;
+    width: auto;
+  }
 }
 
 .logo {
-	display: block;
+  display: block;
 }
 
 .toggle {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 21px;
-	width: 36px;
-	transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 21px;
+  width: 36px;
+  transition: all 0.3s ease-in-out;
 
-	@include tabletUp {
-		display: none;
-	}
+  @include tabletUp {
+    display: none;
+  }
 
-	span {
-		background-color: lighten($grey1, 50%);
-		display: block;
-		height: 2px;
-		width: 36px;
-		transform: rotate(0);
-		transform-origin: 50%;
-	}
+  span {
+    background-color: lighten($grey1, 50%);
+    display: block;
+    height: 2px;
+    width: 36px;
+    transform: rotate(0);
+    transform-origin: 50%;
+  }
 }
 
 .headerFog {
-	display: none;
-	@include mobile {
-		@include absoluteFull();
-		background-color: rgba($grey1, 0.7);
-		display: block;
-		position: fixed;
-		opacity: 0;
-		transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
-		visibility: hidden;
-		z-index: 5;
-	}
+  display: none;
+  @include mobile {
+    @include absoluteFull();
+    background-color: rgba($grey1, 0.7);
+    display: block;
+    position: fixed;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+    visibility: hidden;
+    z-index: 5;
+  }
 }
 
 .headerFogActive {
-	opacity: 1;
-	visibility: visible;
-	transition: opacity 0.3s ease-in-out, visibility 0s;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visibility 0s;
 }
 
 .headerMenu {
-	background-color: $white;
-	height: 100%;
-	width: 320px;
-	overflow: hidden;
-	position: fixed;
-	right: 0;
-	top: 0;
-	transform: translate3d(320px, 0, 0);
-	transition: all 0.2s ease-in-out, visibility 0s 0.2s;
-	z-index: 5;
+  background-color: $white;
+  height: 100%;
+  width: 320px;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translate3d(320px, 0, 0);
+  transition: all 0.2s ease-in-out, visibility 0s 0.2s;
+  z-index: 5;
 
-	@include tabletUp {
-		background-color: transparent;
-		flex: 1;
-		height: auto;
-		max-width: 75%;
-		overflow: inherit;
-		position: relative;
-		width: auto;
-		transition: none;
-		transform: none;
-	}
+  @include tabletUp {
+    background-color: transparent;
+    flex: 1;
+    height: auto;
+    max-width: 75%;
+    overflow: inherit;
+    position: relative;
+    width: auto;
+    transition: none;
+    transform: none;
+  }
 
-	@include desktopUp {
-		max-width: 60%;
-	}
+  @include desktopUp {
+    max-width: 60%;
+  }
 }
 
 .headerMenuActive {
-	opacity: 1;
-	transform: translate3d(0, 0, 0);
-	transition: all 0.2s ease-in-out;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease-in-out;
 }
 
 .close {
-	height: 22px;
-	right: 10px;
-	position: absolute;
-	top: 10px;
-	width: 22px;
-	z-index: 6;
+  height: 22px;
+  right: 10px;
+  position: absolute;
+  top: 10px;
+  width: 22px;
+  z-index: 6;
 
-	@include tabletUp {
-		display: none;
-	}
+  @include tabletUp {
+    display: none;
+  }
 }
 
 .menu {
-	height: 100%;
-	padding: 30px 42px 30px 15px;
-	position: relative;
-	overflow: auto;
+  height: 100%;
+  padding: 30px 42px 30px 15px;
+  position: relative;
+  overflow: auto;
 
-	@include tabletUp {
-		overflow: inherit;
-		padding: 0;
-	}
+  @include tabletUp {
+    overflow: inherit;
+    padding: 0;
+  }
 
-	> ul {
-		@include noList();
-		display: flex;
-		flex-direction: column;
+  > ul {
+    @include noList();
+    display: flex;
+    flex-direction: column;
 
-		@include tabletUp {
-			align-items: center;
-			flex-direction: row;
-			justify-content: space-between;
-		}
+    @include tabletUp {
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+    }
 
-		li {
-			position: relative;
+    > li {
+      &:last-child {
+        margin-top: 15px;
 
-			&:hover {
-				.link {
-					&::after {
-						opacity: 1;
-						transform: rotateY(0deg);
-						transition: all 0.3s 0s ease-in-out;
-					}
-				}
-			}
-		}
-	}
+        @include tabletUp {
+          margin-top: 0;
+        }
+      }
+    }
+
+    li {
+      position: relative;
+
+      &:hover {
+        .link {
+          &::after {
+            opacity: 1;
+            transform: rotateY(0deg);
+            transition: all 0.3s 0s ease-in-out;
+          }
+        }
+      }
+    }
+  }
 }
 
 .link {
-	color: $purple;
-	display: block;
-	font-family: $fontBody;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 14px;
-	position: relative;
-	text-decoration: none !important;
-	text-transform: uppercase;
-	transition: all 0.2s ease-in-out;
+  color: $purple;
+  display: block;
+  font-family: $fontBody;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 14px;
+  position: relative;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
 
-	&::after {
-		@include tabletUp {
-			background-color: $pink;
-			bottom: -10px;
-			content: ' ';
-			left: -14%;
-			height: 2px;
-			position: absolute;
-			opacity: 0;
-			transform: rotateY(90deg);
-			transition: all 0.15s ease-in-out;
-			width: 128%;
-		}
-	}
+  &::after {
+    @include tabletUp {
+      background-color: $pink;
+      bottom: -10px;
+      content: ' ';
+      left: -14%;
+      height: 2px;
+      position: absolute;
+      opacity: 0;
+      transform: rotateY(90deg);
+      transition: all 0.15s ease-in-out;
+      width: 128%;
+    }
+  }
 }
 
 .dropdown {
-	text-align: left;
-	padding: 5px 20px;
+  text-align: left;
+  padding: 5px 20px;
 
-	@include tabletUp {
-		opacity: 0;
-		padding-top: 10px;
-		position: absolute;
-		min-width: 272px;
-		left: 50%;
-		top: 100%;
-		transform: translateX(-50%);
-		transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
-		visibility: hidden;
-		z-index: 5;
-	}
+  @include tabletUp {
+    opacity: 0;
+    padding-top: 10px;
+    position: absolute;
+    min-width: 272px;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+    visibility: hidden;
+    z-index: 5;
+  }
 }
 
 .dropdownInner {
-	@include noList();
+  @include noList();
 
-	@include tabletUp {
-		background-color: $white;
-		box-shadow: 20px 20px 30px 0 rgba(0, 0, 0, 0.2);
-		opacity: 0;
-		padding: 30px;
-		transition: transform 0.3s 0s ease-in-out, opacity 0.3s 0s ease-in-out;
-		transform: skewY(-4deg);
-	}
+  @include tabletUp {
+    background-color: $white;
+    box-shadow: 20px 20px 30px 0 rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    padding: 30px;
+    transition: transform 0.3s 0s ease-in-out, opacity 0.3s 0s ease-in-out;
+    transform: skewY(-4deg);
+  }
 
-	li {
-		display: block;
-	}
+  li {
+    display: block;
+  }
 }
 
 .dropdownLink {
-	color: $purple;
-	font-family: $fontBody;
-	font-size: 14px;
-	line-height: 32px;
-	text-decoration: none !important;
+  color: $purple;
+  font-family: $fontBody;
+  font-size: 14px;
+  line-height: 32px;
+  text-decoration: none !important;
 
-	@include tabletUp {
-		font-size: 15px;
-		line-height: 36px;
-		white-space: nowrap;
-	}
+  @include tabletUp {
+    font-size: 15px;
+    line-height: 36px;
+    white-space: nowrap;
+  }
 
-	&:hover {
-		color: darken($purple, 10%);
-	}
+  &:hover {
+    color: darken($purple, 10%);
+  }
 }
 
 .dropdownHover {
-	.dropdown {
-		opacity: 1;
-		visibility: visible;
-		transition: opacity 0.3s 0s ease-in-out, visibility 0s;
+  .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s 0s ease-in-out, visibility 0s;
 
-		.dropdownInner {
-			opacity: 1;
-			transform: skewY(0deg);
-		}
-	}
+    .dropdownInner {
+      opacity: 1;
+      transform: skewY(0deg);
+    }
+  }
 }
