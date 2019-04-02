@@ -10,7 +10,7 @@ exports.modifyWebpackConfig = ({config}) => {
 			new webpack.DefinePlugin({
 				API_URL: JSON.stringify(
 					isDev ?
-						'http://tsg.info/wp-json' :
+						'http://admin.tsgweddings.com/wp-json' :
 						'https://admin.tsgweddings.com/wp-json'
 				)
 			})

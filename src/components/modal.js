@@ -66,9 +66,12 @@ class Modal extends Component {
 				active: false
 			});
 
-			if (!this.anyModalOpen()) {
-				document.querySelector('body').style.overflow = null;
-			}
+			// Wait for DOM updating
+			setTimeout(() => {
+				if (!this.anyModalOpen()) {
+					document.querySelector('body').style.overflow = null;
+				}
+			}, 10);
 		}
 	}
 

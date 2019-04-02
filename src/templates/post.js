@@ -6,6 +6,7 @@ import {innerHtml} from '../utils/wordpressHelpers';
 import Image from '../components/image';
 import Seo from '../components/seo';
 import Page from '../components/page';
+import Gallery from '../components/gallery';
 import CSS from '../css/modules/post.module.scss';
 
 export default class PostTemplate extends React.Component {
@@ -68,6 +69,12 @@ export default class PostTemplate extends React.Component {
 					<div className="container">
 						{/* eslint-disable-next-line react/no-danger */}
 						<div dangerouslySetInnerHTML={innerHtml(post.content)}/>
+						{post.acf && post.acf.gallery ? (
+							<div className={CSS.gallery}>
+								<h2 className={CSS.galleryTitle}>{post.acf.gallery.title}</h2>
+								<Gallery images={post.acf.gallery.images || []}/>
+							</div>
+						) : null}
 					</div>
 				</div>
 			</Page>
@@ -75,12 +82,20 @@ export default class PostTemplate extends React.Component {
 	}
 }
 
-import {Post} from '../utils/fragments'; // eslint-disable-line no-unused-vars
+import {Post, LargeImage} from '../utils/fragments'; // eslint-disable-line no-unused-vars
 
 export const postQuery = graphql`
 	query defaultPostQuery($id: String!) {
 		currentPost: wordpressPost(id: {eq: $id}) {
 			...Post
+			acf {
+				gallery {
+					title
+					images {
+						...LargeImage
+					}
+				}
+			}
 		}
 	}
 `;

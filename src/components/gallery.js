@@ -47,6 +47,8 @@ class Gallery extends Component {
 	render() {
 		const {images, loading} = this.props;
 
+		console.log(images);
+
 		return (
 			<div className={CSS.wrap}>
 				{loading ? (
