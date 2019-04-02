@@ -26,7 +26,8 @@ export default class PageDescription extends Component {
 		id: PropTypes.string,
 		view: PropTypes.oneOf(['content', 'images']),
 		zIndex: PropTypes.number,
-		angleBottom: PropTypes.bool
+		angleBottom: PropTypes.bool,
+		angleTop: PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -36,7 +37,8 @@ export default class PageDescription extends Component {
 		id: 'pageDescription',
 		view: 'content',
 		zIndex: 0,
-		angleBottom: true
+		angleBottom: true,
+		angleTop: true
 	};
 
 	componentDidMount() {
@@ -79,7 +81,7 @@ export default class PageDescription extends Component {
 	}
 
 	render() {
-		const {id, content, images, view, zIndex, angleBottom, video} = this.props;
+		const {id, content, images, view, zIndex, angleBottom, video, angleTop} = this.props;
 		const {videoBleed, active} = this.state;
 
 		const sectionStyle = {
@@ -99,6 +101,7 @@ export default class PageDescription extends Component {
 				slantDirection="rightToLeft"
 				backgroundColor="white"
 				style={{padding: 0, zIndex}}
+				angleTop={angleTop}
 				angleBottom={angleBottom}
 				breakpoint={992}
 			>

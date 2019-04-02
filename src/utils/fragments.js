@@ -144,6 +144,7 @@ export const PageDescriptionContent = graphql`
 export const PageDescriptionImages = graphql`
 	fragment PageDescriptionImages on WordPressAcf_pageDescriptionImages {
 		disableAngleBottom: pageDescriptionImagesDisableAngleBottom
+		disableAngleTop: pageDescriptionImagesDisableAngleTop
 		images {
 			image {
 				...LargeImage

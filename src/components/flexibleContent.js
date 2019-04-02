@@ -41,6 +41,7 @@ const FlexibleContent = ({page, formContain}) => {
 
 	return (
 		<div>
+			{/* eslint-disable-next-line complexity */}
 			{children.map((child, index) => {
 				if (child.type === 'WordPressAcf_hero' && child.images) {
 					return (
@@ -78,6 +79,7 @@ const FlexibleContent = ({page, formContain}) => {
 							zIndex={0}
 							view="images"
 							images={child.images}
+							angleTop={!child.disableAngleTop}
 							angleBottom={!child.disableAngleBottom}
 							video={child.video ? child.video[0] : null}
 						/>

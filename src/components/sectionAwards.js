@@ -36,10 +36,6 @@ class SectionAwards extends Component {
 		}, 300);
 	}
 
-	handleTabClick(activeTab) {
-		this.setState({activeTab});
-	}
-
 	render() {
 		const {sectionActive} = this.state;
 		const {title, images} = this.props;
@@ -50,7 +46,7 @@ class SectionAwards extends Component {
 		}
 
 		return (
-			<Section id="sectionBios" slantDirection="leftToRight" backgroundColor="#FBF2F7" angleHeightBottom={200} breakpoint={992}>
+			<Section id="sectionAwards" slantDirection="leftToRight" backgroundColor="#FBF2F7" angleHeightBottom={200} breakpoint={992}>
 				<div className={sectionCss.join(' ')}>
 					<div className="container">
 						<div className={CSS.sectionHeader}>
