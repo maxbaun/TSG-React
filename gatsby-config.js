@@ -32,7 +32,39 @@ module.exports = {
 				verboseOutput: true,
 				concurrentRequests: 5,
 				perPage: 100,
-				excludedRoutes: ['/wp/v2/venue']
+				excludedRoutes: ['/wp/v2/venue'],
+				normalizer: function ({entities}) {
+					return entities.map(entity => {
+						if (entity.__type !== 'wordpress__wp_media') {
+							return entity;
+						}
+
+						const sizes = ['thumbnail', 'medium', 'large', 'medium_large', 'full'];
+
+						sizes.forEach(size => {
+							if (!entity.media_details.sizes) {
+								entity.media_details.sizes = {};
+							}
+
+							if (entity.media_details.sizes[size]) {
+								const width = entity.media_details.sizes[size].width ? parseFloat(entity.media_details.sizes[size].width) : null;
+								const height = entity.media_details.sizes[size].height ? parseFloat(entity.media_details.sizes[size].height) : null;
+
+								entity.media_details.sizes[size].width = width;
+								entity.media_details.sizes[size].height = height;
+							} else {
+								entity.media_details.sizes[size] = {
+									source_url: entity.source_url, // eslint-disable-line camelcase
+									width: parseFloat(entity.media_details.width),
+									height: parseFloat(entity.media_details.height),
+									mime_type: entity.mime_type // eslint-disable-line camelcase
+								};
+							}
+						});
+
+						return entity;
+					});
+				}
 			}
 		},
 		{
