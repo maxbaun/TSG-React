@@ -41,6 +41,13 @@ module.exports = {
 
 						const sizes = ['thumbnail', 'medium', 'large', 'medium_large', 'full'];
 
+						if (!entity.media_details) {
+							entity.media_details = {};
+						}
+
+						entity.media_details.width = entity.media_details.width ? parseFloat(entity.media_details.width) : null;
+						entity.media_details.height = entity.media_details.height ? parseFloat(entity.media_details.height) : null;
+
 						sizes.forEach(size => {
 							if (!entity.media_details.sizes) {
 								entity.media_details.sizes = {};
@@ -55,8 +62,8 @@ module.exports = {
 							} else {
 								entity.media_details.sizes[size] = {
 									source_url: entity.source_url, // eslint-disable-line camelcase
-									width: parseFloat(entity.media_details.width),
-									height: parseFloat(entity.media_details.height),
+									width: entity.media_details.width ? parseFloat(entity.media_details.width) : null,
+									height: entity.media_details.height ? parseFloat(entity.media_details.height) : null,
 									mime_type: entity.mime_type // eslint-disable-line camelcase
 								};
 							}
