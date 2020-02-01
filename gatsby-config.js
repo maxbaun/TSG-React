@@ -24,9 +24,11 @@ module.exports = {
 				* The base URL of the Wordpress site without the trailingslash and the protocol. This is required.
 				* Example : 'gatsbyjswpexample.wordpress.com' or 'www.example-site.com'
 				*/
-				baseUrl: isDev ? 'localhost' : `admin.tsgweddings.com`,
+				// baseUrl: isDev ? 'localhost' : `admin.tsgweddings.com`,
+				baseUrl: `admin.tsgweddings.com`,
 				// The protocol. This can be http or https.
-				protocol: isDev ? 'http' : `https`,
+				// protocol: isDev ? 'http' : `https`,
+				protocol: `https`,
 				// Indicates whether the site is hosted on wordpress.com.
 				// If false, then the asumption is made that the site is self hosted.
 				// If true, then the plugin will source its content on wordpress.com using the JSON REST API V2.
