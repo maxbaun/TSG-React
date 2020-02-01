@@ -47,8 +47,6 @@ class Gallery extends Component {
 	render() {
 		const {images, loading} = this.props;
 
-		console.log(images);
-
 		return (
 			<div className={CSS.wrap}>
 				{loading ? (
@@ -64,7 +62,7 @@ class Gallery extends Component {
 				>
 					{images.map((image, index) => {
 						return (
-							<li key={image.id}>
+							<li key={image.wordpress_id || image.id}>
 								<a href={image.url} onClick={clickPrevent(this.handleImageClick, index)}>
 									<Image showPlacholder image={image} size="medium"/>
 								</a>

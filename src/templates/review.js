@@ -43,8 +43,8 @@ export default class ReviewTemplate extends React.Component {
 									<li>
 										<h3>Rating</h3>
 										<div className={CSS.rating}>
-											{ratingArr.map(r => {
-												return <span key={r.id}/>;
+											{ratingArr.map((r, i) => {
+												return <span key={i}/>;
 											})}
 										</div>
 									</li>

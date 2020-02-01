@@ -183,7 +183,7 @@ class Lightbox extends Component {
 									}
 
 									return (
-										<div key={image.id} className="swiper-slide">
+										<div key={image.wordpress_id || image.id} className="swiper-slide">
 											<div
 												style={{
 													height: '100%',

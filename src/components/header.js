@@ -198,7 +198,7 @@ class Header extends Component {
 														onMouseEnter={isDropdown ? click(this.handleMouseEnter, index) : noop}
 														onMouseLeave={isDropdown ? this.handleMouseLeave : noop}
 													>
-														<Link to="#" classname={linkCss.join(' ')} onClick={clickPrevent(this.handleToggle, false)}>
+														<Link to={isDropdown ? '#' : item.url} classname={linkCss.join(' ')} onClick={isDropdown ? clickPrevent(this.handleToggle, false) : () => {}}>
 															{/* eslint-disable-next-line react/no-danger */}
 															<span dangerouslySetInnerHTML={innerHtml(item.title)}/>
 														</Link>

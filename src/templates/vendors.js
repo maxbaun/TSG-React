@@ -39,7 +39,7 @@ export default class VendorsTemplate extends React.Component {
 
 	getCategoryById(id) {
 		const {categories} = this.props.data;
-		const found = categories.edges.find(c => c.node.id === id);
+		const found = categories.edges.find(c => c.node.wordpress_id === id);
 
 		if (!found) {
 			return;
@@ -51,7 +51,7 @@ export default class VendorsTemplate extends React.Component {
 	render() {
 		const {currentPage, options: {options}} = this.props.data;
 
-		const categories = options.vendorCategories.map(c => c.category[0]);
+		const vendorCats = options.vendorCategories.map(c => c.category[0]);
 		const vendorTitle = `Boston's Most Trusted Wedding Vendors`;
 
 		return (
@@ -61,7 +61,7 @@ export default class VendorsTemplate extends React.Component {
 				<div className={CSS.categories}>
 					<h3>{vendorTitle}</h3>
 					<ul>
-						{categories.map(c => {
+						{vendorCats.map(c => {
 							const category = this.getCategoryById(c);
 
 							return (
@@ -76,7 +76,7 @@ export default class VendorsTemplate extends React.Component {
 					</ul>
 				</div>
 				<div className={CSS.vendors}>
-					{categories.map(categoryId => {
+					{vendorCats.map(categoryId => {
 						const category = this.getCategoryById(categoryId);
 						const vendors = this.getVendorsInCategory(categoryId);
 
@@ -86,7 +86,7 @@ export default class VendorsTemplate extends React.Component {
 								<h3 dangerouslySetInnerHTML={innerHtml(category.name)}/>
 								<ul>
 									{vendors.map(vendor => {
-										return <li key={vendor.id}>{this.renderVendor(vendor)}</li>;
+										return <li key={vendor.wordpress_id}>{this.renderVendor(vendor)}</li>;
 									})}
 								</ul>
 							</div>

@@ -15,7 +15,7 @@ const BlogSidebar = ({tags, categories}) => {
 						const {node: category} = c;
 
 						return (
-							<li key={category.id}>
+							<li key={category.wordpress_id}>
 								<Link to={category.link}>
 									<span
 										// eslint-disable-next-line react/no-danger
@@ -34,7 +34,7 @@ const BlogSidebar = ({tags, categories}) => {
 						const {node: tag} = t;
 
 						return (
-							<li key={tag.id}>
+							<li key={tag.wordpress_id}>
 								<Link to={tag.link}>
 									<span
 										// eslint-disable-next-line react/no-danger

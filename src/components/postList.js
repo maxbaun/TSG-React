@@ -56,7 +56,7 @@ export default class BlogTemplate extends React.Component {
 					{posts.map(p => {
 						const {node: post} = p;
 						return (
-							<li key={post.id}>
+							<li key={post.wordpress_id}>
 								<Link to={`/blog/${post.slug}`} classname={CSS.post}>
 									<div className={CSS.postImage}>
 										{post.image ? (

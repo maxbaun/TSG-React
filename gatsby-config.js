@@ -39,6 +39,9 @@ module.exports = {
 				concurrentRequests: 5,
 				perPage: 100,
 				excludedRoutes: ['/wp/v2/venue'],
+				normalizers: normalizers => ([
+					...normalizers.filter(n => n.name !== 'downloadMediaFiles')
+				]),
 				normalizer: function ({entities}) {
 					return entities.map(entity => {
 						if (entity.__type !== 'wordpress__wp_media') {

@@ -30,7 +30,7 @@ class PageDescriptionGallery extends Component {
 						};
 
 						return (
-							<div key={image.id} className={CSS.galleryImage} style={imageStyle}>
+							<div key={image.wordpress_id || image.id} className={CSS.galleryImage} style={imageStyle}>
 								<a href={link} target="_blank" rel="noopener noreferrer">
 									<Image image={image} size="medium"/>
 								</a>

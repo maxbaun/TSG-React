@@ -114,7 +114,7 @@ export default class Hero extends Component {
 							}
 
 							return (
-								<div key={image.id} className={imageCss.join(' ')} style={imageStyle}>
+								<div key={image.wordpress_id || image.id} className={imageCss.join(' ')} style={imageStyle}>
 									<Image image={image} imgStyle={{objectPosition: 'top center'}} onLoad={this.handleImageLoad}/>
 								</div>
 							);

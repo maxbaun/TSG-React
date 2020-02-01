@@ -88,7 +88,7 @@ export default class PageTemplate extends Component {
 						<ul>
 							{venues.map(venue => {
 								return (
-									<li key={venue.id}>
+									<li key={venue.wordpress_id}>
 										<Link to={`/venue/${venue.slug}`} classname={CSS.venue}>
 											<div className={CSS.venueImage}>
 												<Image image={venue.image.url} style={{height: '100%'}} size="medium_large"/>
