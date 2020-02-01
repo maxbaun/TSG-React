@@ -154,9 +154,13 @@ export class ScrollToHelper {
 				this.container.scrollTop;
 		this.distance = topPosition(this.target) - this.start + this.options.offset;
 
-		::this.requestAnimationFrame(time => {
+		this.requestAnimationFrame = this.requestAnimationFrame.bind(this);
+		this.loop = this.loop.bind(this);
+		this.end = this.end.bind(this);
+
+		this.requestAnimationFrame(time => {
 			this.timeStart = time;
-			::this.loop(time);
+			this.loop(time);
 		});
 	}
 
@@ -172,9 +176,9 @@ export class ScrollToHelper {
 		this.container.scroll(0, this.next);
 
 		if (this.timeElapsed < this.options.duration) {
-			::this.requestAnimationFrame(time => ::this.loop(time));
+			this.requestAnimationFrame(time => this.loop(time));
 		} else {
-			::this.end();
+			this.end();
 		}
 	}
 

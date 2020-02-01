@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import {innerHtml} from '../utils/wordpressHelpers';
 import Image from '../components/image';
@@ -23,7 +23,7 @@ export default class PostTemplate extends React.Component {
 	static propTypes = {
 		location: PropTypes.object.isRequired,
 		data: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	handleImageLoad() {

@@ -17,6 +17,7 @@ export default class PageDescription extends Component {
 		};
 
 		this.section = null;
+		this.handleWindowResize = this.handleWindowResize.bind(this);
 	}
 
 	static propTypes = {
@@ -42,7 +43,7 @@ export default class PageDescription extends Component {
 	};
 
 	componentDidMount() {
-		window.addEventListener('resize', ::this.handleWindowResize);
+		window.addEventListener('resize', this.handleWindowResize);
 
 		setTimeout(() => {
 			this.handleWindowResize();
@@ -54,7 +55,7 @@ export default class PageDescription extends Component {
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('resize', ::this.handleWindowResize);
+		window.removeEventListener('resize', this.handleWindowResize);
 	}
 
 	handleWindowResize() {

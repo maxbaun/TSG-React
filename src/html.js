@@ -5,13 +5,13 @@ import './utils/fragments';
 
 let stylesStr;
 
-if (process.env.NODE_ENV === `production`) {
-	try {
-		stylesStr = require(`!raw-loader!../public/styles.css`);
-	} catch (e) {
-		console.log(e);
-	}
-}
+// if (process.env.NODE_ENV === `production`) {
+// 	try {
+// 		stylesStr = require(`!raw-loader!../public/styles.css`);
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// }
 
 export default class Html extends React.Component {
 	static propTypes = {
@@ -21,15 +21,15 @@ export default class Html extends React.Component {
 	};
 
 	render() {
-		let css;
-		if (process.env.NODE_ENV === `production`) {
-			css = (
-				<style
-					id="gatsby-inlined-css"
-					dangerouslySetInnerHTML={{__html: stylesStr}} // eslint-disable-line
-				/>
-			);
-		}
+		// let css;
+		// if (process.env.NODE_ENV === `production`) {
+		// 	css = (
+		// 		<style
+		// 			id="gatsby-inlined-css"
+		// 			dangerouslySetInnerHTML={{__html: stylesStr}} // eslint-disable-line
+		// 		/>
+		// 	);
+		// }
 
 		return (
 			<html op="news" lang="en">
@@ -43,7 +43,7 @@ export default class Html extends React.Component {
 					<link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700" rel="stylesheet"/>
 					<link href="https://fonts.googleapis.com/css?family=Playfair+Display+SC" rel="stylesheet"/>
 					<script src="https://tsgtools.com/check_req_info_form.js"/>
-					{css}
+					{/* {css} */}
 				</head>
 				<body data-theme="default">
 					<div

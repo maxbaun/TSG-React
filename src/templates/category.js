@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import Seo from '../components/seo';
 import Page from '../components/page';
@@ -10,7 +10,7 @@ export default class CategoryTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	render() {
@@ -41,16 +41,16 @@ import {LargeImage} from '../utils/fragments'; // eslint-disable-line no-unused-
 import {BlogFragment} from './blog'; // eslint-disable-line no-unused-vars
 
 export const categoryQuery = graphql`
-	query categoryQuery($name: String!) {
+	query categoryQuery($id: String!) {
 		...BlogFragment
-		category: wordpressCategory(name: {eq: $name}) {
+		category: wordpressCategory(id: {eq: $id}) {
 			name
 			link
 		}
-		posts: allWordpressPost(filter: {categories: {name: {eq: $name}}}) {
+		posts: allWordpressPost(filter: {categories: {elemMatch: {id: {eq: $id}}}}) {
 			edges {
 				node {
-					id: wordpress_id
+					wordpress_id
 					slug
 					title
 					link

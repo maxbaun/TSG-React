@@ -11,7 +11,8 @@ export const replaceLinks = (str, replace = '') => {
 		.replace('http://tsg.d3applications.com', replace)
 		.replace('https://tsg.d3applications.com', replace)
 		.replace('http://admin.tsgweddings.com', replace)
-		.replace('https://admin.tsgweddings.com', replace);
+		.replace('https://admin.tsgweddings.com', replace)
+		.replace('http://localhost', replace);
 };
 
 export const isExternalLink = str => {

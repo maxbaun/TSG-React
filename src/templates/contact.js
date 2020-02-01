@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import FlexibleContent from '../components/flexibleContent';
 import Page from '../components/page';
@@ -14,7 +14,7 @@ export default class ContactTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired,
+		site: PropTypes.object,
 		options: PropTypes.object.isRequired
 	};
 

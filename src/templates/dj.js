@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import DJThumbnail from '../components/djThumbnail';
 import Image from '../components/image';
@@ -16,7 +16,7 @@ export default class DJTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	render() {

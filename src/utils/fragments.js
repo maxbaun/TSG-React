@@ -1,4 +1,4 @@
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 export const MenuItems = graphql`
 	fragment MenuItems on wordpress__wp_api_menus_menus_items {
@@ -17,7 +17,7 @@ export const MenuItems = graphql`
 export const BaseImage = graphql`
 	fragment BaseImage on wordpress__wp_media {
 		url: source_url
-		id: wordpress_id
+		wordpress_id
 		mediaDetails: media_details {
 			width
 			height
@@ -361,7 +361,7 @@ export const SectionForm = graphql`
 
 export const Page = graphql`
 	fragment Page on wordpress__PAGE {
-		id
+		wordpress_id
 		content
 		title
 		excerpt
@@ -450,7 +450,7 @@ export const Page = graphql`
 
 export const Venue = graphql`
 	fragment Venue on wordpress__tsg_venues {
-		id
+		wordpress_id
 		title
 		slug
 		link
@@ -491,7 +491,7 @@ export const Venue = graphql`
 
 export const Vendor = graphql`
 	fragment Vendor on wordpress__wp_vendor {
-		id
+		wordpress_id
 		content
 		title
 		slug
@@ -509,7 +509,7 @@ export const Vendor = graphql`
 
 export const DJ = graphql`
 	fragment DJ on wordpress__wp_dj {
-		id
+		wordpress_id
 		content
 		title
 		excerpt
@@ -545,7 +545,7 @@ export const DJ = graphql`
 
 export const Post = graphql`
 	fragment Post on wordpress__POST {
-		id
+		wordpress_id
 		content
 		title
 		excerpt
@@ -581,7 +581,7 @@ export const Post = graphql`
 
 export const Review = graphql`
 	fragment Review on wordpress__wp_review {
-		id
+		wordpress_id
 		content
 		title
 		excerpt

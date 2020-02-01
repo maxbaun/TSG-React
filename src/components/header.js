@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Logo from '../img/tsg-logo-black.png';
 import CSS from '../css/modules/header.module.scss';
-import {click, noop, innerHtml, debounce, ref} from '../utils/componentHelpers';
+import {click, noop, innerHtml, debounce, ref, clickPrevent} from '../utils/componentHelpers';
 import Link from './link';
 import WindowSize from './windowSize';
 import Button from './button';
@@ -198,7 +198,7 @@ class Header extends Component {
 														onMouseEnter={isDropdown ? click(this.handleMouseEnter, index) : noop}
 														onMouseLeave={isDropdown ? this.handleMouseLeave : noop}
 													>
-														<Link to={item.url} classname={linkCss.join(' ')} onClick={click(this.handleToggle, false)}>
+														<Link to="#" classname={linkCss.join(' ')} onClick={clickPrevent(this.handleToggle, false)}>
 															{/* eslint-disable-next-line react/no-danger */}
 															<span dangerouslySetInnerHTML={innerHtml(item.title)}/>
 														</Link>

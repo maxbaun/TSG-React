@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CSS from '../css/modules/page.module.scss';
+import DefaultLayout from './layout';
 
 const Page = ({children, contain, style, padding}) => {
 	if (contain) {
@@ -15,9 +16,11 @@ const Page = ({children, contain, style, padding}) => {
 	}
 
 	return (
-		<div className={pageCss.join(' ')} style={style}>
-			{children}
-		</div>
+		<DefaultLayout>
+			<div className={pageCss.join(' ')} style={style}>
+				{children}
+			</div>
+		</DefaultLayout>
 	);
 };
 

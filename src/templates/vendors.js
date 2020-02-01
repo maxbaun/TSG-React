@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import {innerHtml} from '../utils/wordpressHelpers';
 import {phoneLink, emailLink} from '../utils/componentHelpers';
@@ -22,7 +22,7 @@ export default class VendorsTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	getVendorsInCategory(category) {
@@ -49,7 +49,7 @@ export default class VendorsTemplate extends React.Component {
 	}
 
 	render() {
-		const {currentPage, options} = this.props.data;
+		const {currentPage, options: {options}} = this.props.data;
 
 		const categories = options.vendorCategories.map(c => c.category[0]);
 		const vendorTitle = `Boston's Most Trusted Wedding Vendors`;
@@ -159,7 +159,7 @@ export const pageQuery = graphql`
 		categories: allWordpressWpVendorcategory {
 			edges {
 				node {
-					id: wordpress_id
+					wordpress_id
 					name
 					count
 				}
@@ -173,8 +173,10 @@ export const pageQuery = graphql`
 			}
 		}
 		options: wordpressAcfOptions {
-			vendorCategories {
-				category
+			options {
+				vendorCategories {
+					category
+				}
 			}
 		}
 	}

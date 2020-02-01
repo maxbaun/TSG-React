@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 import axios from 'axios';
 
 import CSS from '../css/modules/venue.module.scss';
@@ -22,7 +22,7 @@ export default class VenueTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	componentDidMount() {
@@ -50,7 +50,7 @@ export default class VenueTemplate extends React.Component {
 	}
 
 	render() {
-		const {venue, options} = this.props.data;
+		const {venue, options: {options}} = this.props.data;
 
 		return (
 			<Page contain>
@@ -73,9 +73,11 @@ export const venueQuery = graphql`
 			...Venue
 		}
 		options: wordpressAcfOptions {
-			allVenuesLink {
-				title
-				url
+			options {
+				allVenuesLink {
+					title
+					url
+				}
 			}
 		}
 	}

@@ -22,6 +22,8 @@ export default class SectionForm extends Component {
 
 		this.wrap = null;
 		this.form = null;
+
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	static propTypes = {
@@ -48,14 +50,14 @@ export default class SectionForm extends Component {
 
 			if (form) {
 				this.form = new ContactForm(form, {});
-				this.form.form.addEventListener('submit', ::this.handleSubmit);
+				this.form.form.addEventListener('submit', this.handleSubmit);
 			}
 		}
 	}
 
 	componentWillUnmount() {
 		if (this.form && this.form.form) {
-			this.form.form.removeEventListener('submit', ::this.handleSubmit);
+			this.form.form.removeEventListener('submit', this.handleSubmit);
 		}
 	}
 

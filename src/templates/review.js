@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import Page from '../components/page';
 import SectionContent from '../components/sectionContent';
@@ -14,11 +14,11 @@ export default class ReviewTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	render() {
-		const {currentPage, options} = this.props.data;
+		const {currentPage, options: {options}} = this.props.data;
 
 		let ratingArr = [];
 
@@ -77,7 +77,9 @@ export const pageQuery = graphql`
 			...Review
 		}
 		options: wordpressAcfOptions {
-			allReviewsLink
+			options {
+				allReviewsLink
+			}
 		}
 	}
 `;

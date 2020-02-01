@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import FlexibleContent from '../components/flexibleContent';
 import Seo from '../components/seo';
@@ -13,7 +13,7 @@ export default class BlogTemplate extends React.Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	render() {
@@ -47,11 +47,11 @@ export default class BlogTemplate extends React.Component {
 import {LargeImage} from '../utils/fragments'; // eslint-disable-line no-unused-vars
 
 export const BlogFragment = graphql`
-	fragment BlogFragment on RootQueryType {
+	fragment BlogFragment on Query {
 		tags: allWordpressTag(filter: {count: {gt: 0}}) {
 			edges {
 				node {
-					id: wordpress_id
+					wordpress_id
 					name
 					link
 				}
@@ -60,7 +60,7 @@ export const BlogFragment = graphql`
 		categories: allWordpressCategory(filter: {count: {gt: 0}}) {
 			edges {
 				node {
-					id: wordpress_id
+					wordpress_id
 					name
 					link
 				}
@@ -78,7 +78,7 @@ export const blogQuery = graphql`
 		posts: allWordpressPost {
 			edges {
 				node {
-					id: wordpress_id
+					wordpress_id
 					slug
 					title
 					link

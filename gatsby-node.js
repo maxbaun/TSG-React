@@ -3,23 +3,6 @@ const slash = require('slash');
 const Promise = require('bluebird');
 const path = require('path');
 
-exports.modifyWebpackConfig = ({config}) => {
-	const isDev = process.env.NODE_ENV === 'development';
-	config.merge({
-		plugins: [
-			new webpack.DefinePlugin({
-				API_URL: JSON.stringify(
-					isDev ?
-						'http://admin.tsgweddings.com/wp-json' :
-						'https://admin.tsgweddings.com/wp-json'
-				)
-			})
-		]
-	});
-
-	return config;
-};
-
 exports.createPages = ({graphql, boundActionCreators}) => {
 	const {createPage} = boundActionCreators;
 	return Promise.all([
@@ -158,7 +141,7 @@ function getCategories(graphql, createPage) {
 					path: slash(`/blog/category/${category.node.slug}`),
 					component: path.resolve(`./src/templates/category.js`),
 					context: {
-						name: category.node.name
+						id: category.node.id
 					}
 				});
 			});
@@ -196,7 +179,7 @@ function getTags(graphql, createPage) {
 					path: slash(`/blog/tag/${edge.node.slug}`),
 					component: path.resolve(`./src/templates/tag.js`),
 					context: {
-						name: edge.node.name
+						id: edge.node.id
 					}
 				});
 			});

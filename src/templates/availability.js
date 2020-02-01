@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 import moment from 'moment';
 import qs from 'query-string';
 
@@ -33,7 +33,7 @@ export default class AvailabilityTemplate extends React.Component {
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired,
+		site: PropTypes.object,
 		location: PropTypes.object.isRequired
 	};
 

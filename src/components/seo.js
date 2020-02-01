@@ -40,4 +40,14 @@ Seo.propTypes = {
 	site: PropTypes.object.isRequired
 };
 
+Seo.defaultProps = {
+	site: {
+		siteMeta: {
+			siteUrl: `https://tsgweddings.com`,
+			title: `TSG Weddings`,
+			subtitle: `Elegant & Classy Wedding DJs. Well spoken MCs. No Corny Games. No Embarrassing Moments. DJs, Photo Booths, Up Lighting, & Videography In Boston & Massachusetts.`	
+		}
+	}
+}
+
 export default Seo;

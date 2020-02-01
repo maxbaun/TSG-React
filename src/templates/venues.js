@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import graphql from 'graphql';
+import {graphql} from 'gatsby';
 
 import FlexibleContent from '../components/flexibleContent';
 import Image from '../components/image';
@@ -23,7 +23,7 @@ export default class PageTemplate extends Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
 		location: PropTypes.object.isRequired,
-		site: PropTypes.object.isRequired
+		site: PropTypes.object
 	};
 
 	transformVenues() {
@@ -75,39 +75,42 @@ export default class PageTemplate extends Component {
 		const venues = this.transformVenues();
 
 		return (
-			<div>
-				<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
-				<FlexibleContent page={currentPage}/>
-				<div className={CSS.searchWrap}>
-					<div className={CSS.searchInput}>
-						<input type="text" onChange={this.handleSearchQuery} value={this.state.query} placeholder="Search Venues..."/>
+			<DefaultLayout>
+				<div>
+					<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>
+					<FlexibleContent page={currentPage}/>
+					<div className={CSS.searchWrap}>
+						<div className={CSS.searchInput}>
+							<input type="text" onChange={this.handleSearchQuery} value={this.state.query} placeholder="Search Venues..."/>
+						</div>
+					</div>
+					<div className={CSS.venues}>
+						<ul>
+							{venues.map(venue => {
+								return (
+									<li key={venue.id}>
+										<Link to={`/venue/${venue.slug}`} classname={CSS.venue}>
+											<div className={CSS.venueImage}>
+												<Image image={venue.image.url} style={{height: '100%'}} size="medium_large"/>
+											</div>
+											<div className={CSS.venueTitle}>
+												{/* eslint-disable-next-line react/no-danger */}
+												<h3 dangerouslySetInnerHTML={innerHtml(venue.title)}/>
+											</div>
+										</Link>
+									</li>
+								);
+							})}
+						</ul>
 					</div>
 				</div>
-				<div className={CSS.venues}>
-					<ul>
-						{venues.map(venue => {
-							return (
-								<li key={venue.id}>
-									<Link to={`/venue/${venue.slug}`} classname={CSS.venue}>
-										<div className={CSS.venueImage}>
-											<Image image={venue.image.url} style={{height: '100%'}} size="medium_large"/>
-										</div>
-										<div className={CSS.venueTitle}>
-											{/* eslint-disable-next-line react/no-danger */}
-											<h3 dangerouslySetInnerHTML={innerHtml(venue.title)}/>
-										</div>
-									</Link>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			</div>
+			</DefaultLayout>
 		);
 	}
 }
 
 import {Page, Venue} from '../utils/fragments'; // eslint-disable-line no-unused-vars
+import DefaultLayout from '../components/layout';
 
 export const pageQuery = graphql`
 	query venueTemplateQuery($id: String!) {

@@ -27,6 +27,10 @@ export default class Link extends Component {
 		const {to, classname, children, style, onClick} = this.props;
 		const isExternal = isExternalLink(to);
 
+		if (!to || to === '') {
+			return children;
+		}
+
 		const props = {
 			className: classname,
 			style,
