@@ -70,7 +70,7 @@ export default class Hero extends Component {
 	}
 
 	render() {
-		const {images, title, subtitle, link, video} = this.props;
+		const {images, title, subtitle, link, video, className} = this.props;
 		const {loaded, activeImage} = this.state;
 		const showContent = title && title !== '';
 		const hasSubtitle = subtitle && subtitle !== '';
@@ -94,6 +94,11 @@ export default class Hero extends Component {
 
 		if (hasSubtitle) {
 			contentCss.push(CSS.hasSubtitle);
+		}
+
+		if (className) {
+			console.log(className);
+			heroCss.push(CSS[className]);
 		}
 
 		return (

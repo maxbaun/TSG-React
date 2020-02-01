@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Image from './image';
 import CSS from '../css/modules/djThumbnail.module.scss';
 
-const DJThumbnail = ({image, height, width}) => {
+const DJThumbnail = ({image, height, width, hasBg}) => {
 	const imgStyle = {
 		height,
 		width,
@@ -12,25 +12,34 @@ const DJThumbnail = ({image, height, width}) => {
 		margin: '0 auto'
 	};
 
-	const wrapStyle = {
-		height: height + 21,
-		width: width + 44
+	let wrapStyle = {
+		height,
+		width
 	};
 
+	if (hasBg) {
+		wrapStyle = {
+			height: height + 21,
+			width: width + 44
+		};
+	}
+
 	return (
-		<div className={CSS.thumbnail} style={wrapStyle}>
+		<div className={hasBg ? CSS.thumbnail : CSS.thumbnailNoBg} style={wrapStyle}>
 			<Image circle image={image} imgStyle={imgStyle} size="medium"/>
 		</div>
 	);
 };
 
 DJThumbnail.propTypes = {
+	hasBg: PropTypes.bool,
 	image: PropTypes.object.isRequired,
-	height: PropTypes.number,
-	width: PropTypes.number
+	height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 DJThumbnail.defaultProps = {
+	hasBg: true,
 	height: 250,
 	width: 250
 };

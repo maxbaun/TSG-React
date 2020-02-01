@@ -70,7 +70,7 @@ export default class Video extends Component {
 								<span className={CSS.icon}/>
 							</div>
 						</div>
-						<Image image={thumbnail} size="medium_large"/>
+						{thumbnail ? <Image image={thumbnail} size="medium_large"/> : null}
 					</div>
 				</div>
 				<RenderInBody>

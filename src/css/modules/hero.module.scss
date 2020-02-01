@@ -118,6 +118,42 @@
 	}
 }
 
+.heroDj {
+	height: 300px;
+	min-height: 300px;
+
+	@include tabletUp {
+		height: 400px;
+		min-height: 400px;
+	}
+
+	@include desktopUp {
+		height: 500px;
+		min-height: 500px;
+	}
+
+	&::after {
+		content: none;
+	}
+
+	.overlay {
+		background-color: rgba($black, 0.3);
+	}
+
+	.contentWrap {
+		height: auto;
+		margin: 70px auto 0;
+
+		@include desktopUp {
+			margin: 140px auto 0;
+		}
+	}
+
+	.contentInner {
+		display: block;
+	}
+}
+
 .inner {
 	height: 100%;
 	position: relative;

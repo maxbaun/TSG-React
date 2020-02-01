@@ -29,3 +29,13 @@
 		bottom: 0;
 	}
 }
+
+.thumbnailNoBg {
+	@extend .thumbnail;
+	padding: 0;
+
+	&::before,
+	&::after {
+		content: none;
+	}
+}
