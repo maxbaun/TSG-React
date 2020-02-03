@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {graphql, StaticQuery} from 'gatsby';
-import 'swiper/css/swiper.css';
-
+// Import 'swiper/css/swiper.css';
+import 'swiper/dist/css/swiper.css';
 
 import '../css/plugins/normalize.css';
 import '../css/plugins/icomoon/style.css';
@@ -56,46 +56,45 @@ export const mainLayoutQuery = graphql`
 
 export default class DefaultLayout extends Component {
 	static propTypes = {
-		children: PropTypes.oneOfType([PropTypes.element, PropTypes.array, PropTypes.func]),
+		children: PropTypes.oneOfType([PropTypes.element, PropTypes.array, PropTypes.func])
 	};
 
 	render() {
 		return (
-      <StaticQuery 
-        query={mainLayoutQuery}
-        render={data => {
-          const {mainMenu, site, options: {options}, footerMenu1, footerMenu2} = data;
+			<StaticQuery
+				query={mainLayoutQuery}
+				render={data => {
+					const {mainMenu, site, options: {options}, footerMenu1, footerMenu2} = data;
 
-          return (
-            <div id="app">
-              <Header menu={mainMenu}/>
-              <Header sticky menu={mainMenu}/>
-              <main className="main">
-                {this.props.children}
-              </main>
-              <Footer
-                menus={[
-                  {
-                    title: 'Resources',
-                    items: footerMenu1 ? footerMenu1.items : []
-                  },
-                  {
-                    title: 'Services',
-                    items: footerMenu2 ? footerMenu2.items : []
-                  }
-                ]}
-                phone={options.phone}
-                email={options.email}
-                social={options.social}
-                description={options.footerDescription}
-                copy="© TSG Weddings // The Sussman Group, LLC"
-              />
-            </div>
-          )
-        }}  
-      />
+					return (
+						<div id="app">
+							<Header menu={mainMenu}/>
+							<Header sticky menu={mainMenu}/>
+							<main className="main">
+								{this.props.children}
+							</main>
+							<Footer
+								menus={[
+									{
+										title: 'Resources',
+										items: footerMenu1 ? footerMenu1.items : []
+									},
+									{
+										title: 'Services',
+										items: footerMenu2 ? footerMenu2.items : []
+									}
+								]}
+								phone={options.phone}
+								email={options.email}
+								social={options.social}
+								description={options.footerDescription}
+								copy="© TSG Weddings // The Sussman Group, LLC"
+							/>
+						</div>
+					);
+				}}
+			/>
 		);
 	}
 }
-
 
