@@ -70,8 +70,6 @@ export default class DJTemplate extends React.Component {
 		const [hero] = children.filter(c => c.type === 'WordPressAcf_hero');
 		const heroSet = Boolean(hero);
 
-		console.log(hero);
-
 		const seoEl = (<Seo currentPage={currentPage} site={this.props.site} location={this.props.location}/>);
 
 		const contentEl = (
