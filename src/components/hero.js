@@ -97,7 +97,6 @@ export default class Hero extends Component {
 		}
 
 		if (className) {
-			console.log(className);
 			heroCss.push(CSS[className]);
 		}
 
