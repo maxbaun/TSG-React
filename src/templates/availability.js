@@ -397,9 +397,6 @@ export default class AvailabilityTemplate extends React.Component {
                         <label htmlFor="event_location_id">Event Venue</label>
                         <select name="event_location_id">
                           <option value="0">Event Venue</option>
-                          <option value="572">17 Northey Farm Road - Home - Scituate, MA</option>
-                          <option value="600">32 Overlook Drive, Norwood (Home, Tent) - Norwood, MA</option>
-                          <option value="1674">ABERNACKY COUNTRY CLUB RYE NH</option>
                           <option value="5">Adams Inn - Quincy, MA</option>
                           <option value="6">Alden Castle - Brookline, MA</option>
                           <option value="281">Aldrich Mansion - Warwick, RI</option>
