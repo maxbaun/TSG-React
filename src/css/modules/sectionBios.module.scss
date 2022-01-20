@@ -3,135 +3,152 @@
 @import '../utils/section';
 
 .bioTabsHeader {
-	margin: 31px 0 45px;
+  margin: 31px 0 45px;
 
-	ul {
-		@include noList();
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
+  ul {
+    @include noList();
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
 .tab {
-	color: $purple;
-	cursor: pointer;
-	font-family: $fontBody;
-	font-size: 16px;
-	font-weight: 300;
-	line-height: 19px;
-	margin: 0 10px;
-	opacity: 0.4;
-	transition: opacity 0.3s ease-in-out, font-weight 0.3s ease-in-out, color 0.3s ease-in-out;
+  color: $pinkDark;
+  cursor: pointer;
+  font-family: $fontBody;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  margin: 0 10px;
+  opacity: 1;
+  position: relative;
+  transition: opacity 0.3s ease-in-out, font-weight 0.3s ease-in-out, color 0.3s ease-in-out;
 
-	&:hover {
-		@extend .tabActive;
-	}
+  &:hover {
+    @extend .tabActive;
+  }
+
+  &::after {
+    background-color: currentColor;
+    content: ' ';
+    display: block;
+    height: 2px;
+    position: absolute;
+    left: -5px;
+    opacity: 0;
+    right: -5px;
+    top: calc(100% + 5px);
+    transition: opacity 0.3s ease-in-out;
+    width: calc(100% + 10px);
+  }
 }
 
 .tabActive {
-	color: $pinkDark;
-	font-weight: 600;
-	opacity: 1;
+  color: $pinkDark;
+
+  &::after {
+    opacity: 1;
+  }
 }
 
 .bioTabsBody {
-	ul {
-		@include noList();
-		min-height: 694px;
-		position: relative;
+  ul {
+    @include noList();
+    min-height: 694px;
+    position: relative;
 
-		@include tabletUp {
-			min-height: 364px;
-		}
-	}
+    @include tabletUp {
+      min-height: 364px;
+    }
+  }
 }
 
 .bioItem {
-	left: 0;
-	margin: 0 auto;
-	opacity: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-	transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
-	width: 100%;
-	z-index: 0;
+  left: 0;
+  margin: 0 auto;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+  width: 100%;
+  z-index: 0;
 }
 
 .bioItemActive {
-	transition: opacity 0.3s ease-in-out, visibility 0s;
-	opacity: 1;
-	z-index: 1;
+  transition: opacity 0.3s ease-in-out, visibility 0s;
+  opacity: 1;
+  z-index: 1;
 }
 
 .bio {
-	margin: 0 auto;
-	max-width: 910px;
+  margin: 0 auto;
+  max-width: 910px;
 
-	@include tabletUp {
-		display: flex;
-	}
+  @include tabletUp {
+    display: flex;
+  }
 }
 
 .bioLeft {
-	margin: 0 0 20px;
-	width: 100%;
+  margin: 0 0 20px;
+  width: 100%;
 
-	@include tabletUp {
-		margin: 0;
-		width: 275px;
-	}
+  @include tabletUp {
+    margin: 0;
+    width: 275px;
+  }
 }
 
 .bioRight {
-	padding-top: 0;
-	padding-left: 0;
-	width: 100%;
+  padding-top: 0;
+  padding-left: 0;
+  width: 100%;
 
-	@include tabletUp {
-		padding-left: 43px;
-		padding-top: 34px;
-		width: calc(100% - 275px);
-	}
+  @include tabletUp {
+    padding-left: 43px;
+    padding-top: 34px;
+    width: calc(100% - 275px);
+  }
 }
 
 .bioImage {
-	height: 271px;
-	margin: 0 auto 17px;
-	position: relative;
-	width: 294px;
+  height: 271px;
+  margin: 0 auto 17px;
+  position: relative;
+  width: 294px;
 
-	@include tabletUp {
-		margin: 0 0 17px;
-	}
+  @include tabletUp {
+    margin: 0 0 17px;
+  }
 }
 
 .bioTitle {
-	color: $purple;
-	font-family: $fontHeading;
-	font-size: 24px;
-	font-weight: 700;
-	line-height: 42px;
-	margin: 0;
-	text-align: center;
-	text-transform: uppercase;
+  color: $purple;
+  font-family: $fontHeading;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 42px;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .bioPosition {
-	color: $grey1;
-	font-family: $fontBody;
-	font-size: 16px;
-	font-style: italic;
-	line-height: 42px;
-	margin: -8px 0 0;
-	text-align: center;
+  color: $grey1;
+  font-family: $fontBody;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 42px;
+  margin: -8px 0 0;
+  text-align: center;
 }
 
 .bioExcerpt {
-	color: $grey1;
-	font-family: $fontBody;
-	font-size: 16px;
-	line-height: 28px;
-	margin: 0 0 32px;
+  color: $grey1;
+  font-family: $fontBody;
+  font-size: 16px;
+  line-height: 28px;
+  margin: 0 0 32px;
 }
