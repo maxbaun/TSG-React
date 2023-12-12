@@ -55,7 +55,7 @@ export default class Html extends React.Component {
           />
           {this.props.postBodyComponents}
 
-          <script async src="//www.instagram.com/embed.js" />
+          <script src="//www.instagram.com/embed.js" />
         </body>
       </html>
     );
