@@ -29,13 +29,13 @@ export default class VendorsTemplate extends React.Component {
     const {vendors} = this.props.data;
 
     return vendors.edges
-      .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }))
       .filter(i => {
         const {node: vendor} = i;
 
         return vendor.vendorcategory[0] === category;
       })
-      .map(v => v.node);
+      .map(v => v.node)
+      .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
   }
 
   getCategoryById(id) {
