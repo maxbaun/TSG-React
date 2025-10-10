@@ -34,7 +34,8 @@ export default class VendorsTemplate extends React.Component {
 
         return vendor.vendorcategory[0] === category;
       })
-      .map(v => v.node);
+      .map(v => v.node)
+      .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
   }
 
   getCategoryById(id) {
